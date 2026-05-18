@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
 
 export default function Home() {
   return (
@@ -12,20 +13,8 @@ export default function Home() {
         {/* Breathtaking custom blueprint-matched Hero section */}
         <Hero />
 
-        {/* Section Placeholders (Scroll targets, to be built out step-by-step) */}
-        <section
-          id="about"
-          className="min-h-screen flex items-center justify-center border-t border-border/40 py-24 px-6 bg-secondary/5"
-        >
-          <div className="container mx-auto max-w-4xl text-center space-y-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
-              About Me
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Awaiting your next step-by-step instructions to replace this placeholder with a premium custom component.
-            </p>
-          </div>
-        </section>
+        {/* Premium high-fidelity About section strictly matching layout blueprints */}
+        <About />
 
         <section
           id="experience"
