@@ -397,42 +397,54 @@ export function Hero() {
               {/* Floating Skill badges showing BIG LOGOS tightly hugging the symmetric blueprint arch with elastic spring-back and sequential entry */}
               {floatingTechs.map((tech, index) => (
                 <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={isPortraitHovered ? {
-                    opacity: 1,
-                    scale: 0.85, // slightly smaller as they fall
-                    y: tech.name === "Docker" || tech.name === "MERN" ? 260
-                       : tech.name === "JS" || tech.name === "Python" ? 365
-                       : 450, // falls down to perfect bottom baseline!
-                    rotate: index % 2 === 0 ? 30 : -30, // tumbles left/right on impact!
-                  } : {
-                    opacity: 1,
-                    scale: 1,
-                    y: 0,
-                    rotate: 0,
+                  key={`wrapper-${tech.name}`}
+                  className={`absolute ${tech.pos} z-20`}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ 
+                    duration: 3 + (index % 3) * 0.5, // Organic varying float speeds
+                    repeat: Infinity, 
+                    ease: "easeInOut", 
+                    delay: index * 0.3 // Staggered float entry
                   }}
-                  transition={isPortraitHovered ? {
-                    type: "spring",
-                    stiffness: 180,
-                    damping: 12,
-                    mass: 0.8,
-                    delay: index * 0.04 // gorgeous staggered domino collapse!
-                  } : {
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 15,
-                    delay: tech.delay // slide smoothly back to orbit
-                  }}
-                  drag
-                  dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                  dragElastic={0.7}
-                  dragTransition={{ bounceStiffness: 180, bounceDamping: 12 }}
-                  whileHover={{ scale: 1.18, cursor: "grab", zIndex: 40 }}
-                  whileDrag={{ scale: 1.25, cursor: "grabbing", zIndex: 50 }}
-                  className={`absolute ${tech.pos} z-20 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl border border-accent-foreground/25 bg-background/95 shadow-[0_6px_16px_rgba(0,0,0,0.18)] hover:border-accent-foreground hover:shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-[border-color,box-shadow,background-color] duration-300 select-none will-change-[transform,opacity]`}
                 >
-                  <span className="flex items-center justify-center text-accent-foreground pointer-events-none">{tech.icon}</span>
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={isPortraitHovered ? {
+                      opacity: 1,
+                      scale: 0.85, // slightly smaller as they fall
+                      y: tech.name === "Docker" || tech.name === "MERN" ? 260
+                         : tech.name === "JS" || tech.name === "Python" ? 365
+                         : 450, // falls down to perfect bottom baseline!
+                      rotate: index % 2 === 0 ? 30 : -30, // tumbles left/right on impact!
+                    } : {
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                      rotate: 0,
+                    }}
+                    transition={isPortraitHovered ? {
+                      type: "spring",
+                      stiffness: 180,
+                      damping: 12,
+                      mass: 0.8,
+                      delay: index * 0.04 // gorgeous staggered domino collapse!
+                    } : {
+                      type: "spring",
+                      stiffness: 150,
+                      damping: 15,
+                      delay: tech.delay // slide smoothly back to orbit
+                    }}
+                    drag
+                    dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                    dragElastic={0.7}
+                    dragTransition={{ bounceStiffness: 180, bounceDamping: 12 }}
+                    whileHover={{ scale: 1.18, cursor: "grab", zIndex: 40 }}
+                    whileDrag={{ scale: 1.25, cursor: "grabbing", zIndex: 50 }}
+                    className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl border border-accent-foreground/25 bg-background/95 shadow-[0_6px_16px_rgba(0,0,0,0.18)] hover:border-accent-foreground hover:shadow-[0_0_20px_rgba(59,130,246,0.35)] transition-[border-color,box-shadow,background-color] duration-300 select-none will-change-[transform,opacity]"
+                  >
+                    <span className="flex items-center justify-center text-accent-foreground pointer-events-none">{tech.icon}</span>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>

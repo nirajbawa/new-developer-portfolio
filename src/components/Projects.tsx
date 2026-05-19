@@ -337,11 +337,6 @@ export function Projects() {
   // Slice visible projects dynamically
   const visibleProjects = projects.slice(0, visibleCount);
 
-  // Group visible projects dynamically for perfect 3-column asymmetric layout
-  const col1Projects = visibleProjects.filter((_, idx) => idx % 3 === 0);
-  const col2Projects = visibleProjects.filter((_, idx) => idx % 3 === 1);
-  const col3Projects = visibleProjects.filter((_, idx) => idx % 3 === 2);
-
   const hasMore = visibleCount < projects.length;
 
   const handleShowMore = () => {
@@ -387,344 +382,123 @@ export function Projects() {
           </h2>
         </motion.div>
 
-        {/* 3-Column Asymmetric Staggered Masonry Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          
-          {/* Column 1 (Left) */}
-          <div className="flex flex-col gap-6">
-            {col1Projects.map((project, idx) => {
-              const meta = projectMeta[project.title];
-              if (!meta) return null;
-              const slug = titleToSlugMap[project.title] || "";
+        {/* Responsive Bento Grid Layout */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 items-stretch">
+          {visibleProjects.map((project, idx) => {
+            const meta = projectMeta[project.title];
+            if (!meta) return null;
+            const slug = titleToSlugMap[project.title] || "";
 
-              return (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.1 }}
-                  key={project.title}
-                  className={`relative ${meta.aspectClass} rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500`}
-                >
-                  {/* Absolute Link covering the entire card area */}
-                  <Link
-                    href={`/projects/${slug}`}
-                    className="absolute inset-0 z-40"
-                    aria-label={`View ${project.title}`}
-                  />
+            // Bento Grid Logic: Every 3rd item spans full width on mobile
+            const isFullRowMobile = idx % 3 === 0;
+            const bentoSpan = isFullRowMobile ? "col-span-2 lg:col-span-1" : "col-span-1 lg:col-span-1";
+            const bentoHeight = isFullRowMobile ? "min-h-[18rem] sm:min-h-[22rem]" : "min-h-[16rem] sm:min-h-[20rem]";
+            const cardPadding = isFullRowMobile ? "p-5" : "p-4 sm:p-5";
 
-                  {/* Highlight Background Image */}
-                  <Image
-                    src={meta.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    priority={idx === 0}
-                  />
+            return (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: (idx % 3) * 0.1 }}
+                key={project.title}
+                className={`relative w-full ${bentoSpan} ${bentoHeight} rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500`}
+              >
+                {/* Absolute Link covering the entire card area */}
+                <Link
+                  href={`/projects/${slug}`}
+                  className="absolute inset-0 z-40"
+                  aria-label={`View ${project.title}`}
+                />
 
-                  {/* Soft Initial Backdrop Gradient (Pure Black in both light/dark modes for maximum contrast) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
+                {/* Highlight Background Image */}
+                <Image
+                  src={meta.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  priority={idx < 3}
+                />
 
-                  {/* Initial State text overlay at the bottom */}
-                  <div className="absolute bottom-0 left-0 w-full p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2">
-                    <span className="text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
+                {/* Soft Initial Backdrop Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
+
+                {/* Initial State text overlay at the bottom */}
+                <div className={`absolute bottom-0 left-0 w-full ${cardPadding} z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2`}>
+                  <span className="text-[0.55rem] sm:text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
+                    {meta.category}
+                  </span>
+                  <h3 className="text-xs sm:text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
+                    {project.title}
+                  </h3>
+                </div>
+
+                {/* HOVER STATE VIEW */}
+                <div className={`absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between ${cardPadding} text-left`}>
+                  
+                  {/* Top: Title */}
+                  <div className="space-y-1">
+                    <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
                       {meta.category}
                     </span>
-                    <h3 className="text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
+                    <h4 className="text-[0.65rem] sm:text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase line-clamp-1 sm:line-clamp-2">
                       {project.title}
-                    </h3>
+                    </h4>
                   </div>
 
-                  {/* HOVER STATE VIEW (Glassmorphic Dark Overlay consistent in both light/dark modes) */}
-                  <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-5 text-left">
-                    
-                    {/* Top: Title */}
-                    <div className="space-y-1">
-                      <span className="text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
-                        {meta.category}
-                      </span>
-                      <h4 className="text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase">
-                        {project.title}
-                      </h4>
-                    </div>
-
-                    {/* Center: Abstract Box */}
-                    <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-3.5 my-1 flex-1 flex flex-col justify-center">
-                      <span className="text-[0.55rem] font-mono text-neutral-400 uppercase tracking-widest mb-1 block">
-                        Abstract
-                      </span>
-                      <p className="text-[0.68rem] text-neutral-300 leading-relaxed line-clamp-4 sm:line-clamp-5">
-                        {meta.abstract}
-                      </p>
-                    </div>
-
-                    {/* Bottom: Repository Link & View Project Live Buttons */}
-                    <div className="flex flex-col gap-2 pt-2 border-t border-neutral-800 relative z-40">
-                      <div className="flex justify-between items-center text-[0.62rem] font-mono font-bold text-primary uppercase tracking-wider">
-                        <span>Details & Links</span>
-                        <span className="px-2.5 py-1 text-[0.55rem] font-mono font-bold border border-primary/20 bg-primary/5 text-primary uppercase rounded-md">
-                          View Info
-                        </span>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2 mt-1 relative z-50">
-                        <a
-                          href={meta.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-200 hover:text-primary text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                          </svg>
-                          Repo
-                        </a>
-                        <a
-                          href={meta.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
-                          </svg>
-                          Live
-                        </a>
-                      </div>
-                    </div>
-
-                  </div>
-                </motion.div>
-              );
-            })}
-        </div>
-
-          {/* Column 2 (Center) */}
-          <div className="flex flex-col gap-6">
-            {col2Projects.map((project, idx) => {
-              const meta = projectMeta[project.title];
-              if (!meta) return null;
-              const slug = titleToSlugMap[project.title] || "";
-
-              return (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.1 + 0.15 }}
-                  key={project.title}
-                  className={`relative ${meta.aspectClass} rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500`}
-                >
-                  {/* Absolute Link covering the entire card area */}
-                  <Link
-                    href={`/projects/${slug}`}
-                    className="absolute inset-0 z-40"
-                    aria-label={`View ${project.title}`}
-                  />
-
-                  {/* Highlight Background Image */}
-                  <Image
-                    src={meta.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
-
-                  {/* Soft Initial Backdrop Gradient (Pure Black in both light/dark modes for maximum contrast) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
-
-                  {/* Initial State text overlay at the bottom */}
-                  <div className="absolute bottom-0 left-0 w-full p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2">
-                    <span className="text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
-                      {meta.category}
+                  {/* Center: Abstract Box */}
+                  <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-2 sm:p-3.5 my-1 flex-1 flex flex-col justify-center overflow-hidden">
+                    <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-neutral-400 uppercase tracking-widest mb-1 block hidden sm:block">
+                      Abstract
                     </span>
-                    <h3 className="text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
-                      {project.title}
-                    </h3>
+                    <p className="text-[0.55rem] sm:text-[0.68rem] text-neutral-300 leading-relaxed line-clamp-4 sm:line-clamp-5">
+                      {meta.abstract}
+                    </p>
                   </div>
 
-                  {/* HOVER STATE VIEW (Glassmorphic Dark Overlay consistent in both light/dark modes) */}
-                  <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-5 text-left">
+                  {/* Bottom: Links */}
+                  <div className="flex flex-col gap-1.5 sm:gap-2 pt-1 sm:pt-2 border-t border-neutral-800 relative z-40">
+                    <div className="flex justify-between items-center text-[0.5rem] sm:text-[0.62rem] font-mono font-bold text-primary uppercase tracking-wider hidden sm:flex">
+                      <span>Details & Links</span>
+                      <span className="px-2.5 py-1 text-[0.45rem] sm:text-[0.55rem] font-mono font-bold border border-primary/20 bg-primary/5 text-primary uppercase rounded-md">
+                        View Info
+                      </span>
+                    </div>
                     
-                    {/* Top: Title */}
-                    <div className="space-y-1">
-                      <span className="text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
-                        {meta.category}
-                      </span>
-                      <h4 className="text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase">
-                        {project.title}
-                      </h4>
+                    <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-1 relative z-50">
+                      <a
+                        href={meta.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-200 hover:text-primary text-[0.45rem] sm:text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 sm:w-3 sm:h-3">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                        Repo
+                      </a>
+                      <a
+                        href={meta.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-[0.45rem] sm:text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 sm:w-3 sm:h-3">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
+                        </svg>
+                        Live
+                      </a>
                     </div>
-
-                    {/* Center: Abstract Box */}
-                    <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-3.5 my-1 flex-1 flex flex-col justify-center">
-                      <span className="text-[0.55rem] font-mono text-neutral-400 uppercase tracking-widest mb-1 block">
-                        Abstract
-                      </span>
-                      <p className="text-[0.68rem] text-neutral-300 leading-relaxed line-clamp-4 sm:line-clamp-5">
-                        {meta.abstract}
-                      </p>
-                    </div>
-
-                    {/* Bottom: Repository Link & View Project Live Buttons */}
-                    <div className="flex flex-col gap-2 pt-2 border-t border-neutral-800 relative z-40">
-                      <div className="flex justify-between items-center text-[0.62rem] font-mono font-bold text-primary uppercase tracking-wider">
-                        <span>Details & Links</span>
-                        <span className="px-2.5 py-1 text-[0.55rem] font-mono font-bold border border-primary/20 bg-primary/5 text-primary uppercase rounded-md">
-                          View Info
-                        </span>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2 mt-1 relative z-50">
-                        <a
-                          href={meta.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-200 hover:text-primary text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                          </svg>
-                          Repo
-                        </a>
-                        <a
-                          href={meta.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
-                          </svg>
-                          Live
-                        </a>
-                      </div>
-                    </div>
-
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-          {/* Column 3 (Right) */}
-          <div className="flex flex-col gap-6">
-            {col3Projects.map((project, idx) => {
-              const meta = projectMeta[project.title];
-              if (!meta) return null;
-              const slug = titleToSlugMap[project.title] || "";
-
-              return (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.1 + 0.3 }}
-                  key={project.title}
-                  className={`relative ${meta.aspectClass} rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500`}
-                >
-                  {/* Absolute Link covering the entire card area */}
-                  <Link
-                    href={`/projects/${slug}`}
-                    className="absolute inset-0 z-40"
-                    aria-label={`View ${project.title}`}
-                  />
-
-                  {/* Highlight Background Image */}
-                  <Image
-                    src={meta.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
-
-                  {/* Soft Initial Backdrop Gradient (Pure Black in both light/dark modes for maximum contrast) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
-
-                  {/* Initial State text overlay at the bottom */}
-                  <div className="absolute bottom-0 left-0 w-full p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2">
-                    <span className="text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
-                      {meta.category}
-                    </span>
-                    <h3 className="text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  {/* HOVER STATE VIEW (Glassmorphic Dark Overlay consistent in both light/dark modes) */}
-                  <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-5 text-left">
-                    
-                    {/* Top: Title */}
-                    <div className="space-y-1">
-                      <span className="text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
-                        {meta.category}
-                      </span>
-                      <h4 className="text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase">
-                        {project.title}
-                      </h4>
-                    </div>
-
-                    {/* Center: Abstract Box */}
-                    <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-3.5 my-1 flex-1 flex flex-col justify-center">
-                      <span className="text-[0.55rem] font-mono text-neutral-400 uppercase tracking-widest mb-1 block">
-                        Abstract
-                      </span>
-                      <p className="text-[0.68rem] text-neutral-300 leading-relaxed line-clamp-4 sm:line-clamp-5">
-                        {meta.abstract}
-                      </p>
-                    </div>
-
-                    {/* Bottom: Repository Link & View Project Live Buttons */}
-                    <div className="flex flex-col gap-2 pt-2 border-t border-neutral-800 relative z-40">
-                      <div className="flex justify-between items-center text-[0.62rem] font-mono font-bold text-primary uppercase tracking-wider">
-                        <span>Details & Links</span>
-                        <span className="px-2.5 py-1 text-[0.55rem] font-mono font-bold border border-primary/20 bg-primary/5 text-primary uppercase rounded-md">
-                          View Info
-                        </span>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2 mt-1 relative z-50">
-                        <a
-                          href={meta.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-200 hover:text-primary text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                          </svg>
-                          Repo
-                        </a>
-                        <a
-                          href={meta.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                        >
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
-                          </svg>
-                          Live
-                        </a>
-                      </div>
-                    </div>
-
-                  </div>
-                </motion.div>
-              );
-            })}
-        </div>
-
-        </div>
 
         {/* Dynamic Pagination Controller positioned at bottom right */}
         {projects.length > 7 && (

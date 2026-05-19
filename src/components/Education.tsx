@@ -316,7 +316,7 @@ export function Education() {
           )}
 
           {/* RIGHT COLUMN: Stacked Horizontal Cards (Second & Third Education Items) */}
-          <div className="flex flex-col gap-6 justify-between">
+          <div className="grid grid-cols-2 md:flex md:flex-col gap-3 sm:gap-6 justify-between">
             {secondarySchools.map((school, index) => {
               const isEven = index % 2 === 0;
               const meta = institutionMeta[school.institution];
@@ -328,37 +328,37 @@ export function Education() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
-                  className={`p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md shadow-lg group/card hover:border-primary/30 transition-all duration-300 relative cursor-pointer flex flex-col ${
+                  className={`p-3 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md shadow-lg group/card hover:border-primary/30 transition-all duration-300 relative cursor-pointer flex flex-col ${
                     isEven ? "sm:flex-row" : "sm:flex-row-reverse"
-                  } gap-5 items-stretch flex-1`}
+                  } gap-3 sm:gap-5 items-stretch flex-1 overflow-hidden`}
                   onClick={() => setSelectedSchool(school)}
                 >
                   {/* Corner Brackets */}
-                  <span className="absolute top-2.5 left-2.5 w-4.5 h-4.5 border-t-2 border-l-2 border-primary/40 rounded-tl-md !m-0" />
-                  <span className="absolute top-2.5 right-2.5 w-4.5 h-4.5 border-t-2 border-r-2 border-primary/40 rounded-tr-md !m-0" />
-                  <span className="absolute bottom-2.5 left-2.5 w-4.5 h-4.5 border-b-2 border-l-2 border-primary/40 rounded-bl-md !m-0" />
-                  <span className="absolute bottom-2.5 right-2.5 w-4.5 h-4.5 border-b-2 border-r-2 border-primary/40 rounded-br-md !m-0" />
+                  <span className="absolute top-2.5 left-2.5 w-4.5 h-4.5 border-t-2 border-l-2 border-primary/40 rounded-tl-md !m-0 hidden sm:block" />
+                  <span className="absolute top-2.5 right-2.5 w-4.5 h-4.5 border-t-2 border-r-2 border-primary/40 rounded-tr-md !m-0 hidden sm:block" />
+                  <span className="absolute bottom-2.5 left-2.5 w-4.5 h-4.5 border-b-2 border-l-2 border-primary/40 rounded-bl-md !m-0 hidden sm:block" />
+                  <span className="absolute bottom-2.5 right-2.5 w-4.5 h-4.5 border-b-2 border-r-2 border-primary/40 rounded-br-md !m-0 hidden sm:block" />
 
                   {/* Image Carousel (Left/Right side depending on row layout) */}
-                  <div className="w-full sm:w-[42%] aspect-[16/11] sm:aspect-auto rounded-xl overflow-hidden relative min-h-[9rem] sm:min-h-0 flex-shrink-0">
+                  <div className="w-full sm:w-[42%] aspect-[16/11] sm:aspect-auto rounded-xl overflow-hidden relative min-h-[6rem] sm:min-h-0 flex-shrink-0">
                     <ImageCarousel images={meta?.images} alt={school.institution} />
                   </div>
 
                   {/* Info details & Logo on the right/left */}
-                  <div className="flex-1 flex flex-col justify-between py-1 space-y-3">
-                    <div className="flex justify-between items-start gap-3">
-                      <div className="space-y-1">
-                        <h3 className="text-sm font-extrabold text-foreground group-hover/card:text-primary transition-colors leading-snug line-clamp-2">
+                  <div className="flex-1 flex flex-col justify-between py-0.5 sm:py-1 space-y-2 sm:space-y-3">
+                    <div className="flex justify-between items-start gap-2 sm:gap-3">
+                      <div className="space-y-0.5 sm:space-y-1 overflow-hidden">
+                        <h3 className="text-[0.65rem] sm:text-sm font-extrabold text-foreground group-hover/card:text-primary transition-colors leading-snug line-clamp-2">
                           {school.institution}
                         </h3>
-                        <p className="text-[0.58rem] font-mono text-muted-foreground line-clamp-1">{school.details}</p>
-                        <p className="text-xs font-bold text-foreground mt-1">{school.degree}</p>
-                        <span className="inline-block mt-0.5 text-[0.58rem] font-mono text-primary uppercase tracking-widest">{school.duration}</span>
+                        <p className="text-[0.58rem] font-mono text-muted-foreground line-clamp-1 hidden sm:block">{school.details}</p>
+                        <p className="text-[0.55rem] sm:text-xs font-bold text-foreground mt-0.5 sm:mt-1 leading-tight line-clamp-2">{school.degree}</p>
+                        <span className="inline-block mt-0.5 text-[0.45rem] sm:text-[0.58rem] font-mono text-primary uppercase tracking-widest line-clamp-1">{school.duration}</span>
                       </div>
                       
                       {/* Logo corner */}
                       {meta?.logo && (
-                        <div className="w-10 h-10 flex-shrink-0 bg-white rounded-lg border border-border/40 overflow-hidden relative flex items-center justify-center p-0.5">
+                        <div className="w-6 h-6 sm:w-10 sm:h-10 flex-shrink-0 bg-white rounded-md sm:rounded-lg border border-border/40 overflow-hidden relative flex items-center justify-center p-0.5">
                           <Image
                             src={meta.logo}
                             alt={`${school.institution} logo`}
@@ -371,14 +371,14 @@ export function Education() {
                     </div>
 
                     {/* Bullet points description taking full space and eliminating negative space */}
-                    <ul className="space-y-1.5 mt-2 flex-1">
+                    <ul className="space-y-1 sm:space-y-1.5 mt-1 sm:mt-2 flex-1">
                       {school.bullets.map((bullet, idx) => (
-                        <li key={idx} className="flex gap-2 text-[0.68rem] text-muted-foreground leading-relaxed">
-                          <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/70" />
-                          <span>
+                        <li key={idx} className="flex gap-1.5 sm:gap-2 text-[0.55rem] sm:text-[0.68rem] text-muted-foreground leading-relaxed">
+                          <span className="mt-1 sm:mt-1.5 flex-shrink-0 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-primary/70" />
+                          <span className="line-clamp-2 sm:line-clamp-none">
                             {bullet}
                             {idx === school.bullets.length - 1 && (
-                              <span className="text-primary font-mono font-bold ml-1.5 hover:underline whitespace-nowrap">
+                              <span className="text-primary font-mono font-bold ml-1 sm:ml-1.5 hover:underline whitespace-nowrap hidden sm:inline">
                                 ..show more
                               </span>
                             )}
