@@ -1,10 +1,10 @@
 "use client";
-
 import { useState } from "react";
 import { ProjectDetail, projectDetailsList } from "@/data/projectDetails";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Navbar } from "@/components/Navbar";
 
 interface ClientProjectPageProps {
   project: ProjectDetail;
@@ -63,9 +63,13 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
         <div className="absolute bottom-1/4 left-0 w-[45rem] h-[45rem] rounded-full bg-primary/5 dark:bg-primary/[0.01] blur-[180px] -translate-x-1/2" />
       </div>
 
-      {/* Modern Sticky Glassmorphic Header */}
-      <header className="sticky top-0 left-0 w-full z-50 border-b border-border/10 bg-background/60 backdrop-blur-md">
-        <div className="container mx-auto max-w-[76rem] h-16 px-4 sm:px-6 flex items-center justify-between">
+      <Navbar />
+
+      {/* Main Blog Post Structure */}
+      <article className="container mx-auto max-w-[76rem] px-4 sm:px-6 pt-28 sm:pt-32 pb-8 sm:pb-12 relative z-10">
+        
+        {/* Breadcrumb Navigation */}
+        <div className="flex items-center justify-between mb-8">
           <Link
             href="/#projects"
             className="group inline-flex items-center gap-2 text-xs font-bold font-mono uppercase tracking-wider text-muted-foreground hover:text-primary transition-all duration-300"
@@ -86,10 +90,6 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
             Case Study // {project.category}
           </span>
         </div>
-      </header>
-
-      {/* Main Blog Post Structure */}
-      <article className="container mx-auto max-w-[76rem] px-4 sm:px-6 py-8 sm:py-12 relative z-10">
         
         {/* Blog Post Header Info */}
         <motion.header

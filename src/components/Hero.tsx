@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 import developerHeroImg from "@/assets/images/new-developer-img.png";
 import { useSelector } from "react-redux";
 import { selectTheme } from "@/redux/themeSlice";
+import { GithubCalendarWidget } from "./GithubCalendarWidget";
+import { LeetCodeWidget } from "./LeetCodeWidget";
 
 // Cyber-styled Tech Stack SVG Icons
 const MernIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -232,7 +234,7 @@ export function Hero() {
           >
             {/* Frameless Name Cyber block with terminal corner brackets */}
             <div 
-              className="relative p-6 md:p-8 space-y-4 rounded-xl border backdrop-blur-md transition-all duration-300"
+              className="relative p-6 md:p-8 space-y-4 rounded-none border backdrop-blur-md transition-all duration-300"
               style={{
                 backgroundColor: isDark ? "rgba(3, 7, 18, 0.5)" : "rgba(255, 255, 255, 0.75)", // Visible frosted glass white in light mode
                 borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(203, 213, 225, 0.8)", // Clean slate border in light mode
@@ -261,6 +263,41 @@ export function Hero() {
                 <p className="mt-4 text-xs font-sans text-muted-foreground leading-relaxed">
                   Building production systems that bridge technical depth with high-impact, live public solutions.
                 </p>
+              </div>
+
+              {/* Action Buttons inside the box at the bottom */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <a
+                  href="/Niraj_Bava_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "rounded-lg bg-accent-foreground text-black dark:text-white text-[0.65rem] sm:text-xs font-bold font-mono shadow-lg shadow-accent-foreground/10 hover:opacity-90 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center h-11 border-none px-1 text-center"
+                  )}
+                >
+                  View CV
+                </a>
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "rounded-lg border-accent-foreground/20 bg-background/50 backdrop-blur-md text-[0.65rem] sm:text-xs font-bold font-mono text-foreground hover:scale-105 hover:border-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-center justify-center h-11 px-1 text-center"
+                  )}
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="#"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "rounded-lg border-accent-foreground/20 bg-background/50 backdrop-blur-md text-[0.65rem] sm:text-xs font-bold font-mono text-foreground hover:scale-105 hover:border-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-center justify-center h-11 px-1 text-center"
+                  )}
+                >
+                  Resume
+                </a>
               </div>
             </div>
 
@@ -340,6 +377,7 @@ export function Hero() {
               </a>
             </div>
           </motion.div>
+
 
           {/* CENTER COLUMN: Responsive Canvas, Scaled Up Crisp Portrait with Symmetric Arched Halo Tech Stack */}
           <div className="order-1 lg:order-2 flex flex-col items-center justify-center scale-[0.98] sm:scale-100">
@@ -457,68 +495,9 @@ export function Hero() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="order-3 lg:order-3 flex flex-col gap-6 w-full will-change-[transform,opacity]"
           >
-            {/* Frameless Personal Summary Block with glowing side accent bar */}
-            <div 
-              className="relative p-6 md:p-8 space-y-4 rounded-xl border backdrop-blur-md transition-all duration-300 overflow-hidden"
-              style={{
-                backgroundColor: isDark ? "rgba(3, 7, 18, 0.5)" : "rgba(255, 255, 255, 0.75)", // Visible frosted glass white in light mode
-                borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(203, 213, 225, 0.8)", // Clean slate border in light mode
-                boxShadow: isDark ? "none" : "0 10px 30px -5px rgba(15, 23, 42, 0.05)"
-              }}
-            >
-              
-              {/* Sleek Vertical Technical Side-bar */}
-              <div className="absolute top-0 bottom-0 left-0 w-[3px] bg-gradient-to-b from-accent-foreground via-primary to-transparent" />
+            <GithubCalendarWidget />
+            <LeetCodeWidget />
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-[0.65rem] font-bold font-mono bg-primary/10 text-accent-foreground uppercase tracking-wider">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-foreground" />
-                About_Myself
-              </div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground font-sans">
-                Mission & Mindset
-              </h2>
-              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-sans">
-                A passionate Full-Stack Engineer who bridges technical innovation with high-impact, live user solutions. Specializes in designing end-to-end scalable architectures, driven by the conviction that clean, well-engineered software transforms lives.
-              </p>
-              <p className="text-xs font-mono text-accent-foreground leading-relaxed">
-                {"// System Architecture & Full-Stack Development"}
-              </p>
-            </div>
-
-            {/* Bottom-right: Cyber Action Buttons Row (Download CV, LinkedIn, Contact) */}
-            <div className="grid grid-cols-3 gap-3 pl-1 w-full">
-              <a
-                href="/Niraj_Bava_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "rounded-lg bg-accent-foreground text-black dark:text-white text-[0.65rem] sm:text-xs font-bold font-mono shadow-lg shadow-accent-foreground/10 hover:opacity-90 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 flex items-center justify-center h-11 border-none px-1 text-center"
-                )}
-              >
-                View CV
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "rounded-lg border-accent-foreground/20 bg-background/50 backdrop-blur-md text-[0.65rem] sm:text-xs font-bold font-mono text-foreground hover:scale-105 hover:border-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-center justify-center h-11 px-1 text-center"
-                )}
-              >
-                LinkedIn
-              </a>
-              <a
-                href="#"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "rounded-lg border-accent-foreground/20 bg-background/50 backdrop-blur-md text-[0.65rem] sm:text-xs font-bold font-mono text-foreground hover:scale-105 hover:border-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-center justify-center h-11 px-1 text-center"
-                )}
-              >
-                Resume
-              </a>
-            </div>
           </motion.div>
 
         </div>

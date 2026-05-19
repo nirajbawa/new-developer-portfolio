@@ -30,12 +30,12 @@ export function Navbar() {
   }, []);
 
   const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
-    { label: "Education", href: "#education" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/#home" },
+    { label: "About", href: "/#about" },
+    { label: "Experience", href: "/#experience" },
+    { label: "Education", href: "/#education" },
+    { label: "Projects", href: "/#projects" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -49,7 +49,7 @@ export function Navbar() {
       <div className="container mx-auto flex items-center justify-between px-6">
         
         {/* Left Signature Logo */}
-        <a href="#home" className="flex items-center gap-2 group">
+        <a href="/#home" className="flex items-center gap-2 group">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform duration-300 group-hover:scale-105">
             <Code2 className="h-5 w-5" />
           </div>
@@ -91,7 +91,7 @@ export function Navbar() {
           </Button>
 
           <a
-            href="#contact"
+            href="/#contact"
             className={cn(
               buttonVariants({ variant: "default" }),
               "hidden lg:inline-flex bg-primary text-primary-foreground hover:bg-primary/95 text-xs font-semibold shadow-sm rounded-lg px-4 py-2 flex items-center justify-center"
@@ -117,7 +117,7 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => setMobileMenuOpen(false)}
               className={cn(
                 buttonVariants({ variant: "default" }),

@@ -264,7 +264,7 @@ export default function Footer() {
                     <span>LinkedIn</span>
                   </a>
                   <a
-                    href="https://x.com/NirajBava"
+                    href="https://x.com/NirajBawa"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[0.7rem] sm:text-xs font-semibold text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5 group/scl"
