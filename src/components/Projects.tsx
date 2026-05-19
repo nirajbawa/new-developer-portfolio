@@ -52,10 +52,10 @@ const projectMeta: Record<
     carouselImages: [rakshakMain, rakshak1, rakshak2, rakshak3, rakshak4],
     abstract: "An officially deployed WhatsApp chatbot (+91 70661 00112) developed in collaboration with the Nashik Rural Police (Government-funded under ₹6 Lakhs Annual Maintenance) serving thousands of real-world requests. Implements Marathi & English voice/text support, automated multi-level emergency escalation, DeepSeek RAG legal guidance on BNS, IPC, CrPC, and local jurisdiction geolocation lookup.",
     techStack: ["FastAPI", "WhatsApp API", "DeepSeek RAG", "AWS", "Python"],
-    link: "https://github.com/nirajbawa/rakshak-ai",
-    liveUrl: "https://github.com/nirajbawa/rakshak-ai",
+    link: "",
+    liveUrl: "https://www.rakshakai.org/",
     category: "AI & Public Safety",
-    aspectClass: "aspect-[16/10] min-h-[12rem]",
+    aspectClass: "lg:h-[20rem]",
   },
   "Anviksh AI – Learning Platform": {
     image: anvikshMain,
@@ -63,27 +63,27 @@ const projectMeta: Record<
     abstract: "An award-winning learning workspace that transforms self-learning into a highly structured, engaging experience. Uses DeepSeek AI locally to generate personalized skill roadmaps, with daily planner calendar schedules, dynamic practice feedback, multi-role (learner, admin, expert, mentor) capabilities, and secure Razorpay payment integrations.",
     techStack: ["React.js", "FastAPI", "DeepSeek LLM", "MongoDB", "Razorpay"],
     link: "https://github.com/nirajbawa/anviksh-ai",
-    liveUrl: "https://github.com/nirajbawa/anviksh-ai",
+    liveUrl: "https://techaialpha.vercel.app/",
     category: "EdTech & AI",
-    aspectClass: "aspect-[4/3] min-h-[14rem]",
+    aspectClass: "lg:h-[28rem]",
   },
   "MSBTEQuizPro": {
     image: msbteQuizProMain,
     abstract: "A high-performance online preparation portal tailored for MSBTE students, mimicking the official board examination environment. Offers both free and paid MCQ test series with Next Auth OTP login, Zustand device-synced cart operations, dynamic useForm handling, and an exhaustive administrative management panel.",
     techStack: ["Next.js", "Zustand", "React Query", "Next Auth", "MongoDB", "Razorpay"],
     link: "https://github.com/nirajbawa/msbte-quiz-pro",
-    liveUrl: "https://github.com/nirajbawa/msbte-quiz-pro",
+    liveUrl: "https://msbtequizpro.vercel.app/",
     category: "Exam Prep Web Portal",
-    aspectClass: "aspect-[1/1] min-h-[18rem]",
+    aspectClass: "lg:h-[18rem]",
   },
   "Msbte Wallah": {
     image: msbteWallahMain,
     abstract: "A large-scale, cutting-edge edtech social workspace (msbtewallah.in) designed for MSBTE academic students to centralize paper resource sharing, peer discussion chatrooms, Google OAuth secure logins, and Firebase-powered real-time user engagement metrics.",
     techStack: ["ReactJS", "Express.js", "Tailwind CSS", "MongoDB", "Google OAuth", "Firebase"],
     link: "https://github.com/nirajbawa/msbtewallah",
-    liveUrl: "https://github.com/nirajbawa/msbtewallah",
+    liveUrl: "https://msbtewallah.vercel.app/",
     category: "Social EdTech Hub",
-    aspectClass: "aspect-[16/10] min-h-[12rem]",
+    aspectClass: "lg:h-[32rem]",
   },
   "Secure Data Repository System (SDR)": {
     image: sdrMain,
@@ -91,18 +91,18 @@ const projectMeta: Record<
     abstract: "A high-performance district-level private data cloud built for the Nashik Rural Police Cyber Department, now a commercial multi-tenant SaaS product. Uses GPT-5 Mini for AI-powered schema detection, AES-256 local encryption for zero public-cloud offline-first security, typo-tolerant Meilisearch for under-3-second queries on billions of records, Cloudflare Tunnels for secure remote station queries, and immutable compliance logs.",
     techStack: ["Electron", "React", "Meilisearch", "GPT-5 Mini", "Node/Nest.js", "PostgreSQL"],
     link: "https://github.com/nirajbawa/sdr-system",
-    liveUrl: "https://github.com/nirajbawa/sdr-system",
+    liveUrl: "https://admin.sdr.neuronexdevelopers.com/",
     category: "Cybersecurity & SaaS",
-    aspectClass: "aspect-[3/5] min-h-[25rem]",
+    aspectClass: "lg:h-[24rem]",
   },
   "Team Matrix Web App": {
     image: teamMatrixMain,
     abstract: "A collaborative full-stack workspace created for the internal management and media publication of the Team Matrix robotics club. Features a secure member login portal, an administrative page component editor, Zustand state managers, and smooth Framer Motion animated progress logs.",
     techStack: ["Next.js 14", "Zustand", "React Query", "Material Tailwind", "ShadCN UI", "MongoDB"],
     link: "https://github.com/nirajbawa/team-matrix-app",
-    liveUrl: "https://github.com/nirajbawa/team-matrix-app",
+    liveUrl: "https://www.team-matrix.in/",
     category: "Robotics Club Platform",
-    aspectClass: "aspect-[1/1] min-h-[18rem]",
+    aspectClass: "lg:h-[20rem]",
   },
   "ANAV – AUTONOMOUS DRONE": {
     image: anavMain,
@@ -110,9 +110,9 @@ const projectMeta: Record<
     abstract: "A state-of-the-art autonomous drone operating completely without GPS, employing SLAM mapping, dynamic path planning, and real-time telemetry, recognized at the national ISRO-IROC Grand Finale.",
     techStack: ["SLAM", "Robotics", "Python", "C++", "ROS", "Telemetry"],
     link: "https://github.com/nirajbawa/anav-drone",
-    liveUrl: "https://github.com/nirajbawa/anav-drone",
+    liveUrl: "https://drive.google.com/file/d/1INlmuOLDTkfOXPRC-9h9pqSOmbTSnH_b/view",
     category: "Robotics & Hardware",
-    aspectClass: "aspect-[3/4] min-h-[20rem]",
+    aspectClass: "lg:h-[26rem]",
   },
 };
 
@@ -331,11 +331,27 @@ export function Projects() {
   const { projects } = cvData;
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
-  // Pagination states: initially show 7, load increments of 3
-  const [visibleCount, setVisibleCount] = useState(7);
+  // Pagination states: initially show 6, load increments of 3
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  // Helper to parse project duration string and return a timestamp for sorting
+  const parseProjectDate = (duration: string) => {
+    // Expected formats: "Jul 2025 – Sep 2025", "Nov 2024", "Jan 2026 - Feb 2026", "Present"
+    const parts = duration.split(/[-–]/).map(s => s.trim());
+    const endDateStr = parts[parts.length - 1];
+    if (endDateStr.toLowerCase() === "present") return Date.now();
+    
+    const date = new Date(endDateStr);
+    return isNaN(date.getTime()) ? 0 : date.getTime();
+  };
+
+  // Sort projects descending (newest first) based on the parsed duration end date
+  const sortedProjects = [...projects].sort((a, b) => {
+    return parseProjectDate(b.duration) - parseProjectDate(a.duration);
+  });
 
   // Slice visible projects dynamically
-  const visibleProjects = projects.slice(0, visibleCount);
+  const visibleProjects = sortedProjects.slice(0, visibleCount);
 
   const hasMore = visibleCount < projects.length;
 
@@ -344,17 +360,108 @@ export function Projects() {
   };
 
   const handleShowLess = () => {
-    setVisibleCount(7);
+    setVisibleCount(6);
+  };
+
+  const renderCard = (project: ProjectType, idx: number, isMobileLayout: boolean) => {
+    const meta = projectMeta[project.title];
+    if (!meta) return null;
+    const slug = titleToSlugMap[project.title] || "";
+
+    // Mobile layout specific styles (Bento pattern)
+    const isFullRowMobile = isMobileLayout && idx % 3 === 0;
+    const mobileColSpan = isFullRowMobile ? "col-span-2" : "col-span-1";
+    const mobileHeight = isFullRowMobile ? "min-h-[18rem] sm:min-h-[22rem]" : "min-h-[16rem] sm:min-h-[20rem]";
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: (idx % 3) * 0.1 }}
+        key={project.title + (isMobileLayout ? '-mobile' : '-desktop')}
+        className={`relative w-full rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500 ${
+          isMobileLayout 
+            ? `${mobileColSpan} ${mobileHeight}` 
+            : `${meta.aspectClass}`
+        }`}
+      >
+        <Link
+          href={`/projects/${slug}`}
+          className="absolute inset-0 z-40"
+          aria-label={`View ${project.title}`}
+        />
+
+        <Image
+          src={meta.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          priority={idx < 3}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
+
+        <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2">
+          <span className="text-[0.55rem] sm:text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
+            {meta.category}
+          </span>
+          <h3 className="text-xs sm:text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
+            {project.title}
+          </h3>
+        </div>
+
+        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-4 sm:p-5 text-left">
+          <div className="space-y-1">
+            <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
+              {meta.category}
+            </span>
+            <h4 className="text-[0.65rem] sm:text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase line-clamp-1 sm:line-clamp-2">
+              {project.title}
+            </h4>
+          </div>
+
+          <p className="text-[0.65rem] sm:text-[0.7rem] text-neutral-300 leading-relaxed line-clamp-3 sm:line-clamp-4 my-2">
+            {meta.abstract}
+          </p>
+
+          <div className="space-y-3">
+            <div className="flex flex-wrap gap-1.5">
+              {meta.techStack.slice(0, 3).map((tech) => (
+                <span
+                  key={tech}
+                  className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.55rem] sm:text-[0.6rem] font-mono text-neutral-300"
+                >
+                  {tech}
+                </span>
+              ))}
+              {meta.techStack.length > 3 && (
+                <span className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.55rem] sm:text-[0.6rem] font-mono text-neutral-400">
+                  +{meta.techStack.length - 3}
+                </span>
+              )}
+            </div>
+            <div className="flex items-center text-[0.6rem] sm:text-xs font-mono font-bold text-primary group-hover/link:text-primary-foreground transition-colors">
+              Read Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 ml-1 translate-y-[1px] group-hover:translate-x-1 transition-transform">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
   };
 
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 overflow-hidden bg-background"
+      className="relative min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-6 overflow-hidden bg-background"
     >
       {/* Grid Pattern and spotlights */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 bg-fixed bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
         
         {/* Subtle Cyber Spotlights */}
         <div className="absolute top-[25%] right-[10%] w-[32rem] h-[32rem] rounded-full bg-primary/5 dark:bg-primary/[0.02] blur-[120px] -z-10" />
@@ -382,126 +489,29 @@ export function Projects() {
           </h2>
         </motion.div>
 
-        {/* Responsive Bento Grid Layout */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 items-stretch">
-          {visibleProjects.map((project, idx) => {
-            const meta = projectMeta[project.title];
-            if (!meta) return null;
-            const slug = titleToSlugMap[project.title] || "";
-
-            // Bento Grid Logic: Every 3rd item spans full width on mobile
-            const isFullRowMobile = idx % 3 === 0;
-            const bentoSpan = isFullRowMobile ? "col-span-2 lg:col-span-1" : "col-span-1 lg:col-span-1";
-            const bentoHeight = isFullRowMobile ? "min-h-[18rem] sm:min-h-[22rem]" : "min-h-[16rem] sm:min-h-[20rem]";
-            const cardPadding = isFullRowMobile ? "p-5" : "p-4 sm:p-5";
-
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: (idx % 3) * 0.1 }}
-                key={project.title}
-                className={`relative w-full ${bentoSpan} ${bentoHeight} rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500`}
-              >
-                {/* Absolute Link covering the entire card area */}
-                <Link
-                  href={`/projects/${slug}`}
-                  className="absolute inset-0 z-40"
-                  aria-label={`View ${project.title}`}
-                />
-
-                {/* Highlight Background Image */}
-                <Image
-                  src={meta.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  priority={idx < 3}
-                />
-
-                {/* Soft Initial Backdrop Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
-
-                {/* Initial State text overlay at the bottom */}
-                <div className={`absolute bottom-0 left-0 w-full ${cardPadding} z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2`}>
-                  <span className="text-[0.55rem] sm:text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
-                    {meta.category}
-                  </span>
-                  <h3 className="text-xs sm:text-sm font-extrabold text-neutral-100 tracking-tight leading-snug line-clamp-2">
-                    {project.title}
-                  </h3>
-                </div>
-
-                {/* HOVER STATE VIEW */}
-                <div className={`absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between ${cardPadding} text-left`}>
-                  
-                  {/* Top: Title */}
-                  <div className="space-y-1">
-                    <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
-                      {meta.category}
-                    </span>
-                    <h4 className="text-[0.65rem] sm:text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase line-clamp-1 sm:line-clamp-2">
-                      {project.title}
-                    </h4>
-                  </div>
-
-                  {/* Center: Abstract Box */}
-                  <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-2 sm:p-3.5 my-1 flex-1 flex flex-col justify-center overflow-hidden">
-                    <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-neutral-400 uppercase tracking-widest mb-1 block hidden sm:block">
-                      Abstract
-                    </span>
-                    <p className="text-[0.55rem] sm:text-[0.68rem] text-neutral-300 leading-relaxed line-clamp-4 sm:line-clamp-5">
-                      {meta.abstract}
-                    </p>
-                  </div>
-
-                  {/* Bottom: Links */}
-                  <div className="flex flex-col gap-1.5 sm:gap-2 pt-1 sm:pt-2 border-t border-neutral-800 relative z-40">
-                    <div className="flex justify-between items-center text-[0.5rem] sm:text-[0.62rem] font-mono font-bold text-primary uppercase tracking-wider hidden sm:flex">
-                      <span>Details & Links</span>
-                      <span className="px-2.5 py-1 text-[0.45rem] sm:text-[0.55rem] font-mono font-bold border border-primary/20 bg-primary/5 text-primary uppercase rounded-md">
-                        View Info
-                      </span>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-1 relative z-50">
-                      <a
-                        href={meta.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 text-neutral-200 hover:text-primary text-[0.45rem] sm:text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 sm:w-3 sm:h-3">
-                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                        </svg>
-                        Repo
-                      </a>
-                      <a
-                        href={meta.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-[0.45rem] sm:text-[0.55rem] font-bold font-mono uppercase tracking-wider transition-all duration-200 relative z-50"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 sm:w-3 sm:h-3">
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
-                        </svg>
-                        Live
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* MOBILE VIEW: Grid Layout */}
+        <div className="grid lg:hidden grid-cols-2 gap-3 sm:gap-6 items-stretch mb-8">
+          {visibleProjects.map((project, idx) => renderCard(project, idx, true))}
         </div>
 
+        {/* DESKTOP VIEW: Perfect True Masonry Layout (Left-to-Right logic via split columns) */}
+        <div className="hidden lg:grid grid-cols-3 gap-6 mb-12">
+          {/* Column 1 */}
+          <div className="flex flex-col gap-6">
+            {visibleProjects.filter((_, i) => i % 3 === 0).map((project, idx) => renderCard(project, idx * 3, false))}
+          </div>
+          {/* Column 2 */}
+          <div className="flex flex-col gap-6">
+            {visibleProjects.filter((_, i) => i % 3 === 1).map((project, idx) => renderCard(project, idx * 3 + 1, false))}
+          </div>
+          {/* Column 3 */}
+          <div className="flex flex-col gap-6">
+            {visibleProjects.filter((_, i) => i % 3 === 2).map((project, idx) => renderCard(project, idx * 3 + 2, false))}
+          </div>
+        </div>
 
         {/* Dynamic Pagination Controller positioned at bottom right */}
-        {projects.length > 7 && (
+        {projects.length > 6 && (
           <div className="flex justify-end mt-10">
             {hasMore ? (
               <button
@@ -528,15 +538,9 @@ export function Projects() {
         )}
       </div>
 
-      {/* Detail Dialog Modal Component */}
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectDetailModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
+
+
+
       {/* Creative SVG Transition Section Connector (Desktop) */}
       <div className="hidden md:block absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
         <svg
@@ -598,7 +602,6 @@ export function Projects() {
           </defs>
         </svg>
       </div>
-
     </section>
   );
 }

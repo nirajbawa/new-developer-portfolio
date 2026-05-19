@@ -83,8 +83,8 @@ export const projectDetailsList: ProjectDetail[] = [
     outcome: "Successfully launched and deployed across multiple Nashik Rural divisions under annual government sponsorship, resolving thousands of queries with massive public acclaim.",
     image: rakshakMain,
     carouselImages: [rakshakMain, rakshak1, rakshak2, rakshak3, rakshak4],
-    link: "https://github.com/nirajbawa/rakshak-ai",
-    liveUrl: "https://github.com/nirajbawa/rakshak-ai",
+    link: "",
+    liveUrl: "https://www.rakshakai.org/",
   },
   {
     slug: "anviksh-ai-learning-platform",
@@ -116,7 +116,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: anvikshMain,
     carouselImages: [anvikshMain, anviksh1, anviksh2],
     link: "https://github.com/nirajbawa/anviksh-ai",
-    liveUrl: "https://github.com/nirajbawa/anviksh-ai",
+    liveUrl: "https://techaialpha.vercel.app/",
   },
   {
     slug: "secure-data-repository-system-sdr",
@@ -146,7 +146,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: sdrMain,
     carouselImages: [sdrMain, sdr0, sdr1, sdr2],
     link: "https://github.com/nirajbawa/sdr-system",
-    liveUrl: "https://github.com/nirajbawa/sdr-system",
+    liveUrl: "https://admin.sdr.neuronexdevelopers.com/",
   },
   {
     slug: "team-matrix-web-app",
@@ -170,7 +170,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: teamMatrixMain,
     carouselImages: [teamMatrixMain],
     link: "https://github.com/nirajbawa/team-matrix-app",
-    liveUrl: "https://github.com/nirajbawa/team-matrix-app",
+    liveUrl: "https://www.team-matrix.in/",
   },
   {
     slug: "msbtequizpro",
@@ -195,7 +195,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: msbteQuizProMain,
     carouselImages: [msbteQuizProMain],
     link: "https://github.com/nirajbawa/msbte-quiz-pro",
-    liveUrl: "https://github.com/nirajbawa/msbte-quiz-pro",
+    liveUrl: "https://msbtequizpro.vercel.app/",
   },
   {
     slug: "msbte-wallah",
@@ -221,7 +221,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: msbteWallahMain,
     carouselImages: [msbteWallahMain],
     link: "https://github.com/nirajbawa/msbtewallah",
-    liveUrl: "https://github.com/nirajbawa/msbtewallah",
+    liveUrl: "https://msbtewallah.vercel.app/",
   },
   {
     slug: "anav-drone",
@@ -250,7 +250,7 @@ export const projectDetailsList: ProjectDetail[] = [
     image: anavMain,
     carouselImages: [anavMain, anav0, anav1, anav2, anav3, anav4],
     link: "https://github.com/nirajbawa/anav-drone",
-    liveUrl: "https://github.com/nirajbawa/anav-drone",
+    liveUrl: "https://drive.google.com/file/d/1INlmuOLDTkfOXPRC-9h9pqSOmbTSnH_b/view",
   }
 ];
 

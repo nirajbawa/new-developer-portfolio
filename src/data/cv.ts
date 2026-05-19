@@ -324,7 +324,7 @@ export const cvData: CVData = {
       bullets: [
         "Competed against teams from across the globe at PICT's Impetus, one of India's most prestigious project competitions, and secured 1st place for building an innovative, technically rigorous, and high-impact project that stood out for its real-world applicability and engineering depth."
       ],
-      link: "#"
+      link: "https://drive.google.com/file/d/1m-iWSxesXOXe7B0QP4qX2G25Y4ZfBQXz/view?usp=sharing"
     },
     {
       title: "RECOGNITION FOR RAKSHAK AI CHATBOT DEVELOPMENT",
@@ -334,7 +334,7 @@ export const cvData: CVData = {
       bullets: [
         "Received formal recognition from the Nashik Rural Police and the Governor of Maharashtra for designing and deploying Rakshak AI — a government-funded, multilingual AI chatbot that redefined citizen-police engagement and set a benchmark for AI-driven public safety solution in rural India."
       ],
-      link: "#"
+      link: "https://drive.google.com/file/d/1-JEl80MpWR3maSzUuwf4tXmBoUaBc1ul/view"
     },
     {
       title: "ISRO ROBOTICS CHALLENGE 2025",
@@ -343,7 +343,8 @@ export const cvData: CVData = {
       duration: "Apr 2025",
       bullets: [
         "Selected among the top teams nationwide for the Grand Finale held at URSC (U.R. Rao Satellite Centre), Bengaluru, for developing a GPS-free autonomous drone using SLAM for real-time navigation and obstacle avoidance."
-      ]
+      ],
+      link: "https://drive.google.com/file/d/1INlmuOLDTkfOXPRC-9h9pqSOmbTSnH_b/view"
     },
     {
       title: "PCU’S NATIONAL LEVEL HACKATHON",
@@ -353,7 +354,7 @@ export const cvData: CVData = {
       bullets: [
         "Competed in a high-intensity 24-hour national hackathon at PCU Pune against 100+ teams, secured 3rd place by building a fully functional AI-based E-Learning Assistant that impressed judges with its innovation, UX, and real-world potential — finishing in the top 40 nationwide."
       ],
-      link: "#"
+      link: "https://drive.google.com/file/d/1m-iWSxesXOXe7B0QP4qX2G25Y4ZfBQXz/view?usp=sharing"
     },
     {
       title: "NASA Space Apps Challenge 2025",
@@ -363,7 +364,7 @@ export const cvData: CVData = {
       bullets: [
         "Built an intelligent farming simulation app leveraging NASA's real-time Event APIs to model environmental conditions and help farmers make data-driven agricultural decisions, earning 3rd position at the local event of one of the world's largest space and technology hackathons."
       ],
-      link: "#"
+      link: "https://drive.google.com/file/d/1ZDvnMg7wPnBaDACuosbjEd-9DqL6GsD1/view"
     },
     {
       title: "Tech Pragyan National Level Hackathon 2025",
@@ -373,7 +374,7 @@ export const cvData: CVData = {
       bullets: [
         "Built an AI-powered E-Learning platform in a 24-hour hackathon that generates personalized learning paths and adaptive content, securing a top 20 position."
       ],
-      link: "#"
+      link: "https://drive.google.com/file/d/1lV81n56jGv-bmJqdVTA2RG0wTfxV8X-K/view?usp=drive_link"
     }
   ],
   publications: [

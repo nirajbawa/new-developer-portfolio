@@ -35,7 +35,6 @@ export function Navbar() {
     { label: "Experience", href: "#experience" },
     { label: "Education", href: "#education" },
     { label: "Projects", href: "#projects" },
-    { label: "Blogs", href: "#blogs" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -60,7 +59,7 @@ export function Navbar() {
         </a>
 
         {/* Center Navigation Menu (Centered Menu Buttons) */}
-        <div className="hidden md:flex items-center justify-center flex-1">
+        <div className="hidden lg:flex items-center justify-center flex-1">
           <NavigationMenu className="mx-auto">
             <NavigationMenuList className="gap-2">
               {navItems.map((item) => (
@@ -84,7 +83,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-foreground"
+            className="lg:hidden text-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -95,7 +94,7 @@ export function Navbar() {
             href="#contact"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "hidden md:inline-flex bg-primary text-primary-foreground hover:bg-primary/95 text-xs font-semibold shadow-sm rounded-lg px-4 py-2 flex items-center justify-center"
+              "hidden lg:inline-flex bg-primary text-primary-foreground hover:bg-primary/95 text-xs font-semibold shadow-sm rounded-lg px-4 py-2 flex items-center justify-center"
             )}
           >
             Hire Me
@@ -105,7 +104,7 @@ export function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed top-16 left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-6 space-y-4 shadow-xl animate-in fade-in slide-in-from-top-5 duration-300">
+        <div className="lg:hidden fixed top-16 left-0 right-0 border-b border-border bg-background/95 backdrop-blur-lg px-6 py-6 space-y-4 shadow-xl animate-in fade-in slide-in-from-top-5 duration-300">
           <nav className="flex flex-col gap-3">
             {navItems.map((item) => (
               <a

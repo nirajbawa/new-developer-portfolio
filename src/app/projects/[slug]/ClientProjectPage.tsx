@@ -125,7 +125,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
           {/* Inline Action Buttons (Like a high-end Tech Post) */}
           <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1.5 text-xs font-mono">
-            {project.link && (
+            {project.link && project.link !== "#" && project.link.trim() !== "" && (
               <a
                 href={project.link}
                 target="_blank"

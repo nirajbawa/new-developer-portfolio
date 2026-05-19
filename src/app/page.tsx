@@ -5,6 +5,12 @@ import { Experience } from "@/components/Experience";
 import { Education } from "@/components/Education";
 import { Projects } from "@/components/Projects";
 import Skills from "@/components/Skills";
+import Achievements from "@/components/Achievements";
+import Certifications from "@/components/Certifications";
+import Publications from "@/components/Publications";
+import Clubs from "@/components/Clubs";
+import ExtraCurricular from "@/components/ExtraCurricular";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -32,48 +38,25 @@ export default function Home() {
         {/* Vertical Mind Map style Skills Section */}
         <Skills />
 
-        <section
-          id="blogs"
-          className="min-h-screen flex items-center justify-center py-24 px-6 bg-secondary/10"
-        >
-          <div className="container mx-auto max-w-4xl text-center space-y-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
-              Blogs
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Awaiting your next step-by-step instructions to replace this placeholder with a premium custom component.
-            </p>
-          </div>
-        </section>
+        {/* Master-Detail Interactive Achievements Section */}
+        <Achievements />
 
-        <section
-          id="contact"
-          className="min-h-screen flex items-center justify-center py-24 px-6 bg-secondary/10"
-        >
-          <div className="container mx-auto max-w-4xl text-center space-y-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
-              Contact
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Awaiting your next step-by-step instructions to replace this placeholder with a premium custom component.
-            </p>
-          </div>
-        </section>
+        {/* Bento Grid Layout Certifications Section */}
+        <Certifications />
+
+        {/* Publications Grid Section matching blueprint */}
+        <Publications />
+
+        {/* Clubs & Societies Section matching blueprint */}
+        <Clubs />
+
+        {/* Extra-Curricular Activities Section */}
+        <ExtraCurricular />
+
+
       </main>
 
-      {/* Clean signature footer */}
-      <footer className="w-full border-t border-border bg-background py-8 text-center text-xs text-muted-foreground relative z-10">
-        <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 NIRAJ BAVA. All rights reserved.</p>
-          <div className="flex gap-4">
-            <a href="#home" className="hover:text-foreground transition-colors">
-              Back to Top
-            </a>
-            <span>•</span>
-            <span className="text-muted-foreground/80">Tailwind v4 & Redux Persist Active</span>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
