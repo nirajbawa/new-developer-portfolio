@@ -254,7 +254,7 @@ export function Experience() {
                       <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-60px" }}
+                        viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col gap-4 cursor-pointer will-change-[transform,opacity]"
                         onClick={() => setSelectedExperience(exp)}
@@ -334,7 +334,7 @@ export function Experience() {
                       <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-60px" }}
+                        viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col gap-4 cursor-pointer will-change-[transform,opacity]"
                         onClick={() => setSelectedExperience(exp)}

@@ -207,54 +207,81 @@ export const cvData: CVData = {
   ],
   projects: [
     {
-      title: "RAKSHAK AI – CHATBOT FOR NASHIK RURAL POLICE",
-      duration: "Jul 2025",
-      link: "#",
+      title: "Rakshak AI – WhatsApp Police Assistance Chatbot",
+      duration: "Jul 2025 – Sep 2025",
+      link: "https://github.com/nirajbawa/rakshak-ai",
       bullets: [
-        "Architected an AI-powered WhatsApp chatbot officially launched with Nashik Rural Police, delivering instant legal guidance and citizen support in Hindi, Marathi, and English — reaching 5000+ users within the first month.",
-        "Built a RAG-based legal knowledge engine grounded in Indian legal statutes and BNS sections, ensuring accurate, context-aware responses while minimizing hallucinations.",
-        "Engineered a secure, scalable backend with WhatsApp Business API integration, supporting high-concurrency queries with end-to-end encrypted messaging.",
-        "Reduced project cost by 50% (₹12L → ₹6L) through optimized cloud architecture, securing ₹6L in annual government funding."
+        "In collaboration with Nashik Rural Police | Govt-Funded (₹6 Lakhs Annual Maintenance).",
+        "Officially deployed WhatsApp chatbot (+91 70661 00112) serving thousands of citizens, supporting English & Marathi with voice note and text interaction.",
+        "Delivers instant AI-powered legal guidance on BNS, IPC, CrPC, and Cyber Law, alongside geo-location-based jurisdiction lookup for nearest police stations.",
+        "Features an automated incident reporting workflow that routes standard issues to local PIs and auto-escalates confidential/sensitive events directly to DySP/ASP/SP using AI.",
+        "SOS support system with emergency contacts and a live map integration to ensure rapid citizen protection."
       ]
     },
     {
-      title: "ANVIKSHAI – AI BASED LEARNING",
-      duration: "Feb 2025",
-      link: "#",
+      title: "Anviksh AI – Learning Platform",
+      duration: "Feb 2025 – Mar 2025",
+      link: "https://github.com/nirajbawa/anviksh-ai",
       bullets: [
-        "Built an AI-powered web application that generates fully personalized learning roadmaps by analyzing user-selected skills, target goals, and preferred duration — breaking down the journey into structured daily tasks with curated free resources.",
-        "Integrated resource curation pipeline that aggregates high-quality free learning materials (articles, videos, docs) mapped to each roadmap milestone, eliminating the need for manual research.",
-        "Recognized as a winner in two hackathons for its practical innovation, real-world applicability, and potential to democratize personalized education at scale."
+        "Intelligently organizes free online educational resources into clear, skill-based roadmaps generated locally via DeepSeek AI based on user goal inputs.",
+        "Schedules daily structured tasks (videos, quizzes, practice) dynamically in a calendar layout with milestoned visual progress tracking.",
+        "Integrates a robust multi-role architecture: Learners (curate paths), Admins (manage platform metrics), Experts (validate course quality), and Premium Mentors (real-time chat assistance).",
+        "Features secure Razorpay payment gateway integration for seamless premium plan upgrades and live mentor chat unlocking."
+      ]
+    },
+    {
+      title: "MSBTEQuizPro",
+      duration: "Jul 2024 – Sep 2024",
+      link: "https://github.com/nirajbawa/msbte-quiz-pro",
+      bullets: [
+        "Web application designed specifically for MSBTE students to prepare for exams, simulating the official MSBTE examination portal environment.",
+        "Offers both free and premium MCQ tests with Zustand device-synced cart operations and secure Razorpay payment gateway integration.",
+        "Includes a secure user workflow with Next Auth OTP verification, dynamic useForm handling, and high-concurrency MongoDB operations.",
+        "Provides an administrator control board to monitor real-time purchase metrics, view site traffic statistics, and edit tests dynamically with live sync."
+      ]
+    },
+    {
+      title: "Msbte Wallah",
+      duration: "Dec 2023 – Jan 2024",
+      link: "https://github.com/nirajbawa/msbtewallah",
+      bullets: [
+        "A social edutech platform (msbtewallah.in) dedicated to MSBTE students to centralize syllabus resource sharing and academic interaction.",
+        "Empowers student learning communities with centralized peer study rooms, Google OAuth authentication, and real-time Firebase notifications.",
+        "Built a highly responsive and lightweight portal using the full MERN stack (MongoDB, Express, React, Node) with custom styling."
+      ]
+    },
+    {
+      title: "Secure Data Repository System (SDR)",
+      duration: "Jan 2026 – Feb 2026",
+      link: "https://github.com/nirajbawa/sdr-system",
+      bullets: [
+        "District freelance project for the Nashik Rural Police Cyber Department, successfully transformed into a commercial multi-tenant SaaS product.",
+        "Offline-First Security: All subscriber records are stored locally with AES-256 encryption without relying on public cloud infrastructure (no AWS, Azure, or private VPS).",
+        "AI-Powered Schema Mapping: Leveraged GPT-5 Mini to auto-detect and map inconsistent column headers from varying telecom company templates.",
+        "Instant Search at Scale: Integrated Meilisearch engine to query billions of records in less than 3 seconds with typography-tolerance.",
+        "Secure Remote Access: Deployed Cloudflare Tunnels enabling remote police stations to query database interfaces while the master DB remains completely offline.",
+        "Compliance & Onboarding: Engineered Super Admin modules (Nest.js + PostgreSQL) to manage district onboarding, track subscription cycles, and maintain 7 years of immutable audit logs."
+      ]
+    },
+    {
+      title: "Team Matrix Web App",
+      duration: "Jan 2025 – Jan 2025",
+      link: "https://github.com/nirajbawa/team-matrix-app",
+      bullets: [
+        "Full-stack management and sharing workspace crafted for the internal operations of the Team Matrix robotics club.",
+        "Features a robust admin dashboard allowing administrators to customize layout components, manage member rosters, and audit logs.",
+        "Enables a secure member login system supporting collaborative blog writing, project showcase logs, and Framer Motion animated timelines."
       ]
     },
     {
       title: "ANAV – AUTONOMOUS DRONE",
       duration: "Nov 2024",
-      link: "#",
+      link: "https://github.com/nirajbawa/anav-drone",
       bullets: [
         "Designed and developed a fully GPS-free autonomous drone leveraging SLAM (Simultaneous Localization and Mapping) for real-time environment mapping, self-localization, and autonomous path planning in unknown indoor and outdoor terrains.",
         "Implemented obstacle detection and avoidance algorithms enabling the drone to navigate complex environments dynamically without human intervention.",
         "Built a real-time telemetry system providing live data transmission including altitude, orientation, velocity, and sensor readings to a ground control interface.",
         "Selected among top teams nationwide for the ISRO-IROC (Inter-Institutional Robotics Challenge) Grand Finale, held at URSC (U.R. Rao Satellite Centre), Bengaluru."
-      ]
-    },
-    {
-      title: "SDR – SECURE DATA REPOSITORY SYSTEM",
-      duration: "Feb 2026",
-      link: "#",
-      bullets: [
-        "Architected a secure, offline-first district-level data platform functioning as a private cloud, where a centralized local server at the SP Office securely exposes controlled data access to multiple police station users.",
-        "Enabled hierarchical, role-based access with subscription-controlled operations, ensuring centralized governance and complete data isolation across districts.",
-        "Implemented encrypted data ingestion, controlled sharing, audit logging, and AI-powered prompt-based search for secure and efficient data access within the network."
-      ]
-    },
-    {
-      title: "MSBTE WALLAH",
-      duration: "Feb 2023",
-      link: "#",
-      bullets: [
-        "Built a Social Edtech platform empowering MSBTE students with centralized access to learning resources and peer collaboration.",
-        "Enhanced student engagement through seamless content sharing, community interaction, and simplified exam preparation by building a scalable full-stack platform using React.js, Tailwind CSS, Express.js, MongoDB, with authentication and real-time features via Google OAuth and Firebase."
       ]
     }
   ],

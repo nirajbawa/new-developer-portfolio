@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
 import { Education } from "@/components/Education";
+import { Projects } from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -24,23 +25,12 @@ export default function Home() {
         {/* Education section built strictly matching visual asymmetric grid blueprint */}
         <Education />
 
-        <section
-          id="projects"
-          className="min-h-screen flex items-center justify-center py-24 px-6 bg-background"
-        >
-          <div className="container mx-auto max-w-4xl text-center space-y-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
-              Projects
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Awaiting your next step-by-step instructions to replace this placeholder with a premium custom component.
-            </p>
-          </div>
-        </section>
+        {/* Projects section built strictly matching visual staggered 3-column blueprint */}
+        <Projects />
 
         <section
           id="blogs"
-          className="min-h-screen flex items-center justify-center border-t border-border/40 py-24 px-6"
+          className="min-h-screen flex items-center justify-center py-24 px-6"
         >
           <div className="container mx-auto max-w-4xl text-center space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
