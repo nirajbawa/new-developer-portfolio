@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
 
 export default function Home() {
   return (
@@ -16,19 +17,8 @@ export default function Home() {
         {/* Premium high-fidelity About section strictly matching layout blueprints */}
         <About />
 
-        <section
-          id="experience"
-          className="min-h-screen flex items-center justify-center border-t border-border/40 py-24 px-6"
-        >
-          <div className="container mx-auto max-w-4xl text-center space-y-4">
-            <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">
-              Experience
-            </h2>
-            <p className="text-muted-foreground text-sm max-w-xl mx-auto">
-              Awaiting your next step-by-step instructions to replace this placeholder with a premium custom component.
-            </p>
-          </div>
-        </section>
+        {/* Work Experience section with card grid and detail modal */}
+        <Experience />
 
         <section
           id="projects"

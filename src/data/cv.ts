@@ -140,6 +140,35 @@ export const cvData: CVData = {
   ],
   experience: [
     {
+      company: "NEURONEX DEVELOPERS",
+      role: "Co-Founder & CTO",
+      location: "Nashik, Maharashtra, India · On-site",
+      duration: "Nov 2025 – Present",
+      bullets: [
+        "Lead technical strategy and delivery of AI-powered public safety platforms in production with government stakeholders.",
+        "Rakshak AI (WhatsApp): Architected RAG-based multilingual legal chatbot for Nashik Rural Police. Reached 5,000+ users in first month. Secured ₹6L annual funding by reducing costs 50% (₹12L → ₹6L) via cloud optimization.",
+        "SDR System: Built offline-first, district-level private cloud for police with role-based access, encrypted ingestion, audit logging, and AI search — ensuring data isolation across districts.",
+        "Rakshak AI IVR (in development): Leading voice-based system for Nashik Police & Kumbh Mela Authority to handle massive concurrent calls during Kumbh Mela. Enables multilingual IVR, real-time intent detection, and human escalation.",
+        "Government Stakeholder Coordination: Directly engaged with PI, DSP, SP, IG, and IAS officers including Commissioner & Divisional Commissioner — securing buy-in and navigating bureaucratic workflows for deployment.",
+        "Tender & Contract Acquisition: Successfully cracked government tender process for Rakshak AI, managing technical proposals, compliance documentation, and financial negotiations to win state-funded contracts.",
+        "Technical Operations: Manage full-stack engineering, AWS infrastructure, DevOps, end-to-end encryption, and compliance. Lead cross-functional team, agile delivery, and client coordination with police & civic authorities."
+      ],
+      link: "#"
+    },
+    {
+      company: "DREAMCARE DEVELOPERS",
+      role: "Full Stack Developer (Project Consultant)",
+      location: "Pune District, Maharashtra, India · Hybrid",
+      duration: "Sep 2025 – Nov 2025",
+      bullets: [
+        "Served as Project Consultant for government web applications, architecting scalable full-stack solutions.",
+        "Reduced infrastructure and operational costs through cloud optimization and eliminating redundant services.",
+        "Implemented load balancing, database indexing, and caching strategies to enhance application performance.",
+        "Developed in-house alternatives to third-party APIs, ensuring service reliability across deployments."
+      ],
+      link: "#"
+    },
+    {
       company: "INVENTURS CUBE LLP",
       role: "Software Engineer Intern",
       location: "Remote, Indore",
