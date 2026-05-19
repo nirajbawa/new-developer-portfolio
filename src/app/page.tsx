@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Experience } from "@/components/Experience";
+import { Education } from "@/components/Education";
 
 export default function Home() {
   return (
@@ -20,9 +21,12 @@ export default function Home() {
         {/* Work Experience section with card grid and detail modal */}
         <Experience />
 
+        {/* Education section built strictly matching visual asymmetric grid blueprint */}
+        <Education />
+
         <section
           id="projects"
-          className="min-h-screen flex items-center justify-center border-t border-border/40 py-24 px-6 bg-secondary/5"
+          className="min-h-screen flex items-center justify-center py-24 px-6 bg-background"
         >
           <div className="container mx-auto max-w-4xl text-center space-y-4">
             <h2 className="text-3xl font-extrabold tracking-tight text-foreground uppercase">

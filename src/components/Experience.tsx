@@ -94,7 +94,7 @@ function ExperienceModal({
             href={companyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 w-14 h-14 rounded-full overflow-hidden border border-border/50 bg-background shadow-md hover:border-primary/50 transition-all duration-300"
+            className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden border border-border/50 bg-white p-2.5 flex items-center justify-center shadow-md hover:border-primary/50 transition-all duration-300"
           >
             {meta?.logo ? (
               <Image
@@ -102,10 +102,10 @@ function ExperienceModal({
                 alt={`${company} logo`}
                 width={56}
                 height={56}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-lg font-bold">
+              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-lg font-bold rounded-lg">
                 {company.charAt(0)}
               </div>
             )}
@@ -198,7 +198,7 @@ export function Experience() {
   return (
     <section
       id="experience"
-      className="relative min-h-screen flex items-center justify-center border-t border-border/40 py-24 px-6 overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center justify-center py-24 px-6 overflow-hidden bg-gradient-to-b from-background via-background to-secondary/5"
     >
       {/* Dynamic Cyber Ambient Grid Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
@@ -266,7 +266,7 @@ export function Experience() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="flex-shrink-0 w-11 h-11 rounded-full overflow-hidden border border-border/50 bg-background shadow-sm hover:border-primary/50 hover:shadow-[0_0_12px_rgba(var(--primary),0.3)] transition-all duration-300"
+                            className="flex-shrink-0 w-11 h-11 rounded-xl overflow-hidden border border-border/50 bg-white p-1.5 flex items-center justify-center shadow-sm hover:border-primary/50 hover:shadow-[0_0_12px_rgba(var(--primary),0.3)] transition-all duration-300"
                           >
                             {meta?.logo ? (
                               <Image
@@ -274,10 +274,10 @@ export function Experience() {
                                 alt={`${exp.company} logo`}
                                 width={44}
                                 height={44}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-sm font-bold">
+                              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-sm font-bold rounded-lg">
                                 {exp.company.charAt(0)}
                               </div>
                             )}
@@ -339,14 +339,13 @@ export function Experience() {
                         className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col gap-4 cursor-pointer will-change-[transform,opacity]"
                         onClick={() => setSelectedExperience(exp)}
                       >
-                        {/* Company Logo, Name & Meta (Logo on left, text on right) */}
                         <div className="flex items-start gap-4">
                           <a
                             href={companyUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="flex-shrink-0 w-11 h-11 rounded-full overflow-hidden border border-border/50 bg-background shadow-sm hover:border-primary/50 hover:shadow-[0_0_12px_rgba(var(--primary),0.3)] transition-all duration-300"
+                            className="flex-shrink-0 w-11 h-11 rounded-xl overflow-hidden border border-border/50 bg-white p-1.5 flex items-center justify-center shadow-sm hover:border-primary/50 hover:shadow-[0_0_12px_rgba(var(--primary),0.3)] transition-all duration-300"
                           >
                             {meta?.logo ? (
                               <Image
@@ -354,10 +353,10 @@ export function Experience() {
                                 alt={`${exp.company} logo`}
                                 width={44}
                                 height={44}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-sm font-bold">
+                              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-sm font-bold rounded-lg">
                                 {exp.company.charAt(0)}
                               </div>
                             )}
