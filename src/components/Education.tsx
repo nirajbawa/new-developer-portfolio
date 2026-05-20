@@ -54,7 +54,7 @@ function ImageCarousel({ images, alt }: { images: any[]; alt: string }) {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[14rem] rounded-xl overflow-hidden bg-muted group/carousel flex items-center justify-center border border-accent-foreground/10">
+    <div className="relative w-full h-full min-h-0 rounded-xl overflow-hidden bg-muted group/carousel flex items-center justify-center border border-accent-foreground/10">
       <Image
         src={images[index]}
         alt={`${alt} slide ${index + 1}`}
