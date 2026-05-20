@@ -12,6 +12,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -90,15 +91,15 @@ export function Navbar() {
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
 
-          <a
-            href="/#contact"
+          <Link
+            href="/hire-me"
             className={cn(
               buttonVariants({ variant: "default" }),
               "hidden lg:inline-flex bg-primary text-primary-foreground hover:bg-primary/95 text-xs font-semibold shadow-sm rounded-lg px-4 py-2 flex items-center justify-center"
             )}
           >
             Hire Me
-          </a>
+          </Link>
         </div>
       </div>
 

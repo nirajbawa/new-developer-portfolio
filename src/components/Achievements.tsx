@@ -266,95 +266,99 @@ export default function Achievements() {
 
           {/* RIGHT COLUMN: Small List Cards & Pagination */}
           <div className="lg:col-span-7 flex flex-col gap-5 min-h-[10rem] lg:min-h-[30rem]">
-            <AnimatePresence>
-              {currentItems.map((item, index) => {
-                const isSelected = selectedAchievement.title === item.title;
-                const images = achievementImages[item.title] || [];
-                const thumbnail = images[0];
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: "easeInOut" }}
+                className="flex flex-col gap-4 w-full"
+              >
+                {currentItems.map((item, index) => {
+                  const isSelected = selectedAchievement.title === item.title;
+                  const images = achievementImages[item.title] || [];
+                  const thumbnail = images[0];
 
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ willChange: "transform, opacity" }}
-                    onClick={() => setSelectedAchievement(item)}
-                    className={`w-full p-3 sm:p-4 rounded-2xl border flex flex-col sm:flex-row gap-4 sm:gap-5 items-stretch cursor-pointer transition-all duration-300 ${
-                      isSelected 
-                        ? "border-primary/50 bg-primary/5 shadow-[0_0_20px_rgba(var(--primary),0.1)]" 
-                        : "border-accent-foreground/15 bg-background/40 hover:bg-secondary/20 hover:border-primary/30"
-                    }`}
-                  >
-                    {/* Left: Image Box */}
-                    <div className="hidden lg:flex w-full lg:w-[35%] aspect-[16/10] lg:aspect-auto lg:min-h-[9rem] rounded-xl border border-border/40 overflow-hidden relative flex-shrink-0 bg-secondary/10 items-center justify-center group-hover:border-primary/30 transition-colors">
-                      {thumbnail ? (
-                        <Image 
-                          src={thumbnail}
-                          alt={item.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 30vw"
-                          className={`object-cover transition-transform duration-700 ${isSelected ? 'scale-105' : 'scale-100 hover:scale-105'}`}
-                        />
-                      ) : (
-                        <span className="text-muted-foreground font-mono text-[0.6rem] uppercase tracking-wider">No Image</span>
-                      )}
-                      
-                      {/* Selection Overlay */}
-                      <div className={`absolute inset-0 bg-primary/20 backdrop-blur-[1px] transition-opacity duration-300 flex items-center justify-center ${isSelected ? 'opacity-100' : 'opacity-0'}`}>
-                        <div className="bg-background/80 backdrop-blur-md p-2 rounded-full shadow-lg">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4 text-primary">
-                            <path d="M5 12l5 5L20 7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right: Info Box */}
-                    <div className="flex-1 flex flex-col justify-between py-1 border border-transparent rounded-xl">
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-start gap-2">
-                          <h4 className={`text-sm lg:text-base font-extrabold uppercase leading-tight line-clamp-2 transition-colors ${isSelected ? 'text-primary' : 'text-foreground'}`}>
-                            {item.title}
-                          </h4>
-                        </div>
-                        <p className="hidden lg:block text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                          {item.bullets[0]}
-                        </p>
-                      </div>
-                      
-                      <div className="hidden lg:flex justify-between items-center mt-3 pt-3 border-t border-border/30 flex-wrap gap-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[0.6rem] lg:text-[0.65rem] font-mono font-bold text-accent-foreground uppercase tracking-widest bg-accent-foreground/10 px-2 py-0.5 rounded">
-                            {item.duration}
-                          </span>
-                          <a
-                            href={item.link || "#"}
-                            target={item.link && item.link !== "#" ? "_blank" : "_self"}
-                            rel={item.link && item.link !== "#" ? "noopener noreferrer" : ""}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (!item.link || item.link === "#") {
-                                  e.preventDefault();
-                              }
-                            }}
-                            className="px-2 py-0.5 rounded text-[0.6rem] lg:text-[0.65rem] font-mono font-bold border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary-foreground uppercase tracking-widest transition-colors flex items-center gap-1"
-                          >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 lg:w-3 sm:h-3">
-                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
+                  return (
+                    <div
+                      key={item.title}
+                      onClick={() => setSelectedAchievement(item)}
+                      className={`w-full p-3 sm:p-4 rounded-2xl border flex flex-col sm:flex-row gap-4 sm:gap-5 items-stretch cursor-pointer transition-all duration-300 ${
+                        isSelected 
+                          ? "border-primary/50 bg-primary/5 shadow-[0_0_20px_rgba(var(--primary),0.1)]" 
+                          : "border-accent-foreground/15 bg-background/40 hover:bg-secondary/20 hover:border-primary/30"
+                      }`}
+                    >
+                      {/* Left: Image Box */}
+                      <div className="hidden lg:flex w-full lg:w-[35%] aspect-[16/10] lg:aspect-auto lg:min-h-[9rem] rounded-xl border border-border/40 overflow-hidden relative flex-shrink-0 bg-secondary/10 items-center justify-center group-hover:border-primary/30 transition-colors">
+                        {thumbnail ? (
+                          <Image 
+                            src={thumbnail}
+                            alt={item.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 30vw"
+                            className={`object-cover transition-transform duration-700 ${isSelected ? 'scale-105' : 'scale-100 hover:scale-105'}`}
+                          />
+                        ) : (
+                          <span className="text-muted-foreground font-mono text-[0.6rem] uppercase tracking-wider">No Image</span>
+                        )}
+                        
+                        {/* Selection Overlay */}
+                        <div className={`absolute inset-0 bg-primary/20 backdrop-blur-[1px] transition-opacity duration-300 flex items-center justify-center ${isSelected ? 'opacity-100' : 'opacity-0'}`}>
+                          <div className="bg-background/80 backdrop-blur-md p-2 rounded-full shadow-lg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4 text-primary">
+                              <path d="M5 12l5 5L20 7" />
                             </svg>
-                            Certificate
-                          </a>
+                          </div>
                         </div>
-                        <span className={`text-[0.6rem] lg:text-[0.65rem] font-mono font-bold uppercase transition-colors ${isSelected ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
-                          .. show more
-                        </span>
+                      </div>
+
+                      {/* Right: Info Box */}
+                      <div className="flex-1 flex flex-col justify-between py-1 border border-transparent rounded-xl">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <h4 className={`text-sm lg:text-base font-extrabold uppercase leading-tight line-clamp-2 transition-colors ${isSelected ? 'text-primary' : 'text-foreground'}`}>
+                              {item.title}
+                            </h4>
+                          </div>
+                          <p className="hidden lg:block text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                            {item.bullets[0]}
+                          </p>
+                        </div>
+                        
+                        <div className="hidden lg:flex justify-between items-center mt-3 pt-3 border-t border-border/30 flex-wrap gap-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[0.6rem] lg:text-[0.65rem] font-mono font-bold text-accent-foreground uppercase tracking-widest bg-accent-foreground/10 px-2 py-0.5 rounded">
+                              {item.duration}
+                            </span>
+                            <a
+                              href={item.link || "#"}
+                              target={item.link && item.link !== "#" ? "_blank" : "_self"}
+                              rel={item.link && item.link !== "#" ? "noopener noreferrer" : ""}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (!item.link || item.link === "#") {
+                                    e.preventDefault();
+                                }
+                              }}
+                              className="px-2 py-0.5 rounded text-[0.6rem] lg:text-[0.65rem] font-mono font-bold border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary-foreground uppercase tracking-widest transition-colors flex items-center gap-1"
+                            >
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2.5 h-2.5 lg:w-3 sm:h-3">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
+                              </svg>
+                              Certificate
+                            </a>
+                          </div>
+                          <span className={`text-[0.6rem] lg:text-[0.65rem] font-mono font-bold uppercase transition-colors ${isSelected ? 'text-primary' : 'text-muted-foreground hover:text-primary'}`}>
+                            .. show more
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </motion.div>
-                );
-              })}
+                  );
+                })}
+              </motion.div>
             </AnimatePresence>
 
             {/* Pagination Controls */}

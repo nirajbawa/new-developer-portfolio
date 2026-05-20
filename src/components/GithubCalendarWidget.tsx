@@ -52,7 +52,7 @@ export function GithubCalendarWidget() {
 
   if (!mounted) {
     return (
-      <div className="h-64 animate-pulse bg-muted/20 rounded-xl border border-border/10" />
+      <div className="h-[240px] animate-pulse bg-muted/20 rounded-xl border border-border/10" />
     );
   }
 
@@ -64,7 +64,7 @@ export function GithubCalendarWidget() {
 
   return (
     <div
-      className="relative p-5 md:p-6 space-y-5 rounded-xl border backdrop-blur-md transition-all duration-300 overflow-hidden"
+      className="relative p-4 space-y-3 rounded-xl border backdrop-blur-md transition-all duration-300 overflow-hidden h-[240px]"
       style={{
         backgroundColor: isDark ? "rgba(3, 7, 18, 0.5)" : "rgba(255, 255, 255, 0.75)",
         borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(203, 213, 225, 0.8)",
@@ -103,13 +103,11 @@ export function GithubCalendarWidget() {
 
       {/* Embedded Live GitHub Activity Grid */}
       <div className="relative space-y-2">
-        <div className="flex items-center justify-between text-[0.58rem] font-mono text-muted-foreground px-0.5">
-          <span>GitHub contributions calendar:</span>
-        </div>
+
 
         {/* Outer container with absolutely no scrollbar */}
-        <div className="w-full overflow-hidden no-scrollbar p-1 flex justify-center items-center select-none pointer-events-none">
-          <div className="w-full flex justify-center no-scrollbar">
+        <div className="w-full overflow-hidden no-scrollbar p-1 -mb-3 flex justify-center items-center select-none pointer-events-none min-h-[112px]">
+          <div className="w-full flex justify-center no-scrollbar min-h-[112px] items-center">
             <GitHubCalendar
               username="nirajbawa"
               colorScheme={isDark ? "dark" : "light"}
@@ -117,7 +115,7 @@ export function GithubCalendarWidget() {
               transformData={(data: import("react-github-calendar").Activity[]) => data.slice(-140)}
               blockSize={12}
               blockMargin={3}
-              showTotalCount={false}
+              showTotalCount={true}
               showColorLegend={false}
               labels={{
                 totalCount: "{{count}} contributions in recent months",

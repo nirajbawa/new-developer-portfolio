@@ -103,42 +103,47 @@ export default function Clubs() {
                 variants={cardVariants}
                 layout
                 whileHover={{ y: -4, scale: 1.005 }}
-                className="p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md hover:border-primary/40 transition-all duration-300 flex flex-col gap-3 shadow-md group relative overflow-hidden"
+                className="h-full p-4 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md hover:border-primary/40 transition-all duration-300 flex flex-col gap-3 shadow-md group relative overflow-hidden"
               >
                 {/* Visual Accent Glow on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Main Content Area - Full Width */}
-                <div className="flex flex-col gap-2.5 relative z-10 w-full">
-                  {/* Header: Logo, Role & Duration */}
-                  <div className="flex justify-between items-center gap-2 flex-wrap w-full">
-                    <div className="flex items-center gap-2.5">
-                      {/* Integrated inline branding logo */}
-                      <div className="w-10 h-10 rounded-full bg-white border border-border/40 flex items-center justify-center p-1.5 flex-shrink-0 shadow-sm">
-                        <Image
-                          src={club.logo}
-                          alt={club.name}
-                          className="w-full h-full object-contain rounded-full"
-                        />
-                      </div>
-                      <span className="text-xs font-mono font-bold text-primary uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
-                        {club.role}
-                      </span>
+                <div className="flex flex-col gap-2.5 relative z-10 w-full flex-1">
+                  
+                  {/* Header: Logo and Details */}
+                  <div className="flex items-start gap-3 w-full">
+                    {/* Column 1: Logo */}
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-md bg-white border border-border/40 flex items-center justify-center p-2 flex-shrink-0 shadow-sm">
+                      <Image
+                        src={club.logo}
+                        alt={club.name}
+                        className="w-full h-full object-contain rounded-md"
+                      />
                     </div>
-                    <span className="text-xs font-mono text-muted-foreground font-semibold">
-                      {club.duration}
-                    </span>
+                    
+                    {/* Column 2: Details */}
+                    <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                      <div className="flex justify-between items-center gap-2 flex-wrap w-full">
+                        <span className="text-xs font-mono font-bold text-primary uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded border border-primary/20 truncate">
+                          {club.role}
+                        </span>
+                        <span className="text-[0.65rem] sm:text-xs font-mono text-muted-foreground font-semibold shrink-0">
+                          {club.duration}
+                        </span>
+                      </div>
+                      
+                      {/* Name of Club */}
+                      <h3 className="text-sm sm:text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-snug tracking-tight">
+                        {club.name}
+                      </h3>
+                    </div>
                   </div>
 
-                  {/* Name of Club */}
-                  <h3 className="text-sm sm:text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-snug tracking-tight">
-                    {club.name}
-                  </h3>
-
                   {/* Description Container */}
-                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <div className="flex-1 p-2.5 rounded-lg bg-secondary/15 border border-border/20 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     {club.description}
-                  </p>
+                  </div>
 
                   {/* Skills/Tags Footer */}
                   <div className="flex flex-wrap gap-1.5 pt-2 border-t border-accent-foreground/5 w-full">

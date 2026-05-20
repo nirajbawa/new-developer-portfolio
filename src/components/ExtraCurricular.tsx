@@ -60,13 +60,13 @@ const activitiesList: Activity[] = [
 
 const puzzleClasses = [
   // Card 1: Horizontal Landscape Spanning 2 Columns (Row 1)
-  "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-1 h-80 lg:h-[20rem]",
-  // Card 2: Extremely Tall Vertical Spanning 2 Rows (Row 1 & Row 2) -> Now Competitive Cricket!
-  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-2 h-96 lg:h-[42.5rem]",
-  // Card 3: Standard Square (Row 2, Column 1) -> Now Academic Mentorship!
-  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 h-80 lg:h-[20rem]",
-  // Card 4: Standard Square (Row 2, Column 2) -> Ashram School Science Drive
-  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 h-80 lg:h-[20rem]"
+  "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-1 h-96 md:h-80 lg:h-[20rem]",
+  // Card 2: Extremely Tall Vertical Spanning 2 Rows (Row 1 & Row 2)
+  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-2 h-[28rem] md:h-96 lg:h-[42.5rem]",
+  // Card 3: Standard Square (Row 2, Column 1)
+  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 h-96 md:h-80 lg:h-[20rem]",
+  // Card 4: Standard Square (Row 2, Column 2)
+  "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 h-96 md:h-80 lg:h-[20rem]"
 ];
 
 export default function ExtraCurricular() {
@@ -145,21 +145,21 @@ export default function ExtraCurricular() {
                   priority={activity.id <= 3}
                 />
 
-                {/* Dark Vignette Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10 transition-all duration-500 group-hover:bg-black/80 pointer-events-none" />
+                 {/* Dark Vignette Gradient Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 transition-all duration-500 group-hover:bg-black/90 pointer-events-none" />
 
                 {/* Category Floating Badge */}
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg shadow-sm z-20">
-                  <span className="text-xs font-mono font-bold text-primary uppercase tracking-wider">
+                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg shadow-sm z-20 transition-all duration-300 group-hover:opacity-0 group-hover:scale-90 pointer-events-none flex items-center justify-center text-center">
+                  <span className="text-xs font-mono font-bold text-primary uppercase tracking-wider text-center">
                     {activity.category}
                   </span>
                 </div>
 
-                {/* Content Panel at the bottom */}
-                <div className="absolute inset-x-0 bottom-0 p-5 z-20 flex flex-col justify-end h-full pointer-events-none">
+                {/* Content Panel aligned to the bottom */}
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 z-20 flex flex-col justify-end pointer-events-none">
                   
-                  {/* Title wrapper which is ALWAYS visible at the bottom */}
-                  <div className="space-y-1.5 pointer-events-auto">
+                  {/* Title wrapper which is ALWAYS visible at the center by default */}
+                  <div className="space-y-1.5 pointer-events-auto transition-all duration-500 ease-in-out">
                     {/* Location Context */}
                     <div className="flex items-center gap-1.5 text-white/70">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 text-primary flex-shrink-0">
@@ -177,9 +177,9 @@ export default function ExtraCurricular() {
                     </h3>
                   </div>
 
-                  {/* Sliding Info: Description & Tags - visible on hover */}
-                  <div className="h-0 group-hover:h-auto overflow-hidden opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-500 ease-in-out mt-0 group-hover:mt-3 pointer-events-auto">
-                    <p className="text-xs sm:text-sm text-white/90 leading-relaxed">
+                  {/* Sliding Info: Description & Tags - visible on hover, smoothly animated to prevent overlapping */}
+                  <div className="max-h-0 group-hover:max-h-[300px] overflow-hidden opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out mt-0 group-hover:mt-3 pointer-events-auto">
+                    <p className="text-xs sm:text-sm text-white/90 leading-relaxed pt-1.5 border-t border-white/10">
                       {activity.description}
                     </p>
 

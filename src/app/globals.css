@@ -32,6 +32,11 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  /* Globally scale up all content/body text sizes, keeping titles unchanged */
+  --font-size-xs: 0.8125rem;  /* 13px - up from 12px */
+  --font-size-sm: 0.9375rem;  /* 15px - up from 14px */
+  --font-size-base: 1.0625rem; /* 17px - up from 16px */
 }
 
 :root {

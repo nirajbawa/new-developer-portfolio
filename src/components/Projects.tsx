@@ -414,15 +414,15 @@ export function Projects() {
 
         <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-4 sm:p-5 text-left">
           <div className="space-y-1">
-            <span className="text-[0.45rem] sm:text-[0.55rem] font-mono text-primary font-bold uppercase tracking-widest">
+            <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-primary font-bold uppercase tracking-widest">
               {meta.category}
             </span>
-            <h4 className="text-[0.65rem] sm:text-xs font-extrabold text-neutral-50 leading-snug tracking-tight uppercase line-clamp-1 sm:line-clamp-2">
+            <h4 className="text-xs sm:text-sm font-extrabold text-neutral-50 leading-snug tracking-tight uppercase line-clamp-1 sm:line-clamp-2">
               {project.title}
             </h4>
           </div>
 
-          <p className="text-[0.65rem] sm:text-[0.7rem] text-neutral-300 leading-relaxed line-clamp-3 sm:line-clamp-4 my-2">
+          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed line-clamp-3 sm:line-clamp-4 my-2">
             {meta.abstract}
           </p>
 
@@ -431,18 +431,18 @@ export function Projects() {
               {meta.techStack.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
-                  className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.55rem] sm:text-[0.6rem] font-mono text-neutral-300"
+                  className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.62rem] sm:text-xs font-mono text-neutral-300"
                 >
                   {tech}
                 </span>
               ))}
               {meta.techStack.length > 3 && (
-                <span className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.55rem] sm:text-[0.6rem] font-mono text-neutral-400">
+                <span className="px-1.5 py-0.5 rounded-md border border-neutral-700/50 bg-neutral-800/50 text-[0.62rem] sm:text-xs font-mono text-neutral-400">
                   +{meta.techStack.length - 3}
                 </span>
               )}
             </div>
-            <div className="flex items-center text-[0.6rem] sm:text-xs font-mono font-bold text-primary group-hover/link:text-primary-foreground transition-colors">
+            <div className="flex items-center text-xs sm:text-sm font-mono font-bold text-primary group-hover/link:text-primary-foreground transition-colors">
               Read Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 ml-1 translate-y-[1px] group-hover:translate-x-1 transition-transform">
                 <path d="M5 12h14M12 5l7 7-7 7" />

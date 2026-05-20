@@ -48,17 +48,30 @@ export async function GET(request: Request) {
     // submissionCalendar is a JSON string: { "timestamp": count, ... }
     const rawCalendar: Record<string, number> = JSON.parse(calendarJson);
 
-    // Convert Unix timestamps → { date, count, level } for react-activity-calendar
-    const activities = Object.entries(rawCalendar).map(([ts, count]) => {
-      const date = new Date(Number(ts) * 1000).toISOString().split("T")[0];
-      // Level: 0=none, 1=1-2, 2=3-5, 3=6-9, 4=10+
+    // Convert Unix timestamps to a Map for fast lookup (UTC keys)
+    const submissionMap = new Map<string, { count: number; level: number }>();
+    Object.entries(rawCalendar).forEach(([ts, count]) => {
+      const d = new Date(Number(ts) * 1000);
+      const date = d.toISOString().split("T")[0];
       const level =
         count === 0 ? 0 : count <= 2 ? 1 : count <= 5 ? 2 : count <= 9 ? 3 : 4;
-      return { date, count, level };
+      submissionMap.set(date, { count, level });
     });
 
-    // Sort ascending by date
-    activities.sort((a, b) => a.date.localeCompare(b.date));
+    // Generate a continuous block for the last 140 days to match the exact width of the GitHub widget
+    const activities = [];
+    const today = new Date();
+    for (let i = 139; i >= 0; i--) {
+      const d = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - i));
+      const dateStr = d.toISOString().split("T")[0];
+      
+      const submission = submissionMap.get(dateStr);
+      if (submission) {
+        activities.push({ date: dateStr, count: submission.count, level: submission.level });
+      } else {
+        activities.push({ date: dateStr, count: 0, level: 0 });
+      }
+    }
 
     return NextResponse.json({ activities });
   } catch (err) {

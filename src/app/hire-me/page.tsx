@@ -3,76 +3,126 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import Footer from "@/components/Footer";
+import { cvData } from "@/data/cv";
 
-// --- Icons ---
+// --- Custom Icons ---
 const CheckIcon = () => (
-  <svg className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+  <svg className="w-4 h-4 text-cyan-500 dark:text-cyan-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
     <polyline points="20 6 9 17 4 12" />
   </svg>
 );
+
 const CloseIcon = () => (
-  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+  <svg className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
-const BriefcaseIcon = () => (
-  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /><line x1="12" y1="12" x2="12" y2="12" /><path d="M12 12h.01" />
+
+const ConsultancyIcon = () => (
+  <svg className="w-7 h-7 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
   </svg>
 );
-const CodeIcon = () => (
-  <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+
+const MentorshipIcon = () => (
+  <svg className="w-7 h-7 text-blue-500 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
   </svg>
 );
+
+const ProjectIcon = () => (
+  <svg className="w-7 h-7 text-indigo-500 dark:text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+  </svg>
+);
+
 const MailIcon = () => (
-  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+  <svg className="w-4 h-4 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>
 );
+
 const PhoneIcon = () => (
-  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <svg className="w-4 h-4 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 9.15 19.79 19.79 0 0 1 1.08 4.22 2 2 0 0 1 3.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17z" />
   </svg>
 );
+
 const MessageIcon = () => (
-  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <svg className="w-4 h-4 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
 
-// --- Types ---
-type PlanType = "consulting" | "webdev" | null;
+// --- Types & Interfaces ---
+type PlanType = "consultancy" | "mentorship" | "custom" | null;
 
 interface ContactForm {
-  name: string;
-  phone: string;
   email: string;
+  phone: string;
   message: string;
 }
 
-// --- Contact Modal ---
-function ContactModal({ plan, onClose }: { plan: PlanType; onClose: () => void }) {
-  const [form, setForm] = useState<ContactForm>({ name: "", phone: "", email: "", message: "" });
+// --- Hire Modal Component ---
+function HireModal({ plan, onClose }: { plan: PlanType; onClose: () => void }) {
+  const [form, setForm] = useState<ContactForm>({ email: "", phone: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const planLabel = plan === "consulting" ? "Consulting (₹400/hr)" : "Web Development (₹700/hr)";
+  const planTitle =
+    plan === "consultancy"
+      ? "Technical Consultancy"
+      : plan === "mentorship"
+      ? "1-on-1 Mentorship"
+      : "Custom Project Building";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.email) {
-      setError("Please fill in all required fields.");
+    if (!form.email || !form.phone) {
+      setError("Please fill in both Email and Mobile Number.");
       return;
     }
     setError("");
     setSubmitting(true);
-    // Simulate sending (replace with real API call / EmailJS / etc.)
-    await new Promise((r) => setTimeout(r, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
+    
+    try {
+      const emailHtml = `
+        <div style="font-family: sans-serif; padding: 20px; color: #1e293b; background-color: #f8fafc; border-radius: 8px; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0;">
+          <h2 style="color: #0284c7; border-bottom: 2px solid #0284c7; padding-bottom: 8px; margin-top: 0;">New Hire Enquiry</h2>
+          <p style="margin: 8px 0;"><strong>Selected Plan:</strong> ${planTitle}</p>
+          <p style="margin: 8px 0;"><strong>Client Email:</strong> ${form.email}</p>
+          <p style="margin: 8px 0;"><strong>Mobile Number (mo.no):</strong> ${form.phone}</p>
+          ${
+            form.message
+              ? `<p style="margin-top: 16px; background-color: #ffffff; padding: 16px; border-radius: 6px; border: 1px solid #cbd5e1; font-style: italic; line-height: 1.6; color: #334155;"><strong>Message:</strong><br/>${form.message.replace(/\n/g, "<br/>")}</p>`
+              : ""
+          }
+        </div>
+      `;
+
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipient: "nirajbawa222@gmail.com",
+          subject: `New Hire Request: ${planTitle}`,
+          html_content: emailHtml,
+        }),
+      });
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setError("Failed to send enquiry. Please try again.");
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -83,37 +133,47 @@ function ContactModal({ plan, onClose }: { plan: PlanType; onClose: () => void }
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {/* Backdrop */}
+        {/* Backdrop (Darkened and blurred in both modes) */}
         <motion.div
-          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         />
 
-        {/* Modal */}
+        {/* Modal Panel (Theme-Adaptive bg-card and border-border) */}
         <motion.div
-          className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#080d1a] shadow-2xl overflow-hidden"
-          initial={{ opacity: 0, scale: 0.92, y: 30 }}
+          className="relative w-full max-w-md rounded-2xl border border-border bg-card shadow-2xl overflow-hidden z-10 text-foreground"
+          initial={{ opacity: 0, scale: 0.94, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.92, y: 30 }}
-          transition={{ type: "spring", stiffness: 280, damping: 25 }}
+          exit={{ opacity: 0, scale: 0.94, y: 20 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
-          {/* Top accent bar */}
-          <div className={`h-1 w-full ${plan === "consulting" ? "bg-gradient-to-r from-cyan-400 to-blue-500" : "bg-gradient-to-r from-violet-500 to-fuchsia-500"}`} />
+          {/* Theme Gradient Accent Top */}
+          <div
+            className={`h-1 w-full bg-gradient-to-r ${
+              plan === "consultancy"
+                ? "from-cyan-500 to-blue-500"
+                : plan === "mentorship"
+                ? "from-blue-400 to-indigo-500"
+                : "from-indigo-500 to-blue-600"
+            }`}
+          />
 
-          <div className="p-6 md:p-8">
+          <div className="p-6 md:p-8 font-sans">
             {/* Header */}
             <div className="flex items-start justify-between mb-6">
               <div>
-                <p className={`text-[0.65rem] font-mono font-bold uppercase tracking-widest mb-1 ${plan === "consulting" ? "text-cyan-400" : "text-violet-400"}`}>
-                  Enquiring For
+                <p className="text-xs font-semibold text-cyan-500 dark:text-cyan-400 mb-1 uppercase tracking-wider">
+                  Enquiry Request
                 </p>
-                <h2 className="text-lg font-black text-white">{planLabel}</h2>
+                <h3 className="text-lg font-bold tracking-tight">
+                  {planTitle}
+                </h3>
               </div>
               <button
                 onClick={onClose}
-                className="text-slate-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"
+                className="p-1.5 rounded-lg bg-secondary/40 border border-border/40 text-muted-foreground hover:text-foreground transition-all hover:bg-secondary"
               >
                 <CloseIcon />
               </button>
@@ -121,98 +181,106 @@ function ContactModal({ plan, onClose }: { plan: PlanType; onClose: () => void }
 
             {submitted ? (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center py-8 space-y-3"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-center py-10 space-y-4"
               >
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto">
-                  <CheckIcon />
+                <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(6,182,212,0.1)]">
+                  <svg className="w-7 h-7 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
                 </div>
-                <h3 className="text-lg font-bold text-white">Message Sent!</h3>
-                <p className="text-sm text-slate-400">I&apos;ll get back to you within 24 hours.</p>
+                <h4 className="text-lg font-bold text-cyan-500 dark:text-cyan-400">Request Received!</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
+                  We will contact you just few hours once free.
+                </p>
                 <button
                   onClick={onClose}
-                  className="mt-4 px-6 py-2 rounded-lg bg-white/10 text-white text-sm font-semibold hover:bg-white/20 transition-colors"
+                  className="mt-6 px-6 py-2 rounded-lg bg-secondary border border-border text-foreground text-xs font-semibold uppercase tracking-wider hover:bg-secondary/85 transition-all"
                 >
-                  Close
+                  Close Window
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Name */}
+              <form onSubmit={handleSubmit} className="space-y-4 font-sans">
+                {/* Email */}
                 <div className="space-y-1.5">
-                  <label className="text-[0.7rem] font-mono text-slate-400 uppercase tracking-wider">Full Name *</label>
+                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Email Address *
+                  </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"><PhoneIcon /></span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/80">
+                      <MailIcon />
+                    </span>
                     <input
-                      type="text"
-                      placeholder="Your full name"
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-white/30 transition-colors"
+                      type="email"
+                      required
+                      placeholder="name@example.com"
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-secondary/30 border border-border/60 text-foreground placeholder:text-muted-foreground/60 text-sm focus:outline-none focus:border-primary/50 transition-colors font-sans"
                     />
                   </div>
                 </div>
 
-                {/* Phone */}
+                {/* Mobile Number */}
                 <div className="space-y-1.5">
-                  <label className="text-[0.7rem] font-mono text-slate-400 uppercase tracking-wider">Phone Number *</label>
+                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Mobile Number *
+                  </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"><PhoneIcon /></span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/80">
+                      <PhoneIcon />
+                    </span>
                     <input
                       type="tel"
+                      required
                       placeholder="+91 XXXXX XXXXX"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-white/30 transition-colors"
-                    />
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="space-y-1.5">
-                  <label className="text-[0.7rem] font-mono text-slate-400 uppercase tracking-wider">Email Address *</label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"><MailIcon /></span>
-                    <input
-                      type="email"
-                      placeholder="you@example.com"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-white/30 transition-colors"
+                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-secondary/30 border border-border/60 text-foreground placeholder:text-muted-foreground/60 text-sm focus:outline-none focus:border-primary/50 transition-colors font-sans"
                     />
                   </div>
                 </div>
 
                 {/* Message */}
                 <div className="space-y-1.5">
-                  <label className="text-[0.7rem] font-mono text-slate-400 uppercase tracking-wider">Message (optional)</label>
+                  <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                    Message (Optional)
+                  </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-3 text-slate-500"><MessageIcon /></span>
+                    <span className="absolute left-3 top-3 text-muted-foreground/80">
+                      <MessageIcon />
+                    </span>
                     <textarea
-                      placeholder="Tell me about your project..."
+                      placeholder="Share your goals, stack, or project description..."
                       rows={3}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-white/30 transition-colors resize-none"
+                      className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-secondary/30 border border-border/60 text-foreground placeholder:text-muted-foreground/60 text-sm focus:outline-none focus:border-primary/50 transition-colors resize-none font-sans"
                     />
                   </div>
                 </div>
 
                 {error && (
-                  <p className="text-xs text-red-400 font-mono">{error}</p>
+                  <p className="text-xs text-red-500 font-semibold tracking-wide">
+                    {error}
+                  </p>
                 )}
 
+                {/* Submit button */}
                 <button
                   type="submit"
                   disabled={submitting}
-                  className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed ${
-                    plan === "consulting"
-                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-[1.02]"
-                      : "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:scale-[1.02]"
+                  className={`w-full py-3 rounded-xl font-semibold text-sm text-white transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed ${
+                    plan === "consultancy"
+                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-[1.01]"
+                      : plan === "mentorship"
+                      ? "bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-[1.01]"
+                      : "bg-gradient-to-r from-indigo-500 to-blue-600 hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:scale-[1.01]"
                   }`}
                 >
-                  {submitting ? "Sending…" : "Send Enquiry →"}
+                  {submitting ? "Sending..." : "Submit Inquiry →"}
                 </button>
               </form>
             )}
@@ -223,237 +291,275 @@ function ContactModal({ plan, onClose }: { plan: PlanType; onClose: () => void }
   );
 }
 
-// --- Plan Card ---
-function PlanCard({
-  type,
-  icon,
-  badge,
-  title,
-  subtitle,
-  price,
-  priceSuffix,
-  altPrice,
-  features,
-  accentFrom,
-  accentTo,
-  borderColor,
-  badgeColor,
-  ctaLabel,
-  onContact,
-  featured,
-}: {
-  type: PlanType;
-  icon: React.ReactNode;
-  badge: string;
-  title: string;
-  subtitle: string;
-  price: string;
-  priceSuffix: string;
-  altPrice?: string;
-  features: string[];
-  accentFrom: string;
-  accentTo: string;
-  borderColor: string;
-  badgeColor: string;
-  ctaLabel: string;
-  onContact: () => void;
-  featured?: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative flex flex-col rounded-2xl border backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${borderColor} ${featured ? "shadow-xl" : ""}`}
-      style={{ background: "rgba(6, 11, 28, 0.7)" }}
-    >
-      {/* Gradient top bar */}
-      <div className={`h-1 w-full bg-gradient-to-r ${accentFrom} ${accentTo}`} />
-
-      {featured && (
-        <div className={`absolute top-4 right-4 text-[0.6rem] font-black font-mono uppercase tracking-widest px-2.5 py-1 rounded-full ${badgeColor}`}>
-          Most Popular
-        </div>
-      )}
-
-      <div className="p-8 md:p-10 flex flex-col flex-1 gap-6">
-        {/* Icon + Badge */}
-        <div className="flex items-center gap-3">
-          <div className={`p-3 rounded-xl border bg-gradient-to-br ${accentFrom} ${accentTo} text-white bg-opacity-10`} style={{ background: "rgba(255,255,255,0.05)" }}>
-            <span className={`bg-gradient-to-br ${accentFrom} ${accentTo} bg-clip-text text-transparent`}>
-              {icon}
-            </span>
-          </div>
-          <span className={`text-[0.65rem] font-black font-mono uppercase tracking-widest px-2.5 py-1 rounded-md ${badgeColor}`}>
-            {badge}
-          </span>
-        </div>
-
-        {/* Title */}
-        <div>
-          <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">{title}</h2>
-          <p className="mt-1.5 text-sm text-slate-400 font-mono">{subtitle}</p>
-        </div>
-
-        {/* Price */}
-        <div className="space-y-1">
-          <div className="flex items-end gap-2">
-            <span className={`text-5xl font-black bg-gradient-to-r ${accentFrom} ${accentTo} bg-clip-text text-transparent`}>
-              {price}
-            </span>
-            <span className="text-slate-400 text-sm font-mono pb-2">{priceSuffix}</span>
-          </div>
-          {altPrice && (
-            <p className="text-xs text-slate-500 font-mono">{altPrice}</p>
-          )}
-        </div>
-
-        {/* Divider */}
-        <div className={`h-px w-full bg-gradient-to-r ${accentFrom} ${accentTo} opacity-20`} />
-
-        {/* Features */}
-        <ul className="space-y-2.5 flex-1">
-          {features.map((f, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
-              <CheckIcon />
-              <span>{f}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA */}
-        <button
-          onClick={onContact}
-          className={`mt-2 w-full py-3.5 rounded-xl font-black text-sm tracking-wide text-white transition-all duration-300 hover:scale-[1.02] bg-gradient-to-r ${accentFrom} ${accentTo} hover:shadow-[0_0_25px_rgba(99,102,241,0.35)]`}
-        >
-          {ctaLabel}
-        </button>
-      </div>
-    </motion.div>
-  );
-}
-
-// --- Page ---
+// --- Page Component ---
 export default function HireMePage() {
   const [activePlan, setActivePlan] = useState<PlanType>(null);
+  const { personalInfo } = cvData;
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[#03070d] text-white overflow-x-hidden">
-
-        {/* Background ambient glows */}
-        <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10">
-          <div className="absolute top-[-10%] left-[-5%] w-[50rem] h-[50rem] rounded-full bg-cyan-500/5 blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-5%] w-[50rem] h-[50rem] rounded-full bg-violet-500/5 blur-[120px]" />
+      <main className="min-h-screen bg-background text-foreground overflow-x-hidden relative flex flex-col justify-between font-sans transition-colors duration-300">
+        
+        {/* Premium Ambient Grid Glows */}
+        <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10 select-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:24px_24px]" />
+          <div className="absolute top-[-10%] left-[-5%] w-[45rem] h-[45rem] rounded-full bg-cyan-500/[0.03] dark:bg-cyan-500/5 blur-[120px]" />
+          <div className="absolute bottom-[-10%] right-[-5%] w-[45rem] h-[45rem] rounded-full bg-blue-500/[0.03] dark:bg-blue-500/5 blur-[120px]" />
         </div>
 
-        {/* Hero */}
-        <section className="pt-36 pb-16 px-6 text-center">
+        {/* Header Section */}
+        <section className="pt-32 pb-10 px-6 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-2xl mx-auto space-y-5"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-3xl mx-auto space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[0.65rem] font-mono font-bold uppercase tracking-widest text-cyan-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Available for work · Remote &amp; On-site
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card text-xs font-medium text-cyan-600 dark:text-cyan-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
+              Available for work
             </div>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-tight">
-              Let&apos;s Build{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-                Something Great
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+              Hire{" "}
+              <span className="bg-gradient-to-r from-cyan-500 via-primary to-blue-600 bg-clip-text text-transparent">
+                Niraj Bava
               </span>
             </h1>
-            <p className="text-slate-400 text-lg leading-relaxed">
-              Whether you need expert consultation or a full-scale web product — choose the plan that fits your need and let&apos;s get started.
+            <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+              Whether you need deep-dive technical guidance, personalized developer mentorship, or an experienced full-stack engineer to build your next product—I'm here to help.
             </p>
           </motion.div>
         </section>
 
-        {/* Plans Grid */}
-        <section className="max-w-5xl mx-auto px-6 pb-28 grid gap-8 md:grid-cols-2">
-          {/* Plan 1 — Consulting */}
-          <PlanCard
-            type="consulting"
-            icon={<BriefcaseIcon />}
-            badge="Consulting"
-            title="Expert Consulting"
-            subtitle="Strategic guidance, architecture reviews & technical mentorship"
-            price="₹400"
-            priceSuffix="/ hr"
-            altPrice="Billed per day · Minimum 2 hrs"
-            features={[
-              "1-on-1 architecture & system design sessions",
-              "Code review & best practices audit",
-              "Tech stack selection & roadmap planning",
-              "AI/ML integration consulting",
-              "Cloud infrastructure (AWS) advisory",
-              "Startup MVP strategy & prioritization",
-              "Available via Zoom / Google Meet / in-person",
-            ]}
-            accentFrom="from-cyan-400"
-            accentTo="to-blue-600"
-            borderColor="border-cyan-500/20 hover:border-cyan-500/50"
-            badgeColor="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-            ctaLabel="Get in Touch →"
-            onContact={() => setActivePlan("consulting")}
-          />
+        {/* Pricing Cards Grid (3 Columns) - Narrower Max Width, Small Padding & Compact Gaps */}
+        <section className="max-w-5xl mx-auto px-6 pb-20 grid gap-6 md:grid-cols-3 w-full flex-1">
+          
+          {/* Card 1: Technical Consultancy */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex flex-col rounded-xl border border-cyan-500/20 dark:border-cyan-500/30 hover:border-cyan-500/50 backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(6,182,212,0.08)] bg-card/60 dark:bg-card/40"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+            
+            <div className="p-5 md:p-6 flex flex-col flex-1 gap-5">
+              {/* Header Info */}
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-lg border border-cyan-500/20 bg-cyan-500/5 flex items-center justify-center">
+                  <ConsultancyIcon />
+                </div>
+                <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
+                  Engineering
+                </span>
+              </div>
 
-          {/* Plan 2 — Web Dev */}
-          <PlanCard
-            type="webdev"
-            icon={<CodeIcon />}
-            badge="Development"
-            title="Web Development"
-            subtitle="Full-stack production-ready web apps built end-to-end"
-            price="₹700"
-            priceSuffix="/ hr"
-            altPrice="Or fixed-price for custom projects — contact to discuss"
-            features={[
-              "Full-stack: React / Next.js + Node / Python backend",
-              "Database design: MongoDB, PostgreSQL, Redis",
-              "RESTful & GraphQL API development",
-              "AI/GenAI feature integration (RAG, chatbots, agents)",
-              "AWS deployment, CI/CD, Docker containerization",
-              "End-to-end testing & security hardening",
-              "Post-delivery support & maintenance options",
-            ]}
-            accentFrom="from-violet-500"
-            accentTo="to-fuchsia-500"
-            borderColor="border-violet-500/20 hover:border-violet-500/50"
-            badgeColor="bg-violet-500/10 text-violet-400 border border-violet-500/20"
-            ctaLabel="Start a Project →"
-            onContact={() => setActivePlan("webdev")}
-            featured
-          />
+              {/* Title & Slogan */}
+              <div>
+                <h2 className="text-lg font-bold tracking-tight leading-tight">
+                  Technical Consultancy
+                </h2>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed font-sans">
+                  Deep technical guidance for system architecture, codebase audits, and roadmap planning.
+                </p>
+              </div>
+
+              {/* Pricing Grid */}
+              <div className="py-2.5 border-y border-border/40 font-sans">
+                <span className="block text-[0.68rem] font-semibold text-muted-foreground uppercase tracking-wider">
+                  Hourly Rate
+                </span>
+                <div className="flex items-end gap-1 mt-0.5">
+                  <span className="text-2xl font-bold">$5</span>
+                  <span className="text-muted-foreground text-xs font-mono pb-0.5">/ hr</span>
+                </div>
+              </div>
+
+              {/* Features list */}
+              <ul className="space-y-2 flex-1">
+                {[
+                  "System architecture & database design",
+                  "Deep-dive technical consulting calls",
+                  "Codebase audits & practices review",
+                  "Performance optimization advice",
+                  "Tech stack & backend advisory",
+                ].map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-foreground/90 leading-tight">
+                    <CheckIcon />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Action Button */}
+              <button
+                onClick={() => setActivePlan("consultancy")}
+                className="mt-2 w-full py-2.5 rounded-lg font-semibold text-xs text-white transition-all duration-300 bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:scale-[1.01]"
+              >
+                Hire for Consulting →
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Card 2: Mentorship */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="relative flex flex-col rounded-xl border border-blue-500/20 dark:border-blue-500/30 hover:border-blue-500/50 backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(59,130,246,0.08)] bg-card/60 dark:bg-card/40"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-blue-400 to-indigo-500" />
+            
+            <div className="p-5 md:p-6 flex flex-col flex-1 gap-5">
+              {/* Header Info */}
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-lg border border-blue-500/20 bg-blue-500/5 flex items-center justify-center">
+                  <MentorshipIcon />
+                </div>
+                <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                  Education
+                </span>
+              </div>
+
+              {/* Title & Slogan */}
+              <div>
+                <h2 className="text-lg font-bold tracking-tight leading-tight">
+                  1-on-1 Mentorship
+                </h2>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed font-sans">
+                  Structured career training, structured concept learning, and active pair programming.
+                </p>
+              </div>
+
+              {/* Pricing Grid */}
+              <div className="py-2.5 border-y border-border/40 font-sans">
+                <span className="block text-[0.68rem] font-semibold text-muted-foreground uppercase tracking-wider">
+                  Hourly Rate
+                </span>
+                <div className="flex items-end gap-1 mt-0.5">
+                  <span className="text-2xl font-bold">$1</span>
+                  <span className="text-muted-foreground text-xs font-mono pb-0.5">/ hr</span>
+                </div>
+              </div>
+
+              {/* Features list */}
+              <ul className="space-y-2 flex-1">
+                {[
+                  "Personalized structured tutoring sessions",
+                  "Structured career growth roadmap",
+                  "Structured coding learning roadmaps",
+                  "Personal project code reviews",
+                  "Live debugging & pair programming help",
+                ].map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-foreground/90 leading-tight">
+                    <CheckIcon />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Action Button */}
+              <button
+                onClick={() => setActivePlan("mentorship")}
+                className="mt-2 w-full py-2.5 rounded-lg font-semibold text-xs text-white transition-all duration-300 bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:scale-[1.01]"
+              >
+                Hire for Mentorship →
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Custom Project Building */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="relative flex flex-col rounded-xl border border-indigo-500/20 dark:border-indigo-500/30 hover:border-indigo-500/50 backdrop-blur-md overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(99,102,241,0.08)] bg-card/60 dark:bg-card/40"
+          >
+            <div className="h-1 w-full bg-gradient-to-r from-indigo-400 to-indigo-600" />
+            
+            <div className="p-5 md:p-6 flex flex-col flex-1 gap-5">
+              {/* Header Info */}
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-lg border border-indigo-500/20 bg-indigo-500/5 flex items-center justify-center">
+                  <ProjectIcon />
+                </div>
+                <span className="text-xs font-medium px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                  Full Stack
+                </span>
+              </div>
+
+              {/* Title & Slogan */}
+              <div>
+                <h2 className="text-lg font-bold tracking-tight leading-tight">
+                  Custom Project Building
+                </h2>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed font-sans">
+                  End-to-end development of modern web applications tailored specifically to your requirements.
+                </p>
+              </div>
+
+              {/* Pricing Row (Custom) */}
+              <div className="py-2.5 border-y border-border/40 font-sans">
+                <span className="block text-[0.68rem] font-semibold text-muted-foreground uppercase tracking-wider">
+                  Fixed-Price / Retainer
+                </span>
+                <div className="flex items-end gap-1 mt-0.5">
+                  <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-400 dark:to-indigo-600 bg-clip-text">
+                    Custom Plan
+                  </span>
+                </div>
+              </div>
+
+              {/* Features list */}
+              <ul className="space-y-2 flex-1">
+                {[
+                  "Production web apps built from scratch",
+                  "Modern Next.js, React, Node.js & Python stack",
+                  "Database architecture (PostgreSQL, MongoDB)",
+                  "AI integration (LLM APIs, agents, RAG)",
+                  "Scalable cloud deployment & hosting setup",
+                ].map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-foreground/90 leading-tight">
+                    <CheckIcon />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Action Button */}
+              <button
+                onClick={() => setActivePlan("custom")}
+                className="mt-2 w-full py-2.5 rounded-lg font-semibold text-xs text-white transition-all duration-300 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:shadow-[0_0_15px_rgba(99,102,241,0.2)] hover:scale-[1.01]"
+              >
+                Hire for Project →
+              </button>
+            </div>
+          </motion.div>
+
         </section>
 
-        {/* Bottom note */}
-        <section className="text-center pb-20 px-6">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-sm text-slate-500 font-mono"
-          >
-            Not sure which plan fits? Drop a message — we&apos;ll figure it out together.{" "}
-            <button
-              onClick={() => setActivePlan("webdev")}
-              className="text-violet-400 underline underline-offset-2 hover:text-violet-300 transition-colors"
+        {/* Bottom Contact Alternative */}
+        <section className="text-center pb-16 px-6">
+          <p className="text-xs text-muted-foreground font-sans">
+            Have a different concept or custom requirement?{" "}
+            <a
+              href="https://wa.me/919359839551"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-600 dark:text-cyan-400 underline underline-offset-2 hover:text-cyan-500 dark:hover:text-cyan-300 transition-colors font-bold font-sans"
             >
-              Contact me →
-            </button>
-          </motion.p>
+              Reach out directly on WhatsApp (9359839551) →
+            </a>
+          </p>
         </section>
       </main>
 
       <Footer />
 
-      {/* Contact Modal */}
+      {/* Pop-up form Modal */}
       {activePlan && (
-        <ContactModal plan={activePlan} onClose={() => setActivePlan(null)} />
+        <HireModal plan={activePlan} onClose={() => setActivePlan(null)} />
       )}
     </>
   );

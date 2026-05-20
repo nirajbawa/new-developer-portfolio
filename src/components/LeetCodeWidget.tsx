@@ -56,7 +56,7 @@ export function LeetCodeWidget() {
 
   if (!mounted) {
     return (
-      <div className="h-44 animate-pulse bg-muted/20 rounded-xl border border-border/10" />
+      <div className="h-[240px] animate-pulse bg-muted/20 rounded-xl border border-border/10" />
     );
   }
 
@@ -68,7 +68,7 @@ export function LeetCodeWidget() {
 
   return (
     <div
-      className="relative p-5 md:p-6 space-y-4 rounded-xl border backdrop-blur-md transition-all duration-300 overflow-hidden"
+      className="relative p-4 space-y-3 rounded-xl border backdrop-blur-md transition-all duration-300 overflow-hidden h-[240px]"
       style={{
         backgroundColor: isDark ? "rgba(3, 7, 18, 0.5)" : "rgba(255, 255, 255, 0.75)",
         borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(203, 213, 225, 0.8)",
@@ -107,30 +107,27 @@ export function LeetCodeWidget() {
 
       {/* Calendar */}
       <div className="relative space-y-2">
-        <div className="text-[0.58rem] font-mono text-muted-foreground px-0.5">
-          LeetCode submission calendar:
-        </div>
 
-        <div className="w-full overflow-hidden p-1 select-none pointer-events-none">
+        <div className="w-full overflow-hidden no-scrollbar p-1 -mb-3 flex justify-center items-center select-none pointer-events-none min-h-[112px]">
           {loading && (
-            <div className="h-24 animate-pulse bg-muted/20 rounded-lg" />
+            <div className="h-[150px] w-full animate-pulse bg-muted/20 rounded-lg" />
           )}
 
           {error && !loading && (
-            <div className="h-16 flex items-center justify-center text-[0.65rem] font-mono text-muted-foreground border border-border/10 rounded-lg bg-secondary/5">
+            <div className="h-[150px] w-full flex items-center justify-center text-[0.65rem] font-mono text-muted-foreground border border-border/10 rounded-lg bg-secondary/5">
               Could not load submission data
             </div>
           )}
 
           {!loading && !error && activities.length > 0 && (
-            <>
+            <div className="w-full flex justify-center no-scrollbar min-h-[112px] items-center">
               <ActivityCalendar
                 data={activities}
                 colorScheme={isDark ? "dark" : "light"}
                 theme={customTheme}
                 blockSize={12}
                 blockMargin={3}
-                showTotalCount={false}
+                showTotalCount={true}
                 showColorLegend={false}
                 labels={{
                   totalCount: "{{count}} submissions this year",
@@ -147,7 +144,7 @@ export function LeetCodeWidget() {
                   height: auto !important;
                 }
               `}} />
-            </>
+            </div>
           )}
         </div>
       </div>

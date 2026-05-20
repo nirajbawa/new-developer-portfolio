@@ -42,12 +42,12 @@ const certificationsList: Certification[] = [
   },
   {
     id: 3,
-    title: "Continuous Learning & Specialization",
-    provider: "Self-Directed",
-    logo: udemyLogo,
-    link: "#",
-    date: "Ongoing",
-    skills: ["Next.js", "TypeScript", "Tailwind"]
+    title: "SQL",
+    provider: "HackerRank",
+    logo: hackerrankLogo,
+    link: "https://drive.google.com/file/d/1zxuH0RCdFtgIMsGSyEOZA4nTFXGv9xZ4/view?usp=sharing",
+    date: "2024",
+    skills: ["SQL", "Databases", "Queries"]
   },
   {
     id: 4,

@@ -68,12 +68,39 @@ export default function Footer() {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) return;
     setIsSubmitting(true);
-    // Simulate API request
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormState({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
+    
+    try {
+      const emailHtml = `
+        <div style="font-family: sans-serif; padding: 20px; color: #1e293b; background-color: #f8fafc; border-radius: 8px; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0;">
+          <h2 style="color: #0284c7; border-bottom: 2px solid #0284c7; padding-bottom: 8px; margin-top: 0;">New Contact Form Message</h2>
+          <p style="margin: 8px 0;"><strong>Name:</strong> ${formState.name}</p>
+          <p style="margin: 8px 0;"><strong>Email:</strong> ${formState.email}</p>
+          <p style="margin-top: 16px; background-color: #ffffff; padding: 16px; border-radius: 6px; border: 1px solid #cbd5e1; font-style: italic; line-height: 1.6; color: #334155;">
+            ${formState.message.replace(/\n/g, "<br/>")}
+          </p>
+        </div>
+      `;
+
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipient: "nirajbawa222@gmail.com",
+          subject: `Portfolio Message from ${formState.name}`,
+          html_content: emailHtml,
+        }),
+      });
+
+      setSubmitted(true);
+      setFormState({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      console.error("Failed to send message email:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants: Variants = {
@@ -388,7 +415,7 @@ export default function Footer() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-2.5 rounded-lg border border-primary/40 bg-primary/10 text-primary hover:bg-primary/20 text-[0.65rem] font-bold font-mono uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 group-hover:border-primary/60"
+                    className="w-full py-2.5 cursor-pointer rounded-lg border border-primary/40 bg-primary/10 text-primary hover:bg-primary/20 text-[0.65rem] font-bold font-mono uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 group-hover:border-primary/60"
                   >
                     <span>{isSubmitting ? "Sending..." : "Submit Message"}</span>
                     <Send className="w-3 h-3 text-primary group-hover:translate-x-0.5 transition-transform" />
@@ -399,9 +426,14 @@ export default function Footer() {
           </motion.div>
 
         </motion.div>
+      </div> {/* Close main grid container */}
 
-        {/* Full-width Horizontal Copyright Bar matching bottom panel sketch exactly */}
-        <div className="mt-8 pt-4 border-t border-accent-foreground/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.7rem] text-muted-foreground font-mono">
+      {/* Full-bleed Full-width Copyright Divider Line */}
+      <div className="w-full border-t border-accent-foreground/10 mt-8" />
+
+      {/* Bottom Copyright and Links Bar Container */}
+      <div className="container mx-auto px-4 sm:px-8 lg:px-12 relative z-10 w-full max-w-[98%] sm:max-w-[96%] lg:max-w-[94%] xl:max-w-[92%] pt-4 pb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.7rem] text-muted-foreground font-mono">
           <p>© 2026 NIRAJ BAVA. All rights reserved.</p>
           <div className="flex gap-4 items-center">
             
@@ -420,7 +452,6 @@ export default function Footer() {
             
           </div>
         </div>
-
       </div>
     </footer>
   );
