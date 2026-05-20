@@ -493,9 +493,9 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
         </div>
 
-        <Footer />
-      </article>
 
+      </article>
+      <Footer />
       {/* Lightbox / Zoomed image Modal overlay */}
       <AnimatePresence>
         {isZoomed && (
