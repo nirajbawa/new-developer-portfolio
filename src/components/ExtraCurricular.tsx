@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 // Image Imports with exact filesystem spellings
 import policeImg from "@/assets/images/extra-police-assitance-1.jpeg";
@@ -70,6 +72,12 @@ const puzzleClasses = [
 ];
 
 export default function ExtraCurricular() {
+  const [activeCardId, setActiveCardId] = useState<number | null>(null);
+
+  const handleCardClick = (id: number) => {
+    setActiveCardId((prev) => (prev === id ? null : id));
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -127,13 +135,21 @@ export default function ExtraCurricular() {
         >
           {activitiesList.map((activity, idx) => {
             const gridClass = puzzleClasses[idx % puzzleClasses.length];
+            const isActive = activeCardId === activity.id;
 
             return (
               <motion.div
                 key={activity.id}
                 variants={cardVariants}
                 whileHover={{ y: -6 }}
-                className={`group rounded-2xl border border-accent-foreground/15 bg-secondary/10 overflow-hidden relative shadow-lg cursor-pointer ${gridClass}`}
+                onClick={() => handleCardClick(activity.id)}
+                className={cn(
+                  "group rounded-2xl border bg-secondary/10 overflow-hidden relative shadow-lg cursor-pointer transition-all duration-300 card-hover-effect",
+                  gridClass,
+                  isActive
+                    ? "border-primary/50 shadow-[0_8px_30px_rgba(59,130,246,0.25)]"
+                    : "border-accent-foreground/15"
+                )}
               >
                 {/* Background Image */}
                 <Image
@@ -141,25 +157,36 @@ export default function ExtraCurricular() {
                   alt={activity.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 600px"
-                  className="object-cover transition-transform duration-700 scale-100 group-hover:scale-105 filter brightness-[0.7] group-hover:brightness-[0.35]"
+                  className={cn(
+                    "object-cover transition-transform duration-700 filter brightness-[0.7] group-hover-image",
+                    isActive
+                      ? "scale-105 brightness-[0.35]"
+                      : "scale-100"
+                  )}
                   priority={activity.id <= 3}
                 />
 
                  {/* Dark Vignette Gradient Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 transition-all duration-500 group-hover:bg-black/90 pointer-events-none" />
+                <div className={cn(
+                  "absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 transition-all duration-500 pointer-events-none group-hover-overlay",
+                  isActive ? "bg-black/90" : ""
+                )} />
 
                 {/* Category Floating Badge */}
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg shadow-sm z-20 transition-all duration-300 group-hover:opacity-0 group-hover:scale-90 pointer-events-none flex items-center justify-center text-center">
+                <div className={cn(
+                  "absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-2.5 py-1 rounded-lg shadow-sm z-20 transition-all duration-300 pointer-events-none flex items-center justify-center text-center group-hover-badge",
+                  isActive ? "opacity-0 scale-90" : ""
+                )}>
                   <span className="text-xs font-mono font-bold text-primary uppercase tracking-wider text-center">
                     {activity.category}
                   </span>
                 </div>
 
                 {/* Content Panel aligned to the bottom */}
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 z-20 flex flex-col justify-end pointer-events-none">
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 z-20 flex flex-col justify-end">
                   
                   {/* Title wrapper which is ALWAYS visible at the center by default */}
-                  <div className="space-y-1.5 pointer-events-auto transition-all duration-500 ease-in-out">
+                  <div className="space-y-1.5 transition-all duration-500 ease-in-out">
                     {/* Location Context */}
                     <div className="flex items-center gap-1.5 text-white/70">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3 text-primary flex-shrink-0">
@@ -172,13 +199,21 @@ export default function ExtraCurricular() {
                     </div>
 
                     {/* Title of the card */}
-                    <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-primary transition-colors duration-300 leading-snug tracking-tight">
+                    <h3 className={cn(
+                      "text-sm sm:text-base font-bold text-white transition-colors duration-300 leading-snug tracking-tight group-hover-title",
+                      isActive ? "text-primary" : ""
+                    )}>
                       {activity.title}
                     </h3>
                   </div>
 
                   {/* Sliding Info: Description & Tags - visible on hover, smoothly animated to prevent overlapping */}
-                  <div className="max-h-0 group-hover:max-h-[300px] overflow-hidden opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out mt-0 group-hover:mt-3 pointer-events-auto">
+                  <div className={cn(
+                    "overflow-hidden transition-all duration-500 ease-in-out group-hover-expand",
+                    isActive
+                      ? "max-h-[300px] opacity-100 mt-3"
+                      : "max-h-0 opacity-0 mt-0"
+                  )}>
                     <p className="text-xs sm:text-sm text-white/90 leading-relaxed pt-1.5 border-t border-white/10">
                       {activity.description}
                     </p>

@@ -177,7 +177,7 @@ export const cvData: CVData = {
         "Engineered an indoor mapping application for client operating across the US and Africa, improving navigation accuracy and spatial visualization efficiency by 90%.",
         "Built backend microservices automating scraping and Shopify sync, reducing manual work by 90% and speeding up client onboarding.",
       ],
-      link: "#",
+      link: "https://drive.google.com/file/d/1jqdQoBoklyRa9EjIAiXvogx-kU70fcgL/view?usp=sharing",
     },
     {
       company: "INVENTURS CUBE LLP",
@@ -190,7 +190,7 @@ export const cvData: CVData = {
         "Developed FastAPI services for AI Tools App: Engineered PDF text extraction API using Tesseract OCR for multilingual support, Q&A API using RoBERTa-base model, and text summarization using BART-Large-CNN model; developed feature for existing ExpressJS API for ChatGPT context management to reduce cost per request.",
         "Contributed to Internal React Dashboard: Built management interface for services and API tokens, and developed image-to-text translation feature, reducing manual translation effort by 60% and expanding platform support to 5+ languages.",
       ],
-      link: "#",
+      link: "https://drive.google.com/file/d/1BaU1NsYmxWd5wfXcT-khYIM7pG6RiIPB/view?usp=sharing",
     },
     {
       company: "VRINDA PAPERS PRIVATE LIMITED",
@@ -202,7 +202,7 @@ export const cvData: CVData = {
         "Engineered a Google Sheets-integrated stock inquiry plugin enabling real-time inventory tracking, reducing manual work by 80% through Google Apps Script automation.",
         "Handled WordPress custom theme design and web app maintenance.",
       ],
-      link: "#",
+      link: "https://drive.google.com/file/d/1kDwNgjDqZPLQ_kg-Kny8gprTsPk-LfBc/view?usp=sharing",
     },
   ],
   projects: [
@@ -282,6 +282,98 @@ export const cvData: CVData = {
         "Implemented obstacle detection and avoidance algorithms enabling the drone to navigate complex environments dynamically without human intervention.",
         "Built a real-time telemetry system providing live data transmission including altitude, orientation, velocity, and sensor readings to a ground control interface.",
         "Selected among top teams nationwide for the ISRO-IROC (Inter-Institutional Robotics Challenge) Grand Finale, held at URSC (U.R. Rao Satellite Centre), Bengaluru.",
+      ],
+    },
+    {
+      title: "INews Android App",
+      duration: "Jan 2024 – Feb 2024",
+      link: "https://github.com/nirajbawa/iNews-Android-App-Using-Java",
+      bullets: [
+        "Crafted a user-friendly news platform using Java, Android SDK, and custom WebViews to deliver seamless real-time news content feeds.",
+        "Engineered an intuitive multi-language feature offering native news viewing in both Marathi and English to cater to a diverse local audience. 💬🌐",
+        "Optimized layout rendering speed and memory footprints within WebView, providing responsive, fluid touch navigation across devices.",
+      ],
+    },
+    {
+      title: "Weather App Using React",
+      duration: "Jun 2023 – Jun 2023",
+      link: "https://weather-9htn.onrender.com/",
+      bullets: [
+        "Developed a full-stack weather inquiry platform leveraging the MERN stack (MongoDB, Express.js, React.js, Node.js) for high-efficiency operation.",
+        "Integrated the OpenWeatherMap API to fetch and render real-time weather metrics, forecast projections, and localized coordinates.",
+        "Implemented an in-memory active queue (stack) structure to track user searches and provide lightning-fast, zero-friction back-navigation.",
+      ],
+    },
+    {
+      title: "Dynamic Portfolio Web Application",
+      duration: "Feb 2023 – Feb 2023",
+      link: "https://github.com/nirajbawa/Dynamic-Portfolio-Web-App",
+      bullets: [
+        "Designed a custom, dynamic administrative portfolio platform featuring robust admin controls to customize and update sections in real-time.",
+        "Engineered backend logic using Express.js and MongoDB to support complete content CRUD operations and administrative user sessions securely.",
+        "Utilized EJS template rendering with CSS and Bootstrap for high-fidelity responsive displays and rapid server-side rendering.",
+      ],
+    },
+    {
+      title: "QR Attendance",
+      duration: "Oct 2022 – Oct 2022",
+      link: "https://github.com/nirajbawa/QR-Attendance",
+      bullets: [
+        "Developed a lightweight Flask web application featuring a structured MySQL database to digitize and automate student attendance records.",
+        "Engineered an instant QR scanning module leveraging pyqrcode to automate user identification and record attendance instantly upon scan.",
+        "Designed a clean, responsive student portal using HTML, CSS, JavaScript, and Jinja templating for smooth and responsive user flows.",
+      ],
+    },
+    {
+      title: "Fruit Selling Site",
+      duration: "May 2022 – May 2022",
+      link: "https://github.com/nirajbawa/fruit-selling-site-landing-page",
+      bullets: [
+        "Associated with the Maharashtra State Board of Technical Education (MSBTE) academic curriculum design showcase.",
+        "Crafted a beautiful fruit selling landing page using pure HTML5, CSS3, and JavaScript, prioritizing modern typography and responsive UI transitions.",
+        "Engineered highly optimized animations and fluid hover transitions to enhance customer engagement and page aesthetic presentation.",
+      ],
+    },
+    {
+      title: "PDF 2 Audio Converter",
+      duration: "Apr 2021 – May 2021",
+      link: "https://github.com/nirajbawa/pdf2audio",
+      bullets: [
+        "Developed a progressive utility web application using Flask to convert PDF files into audio narration tracks, raw text, or visual images.",
+        "Integrated advanced OCR algorithms using pytesseract, tesseract-ocr, and pdf2image to translate embedded scanned text into clean readable format.",
+        "Implemented high-quality Text-to-Speech (TTS) synthesis engines using Google TTS (gTTS) and PIL for dynamic document conversion.",
+        "Configured as a Progressive Web App (PWA) using Service Workers to enable full offline caching capabilities and responsive bootstrap UI.",
+      ],
+    },
+    {
+      title: "Course Selling Web App",
+      duration: "Jan 2021 – Jan 2021",
+      link: "https://github.com/nirajbawa/course-selling-web-app",
+      bullets: [
+        "Designed an interactive E-learning marketplace using Flask and MySQL, enabling instructors to sell and publish educational courses.",
+        "Integrated Instamojo Payment Gateway APIs to facilitate secure credit card, UPI, and net-banking transactions.",
+        "Features administrative dashboard metrics, live lecture triggers, curriculum scheduling portals, and role-based student access models.",
+      ],
+    },
+    {
+      title: "Covid Victim Counter",
+      duration: "May 2020 – May 2020",
+      link: "https://github.com/nirajbawa/covid-victim-counter",
+      bullets: [
+        "Developed a highly responsive statistical tracking portal to provide real-time updates on active COVID-19 cases in India.",
+        "Fetched live metrics directly from the Covid19india API to render state-wise active count, recoveries, and mortality trends.",
+        "Utilized pure HTML, CSS, and interactive JavaScript to build dynamic filtering dropdowns and clean responsive visual layouts.",
+      ],
+    },
+    {
+      title: "TurfSpot",
+      duration: "Oct 2024 – Nov 2024",
+      link: "https://github.com/nirajbawa/TurfTown",
+      bullets: [
+        "Architected a comprehensive multi-module turf booking SaaS platform utilizing the MERN stack (React, Node, Express, MongoDB) and Redux Toolkit.",
+        "User Module: Browsing turfs, scheduling interactive slots via Razorpay checkout, providing ratings, and email confirmation with secure QR codes.",
+        "Owner & Admin Modules: Interactive dashboards with Recharts transaction stats, turf request vetting (approve/reject link), and member audit logs.",
+        "Integrated secure SMTP mail dispatch, automated user roles, Cloudinary asset hosting, and multi-tenant billing metrics.",
       ],
     },
   ],

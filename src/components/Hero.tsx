@@ -5,7 +5,7 @@ import { cvData } from "@/data/cv";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import developerHeroImg from "@/assets/images/new-developer-img.png";
 import { useSelector } from "react-redux";
 import { selectTheme } from "@/redux/themeSlice";
@@ -158,22 +158,25 @@ export function Hero() {
   const { personalInfo } = cvData;
   const constraintsRef = useRef<HTMLDivElement>(null);
   const [isPortraitHovered, setIsPortraitHovered] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
   // CALIBRATED STRICT SYMMETRIC ARCHED BADGES WITH CINEMATIC STAGGER DELAYS
   const floatingTechs = [
     // Left-Side strictly configured (Docker, JS, AWS)
-    { name: "Docker", icon: <DockerIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] left-[-20px] sm:top-[200px] sm:left-[-25px] md:top-[210px] md:left-[-30px] lg:top-[210px] lg:left-[-35px]", delay: 0.5 },
-    { name: "JS", icon: <JsIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] left-[-10px] sm:top-[85px] sm:left-[-15px] md:top-[90px] md:left-[-20px] lg:top-[90px] lg:left-[-25px]", delay: 0.65 },
-    { name: "AWS", icon: <AwsIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[-10px] left-[45px] sm:top-[-20px] sm:left-[55px] md:top-[-20px] md:left-[60px] lg:top-[-20px] lg:left-[55px]", delay: 0.8 },
+    { name: "Docker", icon: <DockerIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] left-[10px] sm:top-[200px] sm:left-[-25px] md:top-[210px] md:left-[-30px] lg:top-[210px] lg:left-[-35px]", delay: 0.5 },
+    { name: "JS", icon: <JsIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] left-[20px] sm:top-[85px] sm:left-[-15px] md:top-[90px] md:left-[-20px] lg:top-[90px] lg:left-[-25px]", delay: 0.65 },
+    { name: "AWS", icon: <AwsIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[-10px] left-[70px] sm:top-[-20px] sm:left-[55px] md:top-[-20px] md:left-[60px] lg:top-[-20px] lg:left-[55px]", delay: 0.8 },
     
     // Right-Side strictly configured (FastAPI, Redis, MERN)
-    { name: "FastAPI", icon: <FastApiIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[-10px] right-[45px] sm:top-[-20px] sm:right-[55px] md:top-[-20px] md:right-[60px] lg:top-[-20px] lg:right-[55px]", delay: 0.95 },
-    { name: "Python", icon: <PythonIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] right-[-10px] sm:top-[85px] sm:right-[-15px] md:top-[90px] md:right-[-20px] lg:top-[90px] lg:right-[-25px]", delay: 1.10 },
-    { name: "MERN", icon: <MernIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] right-[-20px] sm:top-[200px] sm:right-[-25px] md:top-[210px] md:right-[-30px] lg:top-[210px] lg:right-[-35px]", delay: 1.25 },
+    { name: "FastAPI", icon: <FastApiIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[-10px] right-[70px] sm:top-[-20px] sm:right-[55px] md:top-[-20px] md:right-[60px] lg:top-[-20px] lg:right-[55px]", delay: 0.95 },
+    { name: "Python", icon: <PythonIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] right-[20px] sm:top-[85px] sm:right-[-15px] md:top-[90px] md:right-[-20px] lg:top-[90px] lg:right-[25px]", delay: 1.10 },
+    { name: "MERN", icon: <MernIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] right-[10px] sm:top-[200px] sm:right-[-25px] md:top-[210px] md:right-[30px] lg:top-[210px] lg:right-[35px]", delay: 1.25 },
   ];
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-0 lg:min-h-[calc(100vh-4rem)] flex items-center justify-center pt-28 pb-4 overflow-hidden bg-background"
     >
@@ -185,11 +188,11 @@ export function Hero() {
 
         {/* Left Glassmorphism Cyber-Shield Panel (Slow dynamic floating and rotating glass element) */}
         <motion.div 
-          animate={{ 
+          animate={isInView ? { 
             y: [0, -15, 0], 
             rotate: [12, 18, 12],
             scale: [1, 1.03, 1]
-          }}
+          } : {}}
           transition={{ 
             duration: 10, 
             repeat: Infinity, 
@@ -203,11 +206,11 @@ export function Hero() {
         
         {/* Right Glassmorphism Cyber-Shield Panel (Opposing frequency dynamic slow float glass element) */}
         <motion.div 
-          animate={{ 
+          animate={isInView ? { 
             y: [0, 18, 0], 
             rotate: [-20, -14, -20],
             scale: [1, 1.04, 1]
-          }}
+          } : {}}
           transition={{ 
             duration: 12, 
             repeat: Infinity, 
@@ -227,8 +230,8 @@ export function Hero() {
       {/* Expanded Container with perfect max width for balanced 3-column gap */}
       <div className="container mx-auto px-6 relative z-10 w-full max-w-[84rem]">
         
-        {/* Generous gap-12 (mobile) -> gap-24 (desktop) to keep text blocks separate from technology badges */}
-        <div className="grid gap-12 lg:gap-24 lg:grid-cols-3 items-center justify-center">
+        {/* Generous gap-6 (mobile) -> gap-24 (desktop) to keep text blocks separate from technology badges */}
+        <div className="grid gap-6 sm:gap-8 lg:gap-24 lg:grid-cols-3 items-center justify-center">
           
           {/* MID-LEFT COLUMN: Frameless Cyber-themed Name Block + Social Media Logos (Framer Motion Loaded) */}
           <motion.div 
@@ -405,16 +408,16 @@ export function Hero() {
             {/* Fluid Responsive Canvas - Perfect large scale dimensions */}
             <div 
               ref={constraintsRef}
-              className="relative w-72 h-[26rem] sm:w-80 sm:h-[32rem] md:w-[26rem] md:h-[36rem] flex items-end justify-center overflow-visible"
+              className="relative w-[23rem] h-[32rem] sm:w-[26rem] sm:h-[35rem] md:w-[26rem] md:h-[36rem] flex items-end justify-center overflow-visible"
             >
               {/* Sci-fi HUD rings floating strictly BEHIND the developer (Not cropping portrait) */}
-              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-accent-foreground/15 via-transparent to-primary/15 p-2 -z-10 animate-pulse pointer-events-none">
+              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-80 sm:h-80 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-accent-foreground/15 via-transparent to-primary/15 p-2 -z-10 animate-pulse pointer-events-none">
                 <div className="absolute inset-0 rounded-full border border-accent-foreground/20 animate-ping duration-[3000ms]" />
                 <div className="absolute inset-5 border border-dashed border-primary/20 animate-spin duration-[40000ms] rounded-full" />
               </div>
 
               {/* Ambient premium blue glow behind the developer to spread out naturally without crop limits */}
-              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-accent-foreground/10 dark:bg-accent-foreground/5 blur-[50px] -z-20 pointer-events-none animate-pulse" />
+              <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[22rem] h-[22rem] sm:w-[26rem] sm:h-[26rem] md:w-80 md:h-80 rounded-full bg-accent-foreground/10 dark:bg-accent-foreground/5 blur-[50px] -z-20 pointer-events-none animate-pulse" />
 
               {/* Organically layered developer photo (Framer Motion Loaded - rising dramatically from bottom of section with GPU acceleration and zero lag) */}
               <motion.div 
@@ -436,7 +439,7 @@ export function Hero() {
                   damping: isPortraitHovered ? 12 : 20,
                   mass: 1.2
                 }}
-                className="relative w-64 h-[26rem] sm:w-72 sm:h-[32rem] md:w-[24rem] md:h-[36rem] select-none z-10 pointer-events-auto cursor-pointer will-change-[transform,opacity]"
+                className="relative w-[21rem] h-[32rem] sm:w-[24rem] sm:h-[35rem] md:w-[24rem] md:h-[36rem] select-none z-10 pointer-events-auto cursor-pointer will-change-[transform,opacity]"
                 style={{
                   WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 94%, rgba(0,0,0,0) 100%)",
                   maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 94%, rgba(0,0,0,0) 100%)"
@@ -457,7 +460,7 @@ export function Hero() {
                 <motion.div
                   key={`wrapper-${tech.name}`}
                   className={`absolute ${tech.pos} z-20`}
-                  animate={{ y: [0, -10, 0] }}
+                  animate={isInView ? { y: [0, -10, 0] } : {}}
                   transition={{ 
                     duration: 3 + (index % 3) * 0.5, // Organic varying float speeds
                     repeat: Infinity, 

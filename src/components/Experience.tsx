@@ -15,22 +15,22 @@ import neuronexLogo from "@/assets/images/neuronex_developers_logo.jpg";
 const companyMeta: Record<string, { logo: StaticImageData; url: string; techStack: string[] }> = {
   "NEURONEX DEVELOPERS": {
     logo: neuronexLogo,
-    url: "#",
+    url: "https://www.neuronexdevelopers.com/",
     techStack: ["WhatsApp API", "AWS", "Python", "RAG", "FastAPI", "React Native"],
   },
   "DREAMCARE DEVELOPERS": {
     logo: dreamcareLogo,
-    url: "#",
+    url: "https://www.dreamcaredevelopers.com/",
     techStack: ["React", "Node.js", "Express", "PostgreSQL", "Nginx", "Redis"],
   },
   "INVENTURS CUBE LLP": {
     logo: inventursLogo,
-    url: "https://inventurs.com",
+    url: "https://inventurs.com/",
     techStack: ["React", "Node.js", "FastAPI", "Python", "Flask", "MongoDB"],
   },
   "VRINDA PAPERS PRIVATE LIMITED": {
     logo: vrindaLogo,
-    url: "https://vrindapapers.com",
+    url: "https://vrindapapers.com/",
     techStack: ["PHP", "WordPress", "Google Apps Script", "MySQL"],
   },
 };

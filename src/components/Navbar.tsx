@@ -93,6 +93,7 @@ export function Navbar() {
 
           <Link
             href="/hire-me"
+            scroll={false}
             className={cn(
               buttonVariants({ variant: "default" }),
               "hidden lg:inline-flex bg-primary text-primary-foreground hover:bg-primary/95 text-xs font-semibold shadow-sm rounded-lg px-4 py-2 flex items-center justify-center"

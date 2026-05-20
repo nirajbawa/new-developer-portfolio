@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 interface ClientProjectPageProps {
   project: ProjectDetail;
@@ -55,7 +56,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden font-sans selection:bg-primary/30 selection:text-primary-foreground antialiased">
-      
+
       {/* Background Cybernetic Grid & Glowing Orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -67,7 +68,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
       {/* Main Blog Post Structure */}
       <article className="container mx-auto max-w-[76rem] px-4 sm:px-6 pt-28 sm:pt-32 pb-8 sm:pb-12 relative z-10">
-        
+
         {/* Breadcrumb Navigation */}
         <div className="flex items-center justify-between mb-8">
           <Link
@@ -90,7 +91,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
             Case Study // {project.category}
           </span>
         </div>
-        
+
         {/* Blog Post Header Info */}
         <motion.header
           initial={{ opacity: 0, y: 15 }}
@@ -194,11 +195,10 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
                   <button
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      activeImageIndex === idx
-                        ? "bg-primary w-5"
-                        : "bg-muted-foreground/45 hover:bg-muted-foreground"
-                    }`}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${activeImageIndex === idx
+                      ? "bg-primary w-5"
+                      : "bg-muted-foreground/45 hover:bg-muted-foreground"
+                      }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
@@ -233,7 +233,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
         {/* 12-Column Asymmetric Grid Layout combining main column with sticky sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* LEFT COLUMN: The dynamic blog post body contents (8 columns) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -241,7 +241,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-8 space-y-12 sm:space-y-16 text-left"
           >
-            
+
             {/* SECTION 1: The Friction & Problem Statement */}
             {project.problem && (
               <section id="context" className="space-y-4 scroll-mt-24">
@@ -378,7 +378,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
                   Real-World Impact & Outcomes
                 </h2>
                 <div className="h-[2px] w-12 bg-primary/45 mb-6" />
-                
+
                 {project.outcome && (
                   <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-sans font-normal">
                     {project.outcome}
@@ -402,7 +402,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
           {/* RIGHT COLUMN: Sticky, elegant blog sidebar (4 columns) */}
           <aside className="lg:col-span-4 lg:sticky lg:top-24 space-y-10 lg:pl-8 lg:border-l border-border/10 text-left">
-            
+
             {/* Widget 1: Document Table of Contents Menu links */}
             <div className="space-y-4">
               <h3 className="text-xs font-mono font-extrabold text-foreground uppercase tracking-widest">
@@ -454,6 +454,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
                   <Link
                     key={p.slug}
                     href={`/projects/${p.slug}`}
+                    scroll={false}
                     className="block p-3.5 rounded-xl border border-border/10 bg-secondary/15 hover:border-primary/20 transition-all duration-300 group"
                   >
                     <span className="text-[0.55rem] font-mono text-primary uppercase tracking-wider block mb-1">
@@ -492,11 +493,7 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
 
         </div>
 
-        {/* Footer Blog Signoff */}
-        <footer className="max-w-[76rem] mx-auto border-t border-border/10 mt-16 sm:mt-24 pt-8 text-center text-xs font-mono text-muted-foreground tracking-wider">
-          <p>© {new Date().getFullYear()} Niraj Bawa Case Studies // Code crafted for maximum performance.</p>
-        </footer>
-
+        <Footer />
       </article>
 
       {/* Lightbox / Zoomed image Modal overlay */}

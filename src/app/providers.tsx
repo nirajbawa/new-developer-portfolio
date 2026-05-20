@@ -8,6 +8,28 @@ import { ThemeProvider, useTheme } from "next-themes";
 import { selectTheme } from "@/redux/themeSlice";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { usePathname } from "next/navigation";
+import FeedbackPopup from "@/components/FeedbackPopup";
+
+function ScrollFix() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Snaps browser to top instantly on pathname change, bypassing standard smooth scroll lags
+    const html = document.documentElement;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+
+    const timer = setTimeout(() => {
+      html.style.scrollBehavior = "smooth";
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
+  return null;
+}
+
 function ThemeSync() {
   const reduxTheme = useSelector(selectTheme);
   const { theme: nextTheme, setTheme: setNextTheme } = useTheme();
@@ -41,7 +63,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ThemeSync />
+            <ScrollFix />
             {children}
+            <FeedbackPopup />
           </ThemeProvider>
         </QueryClientProvider>
       </PersistGate>

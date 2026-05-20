@@ -88,11 +88,11 @@ export default function Skills() {
                         {/* Mobile Horizontal Connector */}
                         <div className="md:hidden absolute left-[24px] top-8 w-10 h-[2px] bg-primary/30 z-0" />
                         <motion.div
-                          initial={{ opacity: 0, x: -30, y: 10 }}
+                          initial={{ opacity: 0, x: "var(--slide-from-x, -30px)", y: 10 }}
                           whileInView={{ opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                          className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform"
+                          className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform [--slide-from-x:30px] md:[--slide-from-x:-30px]"
                         >
                           {/* Connecting Line to Axis (Desktop) */}
                           <div className="hidden md:block absolute top-[2.3rem] right-[-3rem] w-12 h-[2px] bg-primary/30 z-0" />
@@ -119,18 +119,18 @@ export default function Skills() {
                   <div className="hidden md:block w-0" />
 
                   {/* Right Column Spacer or Card Container */}
-                  <div className={`w-full md:w-1/2 pl-16 md:pl-12 pr-0 flex justify-start mt-8 md:mt-0 relative ${isEven ? 'hidden md:flex' : ''}`}>
+                  <div className={`w-full md:w-1/2 pl-16 md:pl-12 pr-0 flex justify-start relative ${isEven ? 'hidden md:flex' : ''}`}>
                     {!isEven && (
                       <>
                         {/* Mobile Horizontal Connector */}
                         <div className="md:hidden absolute left-[24px] top-8 w-10 h-[2px] bg-primary/30 z-0" />
 
                         <motion.div
-                          initial={{ opacity: 0, x: 30, y: 10 }}
+                          initial={{ opacity: 0, x: "var(--slide-from-x, 30px)", y: 10 }}
                           whileInView={{ opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                          className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform"
+                          className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform [--slide-from-x:30px]"
                         >
                           {/* Connecting Line to Axis (Desktop) */}
                           <div className="hidden md:block absolute top-[2.3rem] left-[-3rem] w-12 h-[2px] bg-primary/30 z-0" />

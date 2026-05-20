@@ -80,7 +80,7 @@ function ImageCarousel({ images, alt }: { images: any[]; alt: string }) {
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-2 sm:left-4 w-8 h-8 rounded-full bg-background/50 backdrop-blur-md border border-border/40 text-foreground flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:bg-background hover:text-primary hover:border-primary/50"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/50 backdrop-blur-md border border-border/40 text-foreground flex items-center justify-center opacity-90 md:opacity-0 md:group-hover/carousel:opacity-100 transition-all duration-300 hover:bg-background hover:text-primary hover:border-primary/50"
             aria-label="Previous image"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4 translate-x-[-1px]">
@@ -89,7 +89,7 @@ function ImageCarousel({ images, alt }: { images: any[]; alt: string }) {
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-2 sm:right-4 w-8 h-8 rounded-full bg-background/50 backdrop-blur-md border border-border/40 text-foreground flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:bg-background hover:text-primary hover:border-primary/50"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/50 backdrop-blur-md border border-border/40 text-foreground flex items-center justify-center opacity-90 md:opacity-0 md:group-hover/carousel:opacity-100 transition-all duration-300 hover:bg-background hover:text-primary hover:border-primary/50"
             aria-label="Next image"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4 translate-x-[1px]">

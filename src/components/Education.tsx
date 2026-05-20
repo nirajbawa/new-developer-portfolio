@@ -70,7 +70,7 @@ function ImageCarousel({ images, alt }: { images: any[]; alt: string }) {
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-3 w-8 h-8 rounded-full bg-background/90 dark:bg-background/80 backdrop-blur-sm border border-border/40 text-foreground/80 flex items-center justify-center opacity-70 group-hover/carousel:opacity-100 transition-all duration-300 shadow-md hover:bg-background dark:hover:bg-background/90 hover:text-primary hover:border-primary/50 hover:scale-105 hover:opacity-100"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/90 dark:bg-background/80 backdrop-blur-sm border border-border/40 text-foreground/80 flex items-center justify-center opacity-90 md:opacity-70 md:group-hover/carousel:opacity-100 transition-all duration-300 shadow-md hover:bg-background dark:hover:bg-background/90 hover:text-primary hover:border-primary/50 hover:scale-105 hover:opacity-100"
             aria-label="Previous slide"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 translate-x-[-0.5px]">
@@ -79,7 +79,7 @@ function ImageCarousel({ images, alt }: { images: any[]; alt: string }) {
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-3 w-8 h-8 rounded-full bg-background/90 dark:bg-background/80 backdrop-blur-sm border border-border/40 text-foreground/80 flex items-center justify-center opacity-70 group-hover/carousel:opacity-100 transition-all duration-300 shadow-md hover:bg-background dark:hover:bg-background/90 hover:text-primary hover:border-primary/50 hover:scale-105 hover:opacity-100"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-background/90 dark:bg-background/80 backdrop-blur-sm border border-border/40 text-foreground/80 flex items-center justify-center opacity-90 md:opacity-70 md:group-hover/carousel:opacity-100 transition-all duration-300 shadow-md hover:bg-background dark:hover:bg-background/90 hover:text-primary hover:border-primary/50 hover:scale-105 hover:opacity-100"
             aria-label="Next slide"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 translate-x-[0.5px]">

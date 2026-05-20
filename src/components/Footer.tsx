@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
-import { Send, CheckCircle, Mail, Phone, MapPin } from "lucide-react";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { Send, CheckCircle, Mail, Phone, MapPin, Star } from "lucide-react";
 
 // Zero-dependency direct high-fidelity inline brand SVGs
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -59,6 +59,50 @@ export default function Footer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Footer rating feedback states
+  const [footerRating, setFooterRating] = useState(0);
+  const [footerHoveredRating, setFooterHoveredRating] = useState(0);
+  const [footerEmail, setFooterEmail] = useState("");
+  const [isFooterSubmitting, setIsFooterSubmitting] = useState(false);
+  const [footerSubmitted, setFooterSubmitted] = useState(false);
+
+  const handleFooterSubmit = async () => {
+    if (footerRating === 0 || !footerEmail) return;
+    setIsFooterSubmitting(true);
+
+    try {
+      const emailHtml = `
+        <div style="font-family: sans-serif; padding: 20px; color: #1e293b; background-color: #f8fafc; border-radius: 8px; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0;">
+          <h2 style="color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; margin-top: 0;">New Website Feedback Rating</h2>
+          <p style="margin: 8px 0; font-size: 16px;"><strong>Rating:</strong> ${"★".repeat(footerRating)}${"☆".repeat(5 - footerRating)} (${footerRating} / 5 Stars)</p>
+          <p style="margin: 8px 0; font-size: 16px;"><strong>User Email:</strong> ${footerEmail}</p>
+          <p style="margin-top: 16px; font-size: 12px; color: #64748b; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 12px;">
+            Submitted from portfolio footer feedback card.
+          </p>
+        </div>
+      `;
+
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          recipient: "nirajbava222@gmail.com",
+          subject: `Portfolio Feedback - ${footerRating} Stars from ${footerEmail}`,
+          html_content: emailHtml,
+        }),
+      });
+
+      localStorage.setItem("portfolio_feedback_submitted", "true");
+      setFooterSubmitted(true);
+    } catch (err) {
+      console.error("Failed to send footer feedback email:", err);
+    } finally {
+      setIsFooterSubmitting(false);
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
@@ -68,7 +112,7 @@ export default function Footer() {
     e.preventDefault();
     if (!formState.name || !formState.email || !formState.message) return;
     setIsSubmitting(true);
-    
+
     try {
       const emailHtml = `
         <div style="font-family: sans-serif; padding: 20px; color: #1e293b; background-color: #f8fafc; border-radius: 8px; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0;">
@@ -135,7 +179,7 @@ export default function Footer() {
 
   return (
     <footer id="contact" className="relative bg-background overflow-hidden pt-10 pb-4 border-t border-border/10">
-      
+
       {/* Wave Transition Top Separator matching the layout sketch exactly */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none transform -translate-y-[99%] z-10 pointer-events-none">
         <svg
@@ -166,7 +210,7 @@ export default function Footer() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-8 lg:px-12 relative z-10 w-full max-w-[98%] sm:max-w-[96%] lg:max-w-[94%] xl:max-w-[92%]">
-        
+
         {/* 3-Column Asymmetric Bento Grid Layout with reduced gaps */}
         <motion.div
           variants={containerVariants}
@@ -175,14 +219,14 @@ export default function Footer() {
           viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 gap-4 items-stretch"
         >
-          
+
           {/* COLUMN 1: Menu List Card (Spans 3 Columns of 12) */}
           <motion.div
             variants={cardVariants}
             className="lg:col-span-3 rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            
+
             <div className="space-y-3 relative z-10">
               <div>
                 <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
@@ -211,14 +255,14 @@ export default function Footer() {
 
           {/* COLUMN 2: Stacked Cards (Spans 4 Columns of 12) */}
           <div className="lg:col-span-4 flex flex-col gap-4 justify-between h-full">
-            
+
             {/* STACKED CARD A: Contact details only */}
             <motion.div
               variants={cardVariants}
               className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col gap-3 hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md flex-1"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
+
               <div className="space-y-2.5 relative z-10">
                 <div>
                   <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
@@ -259,7 +303,7 @@ export default function Footer() {
               className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[7.5rem]"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              
+
               <div className="space-y-2.5 relative z-10">
                 <div>
                   <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
@@ -328,6 +372,102 @@ export default function Footer() {
               </div>
             </motion.div>
 
+            {/* STACKED CARD C: Rate this Portfolio */}
+            <motion.div
+              variants={cardVariants}
+              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[7.5rem] flex-1"
+            >
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <div className="space-y-2.5 relative z-10 w-full">
+                <div className="flex justify-between items-center w-full">
+                  <div>
+                    <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
+                      Feedback
+                    </h3>
+                    <h2 className="text-lg font-extrabold tracking-tight mt-0.5 text-foreground uppercase">
+                      Rate this Site
+                    </h2>
+                    <div className="h-0.5 w-8 bg-primary rounded-full mt-1" />
+                  </div>
+
+                  {footerSubmitted && (
+                    <span className="text-[0.55rem] font-mono font-bold text-emerald-500 bg-emerald-500/10 border border-emerald-500/25 px-2 py-0.5 rounded">
+                      Submitted!
+                    </span>
+                  )}
+                </div>
+
+                {footerSubmitted ? (
+                  <div className="flex items-center gap-2 py-1 text-emerald-500 text-xs font-semibold">
+                    <CheckCircle className="h-4 w-4 text-emerald-500" />
+                    <span>Thanks for your rating!</span>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3, 4, 5].map((star) => {
+                          const isActive = star <= (footerHoveredRating || footerRating);
+                          return (
+                            <button
+                              key={star}
+                              type="button"
+                              onClick={() => setFooterRating(star)}
+                              onMouseEnter={() => setFooterHoveredRating(star)}
+                              onMouseLeave={() => setFooterHoveredRating(0)}
+                              className="cursor-pointer transition-transform duration-200 hover:scale-115 focus:outline-none"
+                            >
+                              <Star
+                                className={`w-4 h-4 transition-all duration-200 ${isActive
+                                  ? "fill-yellow-500 text-yellow-500 drop-shadow-[0_0_6px_rgba(234,179,8,0.4)]"
+                                  : "text-muted-foreground/35"
+                                  }`}
+                              />
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <span className="text-[0.62rem] font-mono text-muted-foreground/70">
+                        {footerRating > 0 ? `${footerRating} / 5 Selected` : "Select Stars"}
+                      </span>
+                    </div>
+
+                    <AnimatePresence>
+                      {footerRating > 0 && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="flex gap-2 items-center w-full mt-2"
+                        >
+                          <div className="relative flex-1">
+                            <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground/60" />
+                            <input
+                              type="email"
+                              required
+                              placeholder="Your Email"
+                              value={footerEmail}
+                              onChange={(e) => setFooterEmail(e.target.value)}
+                              className="w-full text-[0.7rem] font-semibold rounded-lg bg-secondary/20 border border-border/40 pl-7 pr-2 py-1 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/50 transition-colors font-mono"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleFooterSubmit}
+                            disabled={isFooterSubmitting || !footerEmail}
+                            className="px-2.5 py-1.5 cursor-pointer rounded-lg border border-primary/40 bg-primary/10 hover:bg-primary/20 text-primary text-[0.6rem] font-bold font-mono uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1 disabled:opacity-50"
+                          >
+                            {isFooterSubmitting ? "..." : <Send className="w-2.5 h-2.5" />}
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+
           </div>
 
           {/* COLUMN 3: Contact Form (Spans 5 Columns of 12) - Compact inputs */}
@@ -336,7 +476,7 @@ export default function Footer() {
             className="lg:col-span-5 rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            
+
             <div className="space-y-4 relative z-10 w-full">
               <div>
                 <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
@@ -436,9 +576,9 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[0.7rem] text-muted-foreground font-mono">
           <p>© 2026 NIRAJ BAVA. All rights reserved.</p>
           <div className="flex gap-4 items-center">
-            
+
             {/* Horizontal list of important menu links instead of active features */}
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5 items-center text-[0.65rem] uppercase tracking-wider font-bold">
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 justify-center md:justify-end items-center text-[0.65rem] uppercase tracking-wider font-bold">
               <a href="#home" className="hover:text-primary transition-colors">Home</a>
               <span className="text-muted-foreground/30">•</span>
               <a href="#about" className="hover:text-primary transition-colors">About</a>
@@ -449,7 +589,7 @@ export default function Footer() {
               <span className="text-muted-foreground/30">•</span>
               <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
             </div>
-            
+
           </div>
         </div>
       </div>

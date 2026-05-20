@@ -109,3 +109,57 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* 
+ * MOBILE & TABLET SCROLL LAG OPTIMIZATION
+ * Selectively disables highly taxing backdrop blurs on viewports < 1024px
+ * to prevent GPU/CPU rasterization overhead and ensure steady 60/120 FPS scrolling.
+ * Semi-transparent card backdrops are promoted to readable high-opacity backgrounds.
+ */
+@media (max-width: 1023px) {
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  [class*="backdrop-blur-"] {
+    background-color: hsl(var(--background) / 0.96) !important;
+  }
+
+  .dark [class*="backdrop-blur-"] {
+    background-color: hsl(var(--background) / 0.96) !important;
+  }
+}
+
+/* 
+ * EXTRA-CURRICULAR CARD HOVER EFFECTS (ONLY ON HOVER-CAPABLE DEVICES)
+ * Prevents "sticky" hover state behaviors on touchscreens, while preserving
+ * standard premium hover animations on desktop displays.
+ */
+@media (hover: hover) {
+  .card-hover-effect:hover {
+    border-color: hsla(var(--primary) / 0.4) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  }
+  .group:hover .group-hover-image {
+    transform: scale(1.05);
+    filter: brightness(0.35);
+  }
+  .group:hover .group-hover-overlay {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  .group:hover .group-hover-badge {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .group:hover .group-hover-title {
+    color: hsl(var(--primary)) !important;
+  }
+  .group:hover .group-hover-expand {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 0.75rem;
+  }
+}
+
+

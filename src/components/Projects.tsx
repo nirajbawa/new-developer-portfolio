@@ -20,6 +20,7 @@ import anviksh2 from "@/assets/images/anviksh-2.jpg";
 import msbteQuizProMain from "@/assets/images/msbte-quiz-pro-0.png";
 import msbteWallahMain from "@/assets/images/msbte-wallah-0.png";
 import teamMatrixMain from "@/assets/images/team-matrix-0.png";
+import inewsMain from "@/assets/images/inews-0.png";
 
 import anavMain from "@/assets/images/anav_drone_bg.png";
 import anav0 from "@/assets/images/anav-0.jpg";
@@ -32,6 +33,16 @@ import sdrMain from "@/assets/images/sdr_secure_bg.png";
 import sdr0 from "@/assets/images/sdr-0.png";
 import sdr1 from "@/assets/images/sdr-1.jpeg";
 import sdr2 from "@/assets/images/sdr-2.jpeg";
+
+// 8 new projects showcase assets
+import weatherAppMain from "@/assets/images/weather-app-0.png";
+import dynamicPortfolioMain from "@/assets/images/dynamic-portfolio-0.png";
+import qrAttendanceMain from "@/assets/images/qr-attendance-0.png";
+import fruitSellingMain from "@/assets/images/fruit-selling-0.png";
+import pdf2audioMain from "@/assets/images/pdf2audio-0.png";
+import courseSellingMain from "@/assets/images/course-selling-0.png";
+import covidCounterMain from "@/assets/images/covid-counter-0.png";
+import turfSpotMain from "@/assets/images/turf-spot-0.png";
 
 // Map project title names to static images and rich metadata
 const projectMeta: Record<
@@ -113,6 +124,87 @@ const projectMeta: Record<
     liveUrl: "https://drive.google.com/file/d/1INlmuOLDTkfOXPRC-9h9pqSOmbTSnH_b/view",
     category: "Robotics & Hardware",
     aspectClass: "lg:h-[26rem]",
+  },
+  "INews Android App": {
+    image: inewsMain,
+    abstract: "A lightweight, user-friendly Android news application built using Java, Android SDK, and WebView. Features a dynamic multi-language system providing news delivery in both Marathi and English, alongside performance-optimized article layouts to support fluid and highly responsive touch transitions.",
+    techStack: ["Java", "Android SDK", "WebView", "XML", "Android Studio"],
+    link: "https://github.com/nirajbawa/iNews-Android-App-Using-Java",
+    liveUrl: "https://github.com/nirajbawa/iNews-Android-App-Using-Java",
+    category: "Android Development",
+    aspectClass: "lg:h-[18rem]",
+  },
+  "Weather App Using React": {
+    image: weatherAppMain,
+    abstract: "A comprehensive full-stack weather forecasting dashboard powered by the MERN stack. Fetches real-time weather stats, forecast estimates, and coordinates using OpenWeatherMap, while managing search query histories using an in-memory stack data structure for seamless backwards navigation.",
+    techStack: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "OpenWeatherMap API"],
+    link: "https://github.com/nirajbawa",
+    liveUrl: "https://weather-9htn.onrender.com/",
+    category: "Full-Stack Dashboard",
+    aspectClass: "lg:h-[22rem]",
+  },
+  "Dynamic Portfolio Web Application": {
+    image: dynamicPortfolioMain,
+    abstract: "A fully custom, dynamically editable portfolio application featuring a secure administrative portal. Enables real-time content CRUD operations, layout adjustments, and section toggles backed by Express session controls, styled dynamically using Bootstrap and EJS template engines.",
+    techStack: ["EJS", "Express.js", "Node.js", "MongoDB", "Bootstrap", "CSS"],
+    link: "https://github.com/nirajbawa/Dynamic-Portfolio-Web-App",
+    liveUrl: "https://nirajbawa.onrender.com/",
+    category: "Dynamic Portal",
+    aspectClass: "lg:h-[26rem]",
+  },
+  "QR Attendance": {
+    image: qrAttendanceMain,
+    abstract: "A lightweight Flask-based academic attendance scanner and student database manager. Employs pyqrcode engines to generate instant unique identifiers for direct QR scan captures, updating secure relational MySQL record banks instantly for digitized classroom sheets.",
+    techStack: ["Flask", "MySQL", "Python", "pyqrcode", "HTML5", "Bootstrap"],
+    link: "https://github.com/nirajbawa/QR-Attendance",
+    liveUrl: "https://nirajbava.pythonanywhere.com/",
+    category: "Web & IoT Utility",
+    aspectClass: "lg:h-[18rem]",
+  },
+  "Fruit Selling Site": {
+    image: fruitSellingMain,
+    abstract: "An elegant, interactive storefront landing page associated with the Maharashtra State Board of Technical Education (MSBTE) showcase. Built with pure HTML5, CSS3, and JavaScript, displaying vibrant, high-contrast assets, custom typography systems, and high-performance fluid hover animations.",
+    techStack: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "MSBTE Associated"],
+    link: "https://github.com/nirajbawa/fruit-selling-site-landing-page",
+    liveUrl: "https://nirajbawa.github.io/fruit-selling-site-landing-page/",
+    category: "UI/UX Landing Page",
+    aspectClass: "lg:h-[20rem]",
+  },
+  "PDF 2 Audio Converter": {
+    image: pdf2audioMain,
+    abstract: "A feature-rich Flask Progressive Web App (PWA) that converts uploaded PDF files into clean audio books, plain text downloads, or images. Integrates highly accurate Tesseract OCR scanning, gTTS translation synthesis, and local service workers to provide robust offline-first functionality.",
+    techStack: ["Flask", "Tesseract OCR", "gTTS", "Service Workers PWA", "Bootstrap", "Python"],
+    link: "https://github.com/nirajbawa/pdf2audio",
+    liveUrl: "https://pdf2audio.pythonanywhere.com/",
+    category: "SaaS Utility PWA",
+    aspectClass: "lg:h-[24rem]",
+  },
+  "Course Selling Web App": {
+    image: courseSellingMain,
+    abstract: "An E-learning educational marketplace built using Flask and MySQL. Enables verified tutors to manage, publish, and sell courses, featuring standard interactive checkouts using Instamojo Payment APIs, structured course tables, and secure multi-role student access controls.",
+    techStack: ["Flask", "MySQL", "Instamojo API", "HTML5", "CSS3", "Python"],
+    link: "https://github.com/nirajbawa/course-selling-web-app",
+    liveUrl: "https://superwebs.pythonanywhere.com/",
+    category: "E-Commerce EdTech",
+    aspectClass: "lg:h-[28rem]",
+  },
+  "Covid Victim Counter": {
+    image: covidCounterMain,
+    abstract: "A highly responsive real-time statistical dashboard tracking active COVID-19 pandemic spreads in India. Subscribes dynamically to the Covid19India API to render state-wise active count breakdowns, historical recovery rates, and mortality rates inside a custom modern visual interface.",
+    techStack: ["HTML5", "CSS3", "JavaScript", "Covid19India API", "Dynamic Charts"],
+    link: "https://github.com/nirajbawa/covid-victim-counter",
+    liveUrl: "https://nirajbawa.github.io/covid-victim-counter/",
+    category: "Real-Time Tracking",
+    aspectClass: "lg:h-[18rem]",
+  },
+  "TurfSpot": {
+    image: turfSpotMain,
+    abstract: "A premium, fully featured multi-tenant sports turf booking SaaS application built on the MERN stack. Integrates interactive calendar slot matrices, real-time Razorpay checkout logs, automated mail templates with secure QR codes, Recharts analytics boards, and secure multi-role admin/owner portals.",
+    techStack: ["React.js", "Redux Toolkit", "Node.js", "Express.js", "MongoDB", "Razorpay", "Recharts"],
+    link: "https://github.com/nirajbawa/TurfTown",
+    liveUrl: "https://turf-spot.vercel.app/",
+    category: "Booking SaaS Platform",
+    aspectClass: "lg:h-[30rem]",
   },
 };
 
@@ -325,6 +417,15 @@ const titleToSlugMap: Record<string, string> = {
   "ANAV – AUTONOMOUS DRONE": "anav-autonomous-drone",
   "RAKSHAK AI IVR – MULTILINGUAL VOICE ASSISTANT": "rakshak-ai-ivr-multilingual-voice-assistant",
   "US-AFRICA INDOOR MAPPING": "us-africa-indoor-mapping",
+  "INews Android App": "inews-android-app",
+  "Weather App Using React": "weather-app-using-react",
+  "Dynamic Portfolio Web Application": "dynamic-portfolio-web-application",
+  "QR Attendance": "qr-attendance",
+  "Fruit Selling Site": "fruit-selling-site",
+  "PDF 2 Audio Converter": "pdf-2-audio-converter",
+  "Course Selling Web App": "course-selling-web-app",
+  "Covid Victim Counter": "covid-victim-counter",
+  "TurfSpot": "turfspot",
 };
 
 export function Projects() {
@@ -388,6 +489,7 @@ export function Projects() {
       >
         <Link
           href={`/projects/${slug}`}
+          scroll={false}
           className="absolute inset-0 z-40"
           aria-label={`View ${project.title}`}
         />
@@ -518,7 +620,7 @@ export function Projects() {
                 onClick={handleShowMore}
                 className="px-5 py-2.5 rounded-xl border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-xs font-bold font-mono uppercase tracking-wider transition-all duration-300 flex items-center gap-2 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
               >
-                Show More Projects
+                Show More Projects ({projects.length})
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4 animate-bounce">
                   <path d="M19 9l-7 7-7-7" />
                 </svg>

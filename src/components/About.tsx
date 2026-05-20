@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { cvData } from "@/data/cv";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import developerAboutImg from "@/assets/images/developer-hero-img.png";
 
@@ -159,6 +159,8 @@ const getOrbitPath = (startAngleDegrees: number, Rx = 12.8, Ry = 3.8, Rz = 32) =
 
 export function About() {
   const { personalInfo, summary } = cvData;
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
 
   // Generate mathematically perfect elliptical paths for the 8 tech badges
   const dockerPath = getOrbitPath(0);
@@ -170,10 +172,9 @@ export function About() {
   const tsPath = getOrbitPath(270);
   const jsPath = getOrbitPath(315);
 
-
-
   return (
     <section
+      ref={sectionRef}
       id="about"
       className="relative min-h-screen flex items-center justify-center border-t border-border/40 py-12 md:py-24 px-0 sm:px-6 overflow-hidden bg-secondary/5"
     >
@@ -209,9 +210,9 @@ export function About() {
               >
                 {/* Futuristic Cyber Grid & Glowing Frame Plate participating perfectly in 3D space */}
                 <motion.div
-                  animate={{
+                  animate={isInView ? {
                     rotate: [0, 360],
-                  }}
+                  } : {}}
                   transition={{
                     duration: 40,
                     repeat: Infinity,
@@ -281,12 +282,12 @@ export function About() {
               
               {/* 1. Docker Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: dockerPath.x,
                   y: dockerPath.y,
                   z: dockerPath.z,
                   scale: dockerPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -298,12 +299,12 @@ export function About() {
 
               {/* 2. Python Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: pythonPath.x,
                   y: pythonPath.y,
                   z: pythonPath.z,
                   scale: pythonPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -315,12 +316,12 @@ export function About() {
 
               {/* 3. FastAPI Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: fastApiPath.x,
                   y: fastApiPath.y,
                   z: fastApiPath.z,
                   scale: fastApiPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -332,12 +333,12 @@ export function About() {
 
               {/* 4. React Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: reactPath.x,
                   y: reactPath.y,
                   z: reactPath.z,
                   scale: reactPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -349,12 +350,12 @@ export function About() {
 
               {/* 5. AWS Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: awsPath.x,
                   y: awsPath.y,
                   z: awsPath.z,
                   scale: awsPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -366,12 +367,12 @@ export function About() {
 
               {/* 6. LangChain Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: langchainPath.x,
                   y: langchainPath.y,
                   z: langchainPath.z,
                   scale: langchainPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -383,12 +384,12 @@ export function About() {
 
               {/* 7. TypeScript Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: tsPath.x,
                   y: tsPath.y,
                   z: tsPath.z,
                   scale: tsPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -400,12 +401,12 @@ export function About() {
 
               {/* 8. JavaScript Badge */}
               <motion.div
-                animate={{
+                animate={isInView ? {
                   x: jsPath.x,
                   y: jsPath.y,
                   z: jsPath.z,
                   scale: jsPath.scale
-                }}
+                } : {}}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
