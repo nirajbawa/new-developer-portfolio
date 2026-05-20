@@ -170,8 +170,8 @@ export function Hero() {
     
     // Right-Side strictly configured (FastAPI, Redis, MERN)
     { name: "FastAPI", icon: <FastApiIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[-10px] right-[70px] sm:top-[-20px] sm:right-[55px] md:top-[-20px] md:right-[60px] lg:top-[-20px] lg:right-[55px]", delay: 0.95 },
-    { name: "Python", icon: <PythonIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] right-[20px] sm:top-[85px] sm:right-[-15px] md:top-[90px] md:right-[-20px] lg:top-[90px] lg:right-[25px]", delay: 1.10 },
-    { name: "MERN", icon: <MernIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] right-[10px] sm:top-[200px] sm:right-[-25px] md:top-[210px] md:right-[30px] lg:top-[210px] lg:right-[35px]", delay: 1.25 },
+    { name: "Python", icon: <PythonIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[75px] right-[20px] sm:top-[85px] sm:right-[-15px] md:top-[90px] md:right-[-20px] lg:top-[90px] lg:right-[-25px]", delay: 1.10 },
+    { name: "MERN", icon: <MernIcon className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />, pos: "top-[180px] right-[10px] sm:top-[200px] sm:right-[-25px] md:top-[210px] md:right-[-30px] lg:top-[210px] lg:right-[-35px]", delay: 1.25 },
   ];
 
   return (
