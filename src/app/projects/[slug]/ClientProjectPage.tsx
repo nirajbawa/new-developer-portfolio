@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProjectDetail, projectDetailsList } from "@/data/projectDetails";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Portal } from "@/components/Portal";
 
 interface ClientProjectPageProps {
   project: ProjectDetail;
@@ -14,6 +15,17 @@ interface ClientProjectPageProps {
 export default function ClientProjectPage({ project }: ClientProjectPageProps) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+
+  useEffect(() => {
+    if (isZoomed) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isZoomed]);
 
   const prevImage = () => {
     setActiveImageIndex((prev) =>
@@ -499,35 +511,37 @@ export default function ClientProjectPage({ project }: ClientProjectPageProps) {
       {/* Lightbox / Zoomed image Modal overlay */}
       <AnimatePresence>
         {isZoomed && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsZoomed(false)}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
-          >
-            <button
+          <Portal>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsZoomed(false)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/20"
-              aria-label="Close zoomed view"
+              className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
+              <button
+                onClick={() => setIsZoomed(false)}
+                className="absolute top-6 right-6 w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/20"
+                aria-label="Close zoomed view"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
 
-            <div
-              className="relative w-full max-w-[85vw] max-h-[85vh] aspect-[16/10] sm:aspect-[16/9]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={project.carouselImages[activeImageIndex]}
-                alt={project.title}
-                fill
-                className="object-contain"
-              />
-            </div>
-          </motion.div>
+              <div
+                className="relative w-full max-w-[85vw] max-h-[80dvh] aspect-[16/10] sm:aspect-[16/9]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={project.carouselImages[activeImageIndex]}
+                  alt={project.title}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+          </Portal>
         )}
       </AnimatePresence>
     </div>

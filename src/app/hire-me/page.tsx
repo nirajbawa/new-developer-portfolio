@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Portal } from "@/components/Portal";
 import { cvData } from "@/data/cv";
 
 // --- Custom Icons ---
@@ -126,7 +127,7 @@ function HireModal({ plan, onClose }: { plan: PlanType; onClose: () => void }) {
   };
 
   return (
-    <AnimatePresence>
+    <Portal>
       <motion.div
         className="fixed inset-0 z-[100] flex items-center justify-center p-4"
         initial={{ opacity: 0 }}
@@ -143,60 +144,57 @@ function HireModal({ plan, onClose }: { plan: PlanType; onClose: () => void }) {
 
         {/* Modal Panel (Theme-Adaptive bg-card and border-border) */}
         <motion.div
-          className="relative w-full max-w-md rounded-2xl border border-border bg-card shadow-2xl overflow-hidden z-10 text-foreground"
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          className="relative w-full max-w-md max-h-[80dvh] overflow-y-auto rounded-2xl bg-card border border-border text-foreground shadow-2xl p-6 sm:p-8 space-y-6 z-10"
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          transition={{ type: "spring", duration: 0.5 }}
         >
-          {/* Theme Gradient Accent Top */}
-          <div
-            className={`h-1 w-full bg-gradient-to-r ${
-              plan === "consultancy"
-                ? "from-cyan-500 to-blue-500"
+          {/* Close button inside modal panel */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-secondary/80 text-muted-foreground hover:text-foreground transition-all border border-transparent hover:border-border/40"
+            aria-label="Close modal"
+          >
+            <CloseIcon />
+          </button>
+
+          {/* Form Header */}
+          <div className="text-left space-y-1 sm:space-y-1.5 font-sans">
+            <span className="text-[0.65rem] font-mono font-bold text-primary uppercase tracking-widest">
+              Hire request
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight">
+              {plan === "consultancy"
+                ? "Request Consultancy"
                 : plan === "mentorship"
-                ? "from-blue-400 to-indigo-500"
-                : "from-indigo-500 to-blue-600"
-            }`}
-          />
+                ? "Request Mentorship"
+                : "Request Project Collaboration"}
+            </h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Fill in your details below and I'll get back to you within 24 hours.
+            </p>
+          </div>
 
-          <div className="p-6 md:p-8 font-sans">
-            {/* Header */}
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <p className="text-xs font-semibold text-cyan-500 dark:text-cyan-400 mb-1 uppercase tracking-wider">
-                  Enquiry Request
-                </p>
-                <h3 className="text-lg font-bold tracking-tight">
-                  {planTitle}
-                </h3>
-              </div>
-              <button
-                onClick={onClose}
-                className="p-1.5 rounded-lg bg-secondary/40 border border-border/40 text-muted-foreground hover:text-foreground transition-all hover:bg-secondary"
-              >
-                <CloseIcon />
-              </button>
-            </div>
-
+          <div className="relative">
             {submitted ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-10 space-y-4"
+                className="text-center py-8 space-y-4 font-sans"
               >
-                <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(6,182,212,0.1)]">
-                  <svg className="w-7 h-7 text-cyan-500 dark:text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
+                <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center mx-auto text-xl font-bold">
+                  ✓
                 </div>
-                <h4 className="text-lg font-bold text-cyan-500 dark:text-cyan-400">Request Received!</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">
-                  We will contact you just few hours once free.
-                </p>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold uppercase text-foreground">Inquiry Sent Successfully!</h4>
+                  <p className="text-xs text-muted-foreground">
+                    Thank you for your request. I will reach out to you soon.
+                  </p>
+                </div>
                 <button
                   onClick={onClose}
-                  className="mt-6 px-6 py-2 rounded-lg bg-secondary border border-border text-foreground text-xs font-semibold uppercase tracking-wider hover:bg-secondary/85 transition-all"
+                  className="px-4 py-2 bg-secondary text-foreground rounded-lg text-xs font-semibold hover:bg-secondary/80 transition-colors"
                 >
                   Close Window
                 </button>
@@ -287,13 +285,25 @@ function HireModal({ plan, onClose }: { plan: PlanType; onClose: () => void }) {
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </Portal>
   );
 }
 
 // --- Page Component ---
 export default function HireMePage() {
   const [activePlan, setActivePlan] = useState<PlanType>(null);
+
+  useEffect(() => {
+    if (activePlan) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activePlan]);
+
   const { personalInfo } = cvData;
 
   return (
@@ -558,9 +568,11 @@ export default function HireMePage() {
       <Footer />
 
       {/* Pop-up form Modal */}
-      {activePlan && (
-        <HireModal plan={activePlan} onClose={() => setActivePlan(null)} />
-      )}
+      <AnimatePresence>
+        {activePlan && (
+          <HireModal plan={activePlan} onClose={() => setActivePlan(null)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

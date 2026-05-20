@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cvData, WorkExperience } from "@/data/cv";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { useAnimateBypass } from "@/app/providers";
+import { Portal } from "@/components/Portal";
 
 // Company logo imports
 import inventursLogo from "@/assets/images/inventurs_logo.jpg";
@@ -59,132 +60,134 @@ function ExperienceModal({
   const companyUrl = meta?.url || link || "#";
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-      onClick={onClose}
-    >
-      {/* Blurred Backdrop */}
-      <div className="absolute inset-0 bg-background/70 backdrop-blur-xl" />
-
-      {/* Modal Card Content */}
+    <Portal>
       <motion.div
-        initial={{ opacity: 0, scale: 0.92, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.92, y: 20 }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border border-accent-foreground/15 bg-background/90 backdrop-blur-2xl shadow-2xl p-6 sm:p-8 space-y-6"
-        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+        onClick={onClose}
       >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg border border-border/50 bg-background/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all duration-200"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
+        {/* Blurred Backdrop */}
+        <div className="absolute inset-0 bg-background/70 backdrop-blur-xl" />
 
-        {/* Company Header */}
-        <div className="flex items-center gap-4">
-          <a
-            href={companyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden border border-border/50 bg-white p-2.5 flex items-center justify-center shadow-md hover:border-primary/50 transition-all duration-300"
+        {/* Modal Card Content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 20 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-2xl max-h-[80dvh] overflow-y-auto rounded-2xl border border-accent-foreground/15 bg-background/90 backdrop-blur-2xl shadow-2xl p-6 sm:p-8 space-y-6"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 w-8 h-8 rounded-lg border border-border/50 bg-background/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all duration-200"
           >
-            {meta?.logo ? (
-              <Image
-                src={meta.logo}
-                alt={`${company} logo`}
-                width={56}
-                height={56}
-                className="w-full h-full object-contain"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-lg font-bold rounded-lg">
-                {company.charAt(0)}
-              </div>
-            )}
-          </a>
-          <div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Company Header */}
+          <div className="flex items-center gap-4">
             <a
               href={companyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              className="flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden border border-border/50 bg-white p-2.5 flex items-center justify-center shadow-md hover:border-primary/50 transition-all duration-300"
             >
-              {company}
+              {meta?.logo ? (
+                <Image
+                  src={meta.logo}
+                  alt={`${company} logo`}
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-primary/10 text-primary text-lg font-bold rounded-lg">
+                  {company.charAt(0)}
+                </div>
+              )}
             </a>
-            <p className="text-xs text-muted-foreground">
-              {role}
-            </p>
-          </div>
-        </div>
-
-        {/* Position Details */}
-        <div className="space-y-5">
-          <div className="relative pl-5 border-l-2 border-primary/30">
-            {/* Position Dot */}
-            <div className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-primary" />
-            
-            <div className="space-y-2">
-              <div>
-                <h4 className="text-sm font-bold text-foreground">{role}</h4>
-                <p className="text-[0.65rem] font-mono text-muted-foreground/70 uppercase tracking-wider">
-                  {duration} · {location}
-                </p>
-              </div>
-
-              {/* Bullet Points */}
-              <ul className="space-y-1.5">
-                {bullets.map((bullet, bIdx) => (
-                  <li key={bIdx} className="flex gap-2 text-xs text-muted-foreground leading-relaxed">
-                    <span className="mt-1.5 flex-shrink-0 w-1 h-1 rounded-full bg-primary/60" />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+            <div>
+              <a
+                href={companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              >
+                {company}
+              </a>
+              <p className="text-xs text-muted-foreground">
+                {role}
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* Tech Stack */}
-        {meta?.techStack && (
-          <div className="flex flex-wrap gap-1.5 pt-2 border-t border-border/30">
-            {meta.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-2.5 py-1 text-[0.55rem] font-mono font-medium rounded-full border border-primary/20 bg-primary/5 text-primary uppercase tracking-wider"
-              >
-                {tech}
-              </span>
-            ))}
+          {/* Position Details */}
+          <div className="space-y-5">
+            <div className="relative pl-5 border-l-2 border-primary/30">
+              {/* Position Dot */}
+              <div className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-primary" />
+              
+              <div className="space-y-2">
+                <div>
+                  <h4 className="text-sm font-bold text-foreground">{role}</h4>
+                  <p className="text-[0.65rem] font-mono text-muted-foreground/70 uppercase tracking-wider">
+                    {duration} · {location}
+                  </p>
+                </div>
+
+                {/* Bullet Points */}
+                <ul className="space-y-1.5">
+                  {bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex gap-2 text-xs text-muted-foreground leading-relaxed">
+                      <span className="mt-1.5 flex-shrink-0 w-1 h-1 rounded-full bg-primary/60" />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-        )}
 
-        {/* Certificate Button */}
-        {link && link !== "#" && (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold font-mono uppercase tracking-wider hover:bg-primary/20 hover:border-primary/50 transition-all duration-200"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <path d="M14 2v6h6" />
-              <path d="M16 13H8M16 17H8M10 9H8" />
-            </svg>
-            View Certificate
-          </a>
-        )}
+          {/* Tech Stack */}
+          {meta?.techStack && (
+            <div className="flex flex-wrap gap-1.5 pt-2 border-t border-border/30">
+              {meta.techStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2.5 py-1 text-[0.55rem] font-mono font-medium rounded-full border border-primary/20 bg-primary/5 text-primary uppercase tracking-wider"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Certificate Button */}
+          {link && link !== "#" && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-bold font-mono uppercase tracking-wider hover:bg-primary/20 hover:border-primary/50 transition-all duration-200"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6" />
+                <path d="M16 13H8M16 17H8M10 9H8" />
+              </svg>
+              View Certificate
+            </a>
+          )}
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </Portal>
   );
 }
 
@@ -193,6 +196,17 @@ export function Experience() {
   const bypass = useAnimateBypass();
   const [showAll, setShowAll] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState<WorkExperience | null>(null);
+
+  useEffect(() => {
+    if (selectedExperience) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedExperience]);
 
   // Default to showing only 4 timeline events at single time
   const visibleExperiences = showAll ? experience : experience.slice(0, 4);

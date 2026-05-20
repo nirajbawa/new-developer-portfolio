@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cvData, Education as EducationType } from "@/data/cv";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useAnimateBypass } from "@/app/providers";
+import { Portal } from "@/components/Portal";
 
 // Image Imports
 import kkwaghLogoImg from "@/assets/images/kk-wagh-logo.png";
@@ -117,88 +118,98 @@ function EducationModal({
   const meta = institutionMeta[institution];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-      onClick={onClose}
-    >
-      {/* Blur Backdrop */}
-      <div className="absolute inset-0 bg-background/75 backdrop-blur-xl" />
-
-      {/* Modal Card Content */}
+    <Portal>
       <motion.div
-        initial={{ opacity: 0, scale: 0.92, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.92, y: 20 }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl border border-accent-foreground/15 bg-background/90 backdrop-blur-2xl shadow-2xl p-6 sm:p-8 space-y-6"
-        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+        onClick={onClose}
       >
-        {/* Header Row (Dedicated Close Area) */}
-        <div className="flex justify-between items-center w-full pb-2">
-          <span className="text-[0.65rem] font-mono font-bold text-muted-foreground uppercase tracking-widest">
-            Institution Details
-          </span>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-lg border border-border/50 bg-background/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all duration-200"
-            aria-label="Close modal"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
+        {/* Blur Backdrop */}
+        <div className="absolute inset-0 bg-background/75 backdrop-blur-xl" />
 
-        {/* Top carousel area */}
-        {meta?.images && (
-          <div className="w-full aspect-[16/9] rounded-xl overflow-hidden relative">
-            <ImageCarousel images={meta.images} alt={institution} />
-          </div>
-        )}
-
-        {/* Headers and text detail info */}
-        <div className="flex justify-between items-start gap-4">
-          <div className="space-y-1.5">
-            <h3 className="text-xl font-extrabold text-foreground tracking-tight leading-tight">{institution}</h3>
-            <p className="text-xs font-mono text-muted-foreground">{details}</p>
-            <p className="text-sm font-bold text-primary">{degree}</p>
-            <span className="inline-block px-2.5 py-0.5 text-[0.6rem] font-mono rounded-full border border-primary/20 bg-primary/5 text-primary uppercase tracking-wider">
-              {duration} · {location}
+        {/* Modal Card Content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 20 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-2xl max-h-[80dvh] overflow-y-auto rounded-2xl border border-accent-foreground/15 bg-background/90 backdrop-blur-2xl shadow-2xl p-6 sm:p-8 space-y-6"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header Row (Dedicated Close Area) */}
+          <div className="flex justify-between items-center w-full pb-2">
+            <span className="text-[0.65rem] font-mono font-bold text-muted-foreground uppercase tracking-widest">
+              Institution Details
             </span>
+            <button
+              onClick={onClose}
+              className="w-8 h-8 rounded-lg border border-border/50 bg-background/50 flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all duration-200"
+              aria-label="Close modal"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
           </div>
 
-          {/* Circular logo */}
-          {meta?.logo && (
-            <div className="w-14 h-14 flex-shrink-0 relative overflow-hidden bg-white rounded-xl border border-border/40 p-1 flex items-center justify-center">
-              <Image
-                src={meta.logo}
-                alt={`${institution} logo`}
-                width={52}
-                height={52}
-                className="object-contain"
-              />
+          {/* Top carousel area */}
+          {meta?.images && (
+            <div className="w-full aspect-[16/9] rounded-xl overflow-hidden relative">
+              <ImageCarousel images={meta.images} alt={institution} />
             </div>
           )}
-        </div>
 
-        {/* Detailed Points */}
-        <div className="space-y-3 pt-4 border-t border-border/30">
-          <h4 className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-widest">Academic Highlights</h4>
-          <ul className="space-y-2">
-            {bullets.map((bullet, idx) => (
-              <li key={idx} className="flex gap-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                <span className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/70 animate-pulse" />
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+          {/* Institutional details layout */}
+          <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4 text-left">
+            <div className="space-y-1 sm:max-w-[70%]">
+              <h3 className="text-lg font-bold text-foreground leading-tight tracking-tight uppercase">
+                {institution}
+              </h3>
+              <p className="text-xs sm:text-sm font-semibold text-primary uppercase tracking-wide">
+                {degree}
+              </p>
+              <p className="text-[0.65rem] font-mono text-muted-foreground/75 uppercase tracking-wider">
+                {duration} · {location}
+              </p>
+              {details && (
+                <p className="text-[0.65rem] font-mono text-emerald-500/90 dark:text-emerald-400/90 font-bold uppercase tracking-wider pt-0.5">
+                  Result: {details}
+                </p>
+              )}
+            </div>
+
+            {/* Floating Right Corner Institutional Mini-Logo */}
+            {meta?.logo && (
+              <div className="flex-shrink-0 w-16 h-16 rounded-2xl overflow-hidden border border-border bg-white/70 backdrop-blur-md p-2 flex items-center justify-center shadow-lg self-start">
+                <Image
+                  src={meta.logo}
+                  alt={`${institution} logo`}
+                  width={52}
+                  height={52}
+                  className="object-contain"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Detailed Points */}
+          <div className="space-y-3 pt-4 border-t border-border/30">
+            <h4 className="text-xs font-mono font-bold text-muted-foreground uppercase tracking-widest">Academic Highlights</h4>
+            <ul className="space-y-2">
+              {bullets.map((bullet, idx) => (
+                <li key={idx} className="flex gap-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <span className="mt-2 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/70 animate-pulse" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </Portal>
   );
 }
 
@@ -207,6 +218,17 @@ export function Education() {
   const bypass = useAnimateBypass();
   const [showAll, setShowAll] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState<EducationType | null>(null);
+
+  useEffect(() => {
+    if (selectedSchool) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedSchool]);
 
   // Layout requires latest school first on the left, other two stacked on the right
   // KK Wagh (idx 0) is latest, Jamia (idx 1) is horizontal, Nemsushil (idx 2) is reversed horizontal
