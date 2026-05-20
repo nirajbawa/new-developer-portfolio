@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cvData, Education as EducationType } from "@/data/cv";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useAnimateBypass } from "@/app/providers";
 
 // Image Imports
 import kkwaghLogoImg from "@/assets/images/kk-wagh-logo.png";
@@ -203,6 +204,7 @@ function EducationModal({
 
 export function Education() {
   const { education } = cvData;
+  const bypass = useAnimateBypass();
   const [showAll, setShowAll] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState<EducationType | null>(null);
 
@@ -228,7 +230,7 @@ export function Education() {
       <div className="container mx-auto px-2 sm:px-6 relative z-10 w-full max-w-[80rem]">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -252,7 +254,7 @@ export function Education() {
           {/* LEFT COLUMN: Large Prominent Vertical Card (Latest Institute First) */}
           {latestSchool && (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={bypass ? false : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -324,7 +326,7 @@ export function Education() {
               return (
                 <motion.div
                   key={school.institution}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={bypass ? false : { opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
@@ -397,7 +399,7 @@ export function Education() {
         {/* Dynamic Expand Show Remaining Button (Parity with blueprint instructions) */}
         {education.length > 3 && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={bypass ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="flex justify-end mt-12"

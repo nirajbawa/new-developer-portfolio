@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
+import { useAnimateBypass } from "@/app/providers";
 
 // Image Imports
 import matrixLogo from "@/assets/images/team_matrixs_logo.jpg";
@@ -41,6 +42,7 @@ const clubsList: Club[] = [
 
 export default function Clubs() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const bypass = useAnimateBypass();
 
   // Initially show 2 clubs
   const visibleClubs = isExpanded ? clubsList : clubsList.slice(0, 2);
@@ -70,7 +72,7 @@ export default function Clubs() {
       <div className="container mx-auto px-4 relative max-w-6xl">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -91,7 +93,7 @@ export default function Clubs() {
         {/* Clubs Grid */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={bypass ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"

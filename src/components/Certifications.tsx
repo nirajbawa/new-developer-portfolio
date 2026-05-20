@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
+import { useAnimateBypass } from "@/app/providers";
 
 // Image Imports
 import postmanLogo from "@/assets/images/postman-icon.png";
@@ -109,6 +110,7 @@ const certificationsList: Certification[] = [
 export default function Certifications() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [mobileVisibleCount, setMobileVisibleCount] = useState(3);
+  const bypass = useAnimateBypass();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -142,7 +144,7 @@ export default function Certifications() {
       <div className="container mx-auto px-2 sm:px-6 relative z-10 w-full max-w-[80rem]">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -163,7 +165,7 @@ export default function Certifications() {
         {/* Bento Grid Layout matching user blueprint */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={bypass ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
           className="hidden lg:grid grid-cols-3 gap-6 items-start"
@@ -527,7 +529,7 @@ export default function Certifications() {
               return (
                 <motion.div
                   key={cert.id}
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={bypass ? false : { y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 100 }}
@@ -574,7 +576,7 @@ export default function Certifications() {
               return (
                 <motion.div
                   key={cert.id}
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={bypass ? false : { y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 100 }}

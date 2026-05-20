@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useAnimateBypass } from "@/app/providers";
 
 // Image Imports with exact filesystem spellings
 import policeImg from "@/assets/images/extra-police-assitance-1.jpeg";
@@ -73,6 +74,7 @@ const puzzleClasses = [
 
 export default function ExtraCurricular() {
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
+  const bypass = useAnimateBypass();
 
   const handleCardClick = (id: number) => {
     setActiveCardId((prev) => (prev === id ? null : id));
@@ -107,7 +109,7 @@ export default function ExtraCurricular() {
       <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full max-w-6xl">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -128,7 +130,7 @@ export default function ExtraCurricular() {
         {/* Puzzle Bento Grid */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={bypass ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"

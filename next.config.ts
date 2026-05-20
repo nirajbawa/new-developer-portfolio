@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const allowedOrigins: string[] = ["localhost:3000"];
 
 // Add fallback for current active ngrok tunnel
-allowedOrigins.push("f656-2409-40c2-6016-e625-8d99-78d6-5b93-c57c.ngrok-free.app");
+allowedOrigins.push("77db-2409-40c2-641c-a149-10ee-d33-e1a8-474e.ngrok-free.app");
 
 // Dynamically handle any ngrok/local network tunnels from env variables
 if (process.env.NGROK_URL) {

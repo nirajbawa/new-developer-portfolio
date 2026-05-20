@@ -5,6 +5,7 @@ import { cvData, Project as ProjectType } from "@/data/cv";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import { useAnimateBypass } from "@/app/providers";
 
 // Import project showcase images
 import rakshakMain from "@/assets/images/rakshak-0.png";
@@ -430,6 +431,7 @@ const titleToSlugMap: Record<string, string> = {
 
 export function Projects() {
   const { projects } = cvData;
+  const bypass = useAnimateBypass();
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
   // Pagination states: initially show 6, load increments of 3
@@ -476,7 +478,7 @@ export function Projects() {
 
     return (
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={bypass ? false : { opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: (idx % 3) * 0.1 }}
@@ -573,7 +575,7 @@ export function Projects() {
       <div className="container mx-auto px-2 sm:px-6 relative z-10 w-full max-w-[80rem]">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}

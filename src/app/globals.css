@@ -107,7 +107,7 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Dynamic scroll controller in providers.tsx toggles smooth behavior for anchors */
 }
 
 /* 
@@ -162,4 +162,25 @@ html {
   }
 }
 
+/* 
+ * HIGH-PERFORMANCE CONTENT VISIBILITY OPTIMIZATION
+ * Skips layout, style, and paint calculations for off-screen sections (below the fold)
+ * and the footer when scrolling very fast, ensuring maximum framerates (60/120 FPS).
+ * We exclude '#home' (the hero section) to guarantee instant initial rendering of the landing view.
+ */
+section:not(#home),
+footer#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
 
+/* 
+ * HARDWARE ACCELERATION FOR GRAPHICS RENDERER
+ * Forces layers to render on the GPU compositor thread, minimizing 
+ * recalculate style/repaint times when scrolling past 3D cards and orbital animations.
+ */
+.will-change-transform {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cvData, WorkExperience } from "@/data/cv";
 import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
+import { useAnimateBypass } from "@/app/providers";
 
 // Company logo imports
 import inventursLogo from "@/assets/images/inventurs_logo.jpg";
@@ -189,6 +190,7 @@ function ExperienceModal({
 
 export function Experience() {
   const { experience } = cvData;
+  const bypass = useAnimateBypass();
   const [showAll, setShowAll] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState<WorkExperience | null>(null);
 
@@ -210,7 +212,7 @@ export function Experience() {
       <div className="container mx-auto px-6 relative z-10 w-full max-w-[64rem]">
         {/* Section Heading & Cyber Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -252,7 +254,7 @@ export function Experience() {
                   <div className="w-full md:w-1/2 pr-0 md:pr-12 md:pl-0 pl-12 flex md:justify-end justify-start">
                     {isEven ? (
                       <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={bypass ? false : { opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
@@ -332,7 +334,7 @@ export function Experience() {
                   <div className="w-full md:w-1/2 pl-12 md:pl-12 pr-0 flex justify-start">
                     {!isEven ? (
                       <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={bypass ? false : { opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
@@ -412,7 +414,7 @@ export function Experience() {
         {/* Expand / Collapse Action Trigger */}
         {experience.length > 4 && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={bypass ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="flex justify-center mt-14"

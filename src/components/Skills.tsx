@@ -3,9 +3,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cvData } from "@/data/cv";
+import { useAnimateBypass } from "@/app/providers";
 
 export default function Skills() {
   const { skills } = cvData;
+  const bypass = useAnimateBypass();
 
   return (
     <section
@@ -22,7 +24,7 @@ export default function Skills() {
       <div className="container mx-auto px-6 relative z-10 w-full max-w-[64rem]">
         {/* Section Heading & Cyber Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={bypass ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -47,7 +49,7 @@ export default function Skills() {
 
           {/* Root Node on Axis */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={bypass ? false : { opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5 }}
@@ -88,7 +90,7 @@ export default function Skills() {
                         {/* Mobile Horizontal Connector */}
                         <div className="md:hidden absolute left-[24px] top-8 w-10 h-[2px] bg-primary/30 z-0" />
                         <motion.div
-                          initial={{ opacity: 0, x: "var(--slide-from-x, -30px)", y: 10 }}
+                          initial={bypass ? false : { opacity: 0, x: "var(--slide-from-x, -30px)", y: 10 }}
                           whileInView={{ opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -126,7 +128,7 @@ export default function Skills() {
                         <div className="md:hidden absolute left-[24px] top-8 w-10 h-[2px] bg-primary/30 z-0" />
 
                         <motion.div
-                          initial={{ opacity: 0, x: "var(--slide-from-x, 30px)", y: 10 }}
+                          initial={bypass ? false : { opacity: 0, x: "var(--slide-from-x, 30px)", y: 10 }}
                           whileInView={{ opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
                           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}

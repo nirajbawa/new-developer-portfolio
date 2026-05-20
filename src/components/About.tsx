@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import developerAboutImg from "@/assets/images/developer-hero-img.png";
+import { useAnimateBypass } from "@/app/providers";
 
 // High-Fidelity SVG Brand Icons for Social Buttons
 const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -161,6 +162,7 @@ export function About() {
   const { personalInfo, summary } = cvData;
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const bypass = useAnimateBypass();
 
   // Generate mathematically perfect elliptical paths for the 8 tech badges
   const dockerPath = getOrbitPath(0);
@@ -200,38 +202,181 @@ export function About() {
               
 
 
-              {/* Symmetrical Cyber Plate Backdrop (ALWAYS behind the image) */}
-              <div
-                className="absolute inset-[6%_8%_24%_8%] z-0 pointer-events-none"
-                style={{
-                  transform: "translateZ(-80px)",
-                  transformStyle: "preserve-3d"
-                }}
-              >
-                {/* Futuristic Cyber Grid & Glowing Frame Plate participating perfectly in 3D space */}
-                <motion.div
-                  animate={isInView ? {
-                    rotate: [0, 360],
-                  } : {}}
-                  transition={{
-                    duration: 40,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                  className="w-full h-full rounded-full border border-primary/25 dark:border-primary/15 bg-gradient-to-br from-primary/10 via-background/80 to-transparent shadow-none dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.35)] relative overflow-hidden flex items-center justify-center"
-                  style={{
-                    backfaceVisibility: "hidden",
-                    WebkitBackfaceVisibility: "hidden"
-                  }}
-                >
-                  {/* Internal rotating grid lines */}
-                  <div className="absolute inset-0 bg-[radial-gradient(#80808012_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
+              {/* Symmetrical Cyber Plate Backdrop & Orbiting Badges (ONLY rendered when in viewport) */}
+              {isInView && (
+                <>
+                  {/* Symmetrical Cyber Plate Backdrop (ALWAYS behind the image) */}
+                  <div
+                    className="absolute inset-[6%_8%_24%_8%] z-0 pointer-events-none"
+                    style={{
+                      transform: "translateZ(-80px)",
+                      transformStyle: "preserve-3d"
+                    }}
+                  >
+                    {/* Futuristic Cyber Grid & Glowing Frame Plate participating perfectly in 3D space */}
+                    <motion.div
+                      animate={{
+                        rotate: [0, 360],
+                      }}
+                      transition={{
+                        duration: 40,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                      className="w-full h-full rounded-full border border-primary/25 dark:border-primary/15 bg-gradient-to-br from-primary/10 via-background/80 to-transparent shadow-none dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.35)] relative overflow-hidden flex items-center justify-center will-change-transform"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden"
+                      }}
+                    >
+                      {/* Internal rotating grid lines */}
+                      <div className="absolute inset-0 bg-[radial-gradient(#80808012_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
+                      
+                      {/* Glowing orbital lines */}
+                      <div className="absolute w-[85%] h-[85%] rounded-full border border-dashed border-primary/30 dark:border-primary/20 animate-[spin_60s_linear_infinite]" />
+                      <div className="absolute w-[70%] h-[70%] rounded-full border border-dotted border-accent-foreground/20 dark:border-accent-foreground/15 animate-[spin_30s_linear_infinite_reverse]" />
+                    </motion.div>
+                  </div>
+
+                  {/* DIRECT SIBLING BADGES FOR TRUE 3D WEAVING (distortion-free, centered around model tummy, weaving back and front) */}
                   
-                  {/* Glowing orbital lines */}
-                  <div className="absolute w-[85%] h-[85%] rounded-full border border-dashed border-primary/30 dark:border-primary/20 animate-[spin_60s_linear_infinite]" />
-                  <div className="absolute w-[70%] h-[70%] rounded-full border border-dotted border-accent-foreground/20 dark:border-accent-foreground/15 animate-[spin_30s_linear_infinite_reverse]" />
-                </motion.div>
-              </div>
+                  {/* 1. Docker Badge */}
+                  <motion.div
+                    animate={{
+                      x: dockerPath.x,
+                      y: dockerPath.y,
+                      z: dockerPath.z,
+                      scale: dockerPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-sky-400/60 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 cursor-pointer">
+                      <DockerIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 2. Python Badge */}
+                  <motion.div
+                    animate={{
+                      x: pythonPath.x,
+                      y: pythonPath.y,
+                      z: pythonPath.z,
+                      scale: pythonPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-yellow-400/60 hover:shadow-[0_0_15px_rgba(254,240,138,0.4)] transition-all duration-300 cursor-pointer">
+                      <PythonIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 3. FastAPI Badge */}
+                  <motion.div
+                    animate={{
+                      x: fastApiPath.x,
+                      y: fastApiPath.y,
+                      z: fastApiPath.z,
+                      scale: fastApiPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-teal-400/60 hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all duration-300 cursor-pointer">
+                      <FastApiIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 4. React Badge */}
+                  <motion.div
+                    animate={{
+                      x: reactPath.x,
+                      y: reactPath.y,
+                      z: reactPath.z,
+                      scale: reactPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300 cursor-pointer">
+                      <ReactIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 5. AWS Badge */}
+                  <motion.div
+                    animate={{
+                      x: awsPath.x,
+                      y: awsPath.y,
+                      z: awsPath.z,
+                      scale: awsPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-orange-400/60 hover:shadow-[0_0_15px_rgba(251,146,60,0.4)] transition-all duration-300 cursor-pointer">
+                      <AwsIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 6. LangChain Badge */}
+                  <motion.div
+                    animate={{
+                      x: langchainPath.x,
+                      y: langchainPath.y,
+                      z: langchainPath.z,
+                      scale: langchainPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-emerald-400/60 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)] transition-all duration-300 cursor-pointer">
+                      <LangChainIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 7. TypeScript Badge */}
+                  <motion.div
+                    animate={{
+                      x: tsPath.x,
+                      y: tsPath.y,
+                      z: tsPath.z,
+                      scale: tsPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-blue-400/60 hover:shadow-[0_0_15px_rgba(96,165,250,0.4)] transition-all duration-300 cursor-pointer">
+                      <TsIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+
+                  {/* 8. JavaScript Badge */}
+                  <motion.div
+                    animate={{
+                      x: jsPath.x,
+                      y: jsPath.y,
+                      z: jsPath.z,
+                      scale: jsPath.scale
+                    }}
+                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center will-change-transform"
+                    style={{ transformStyle: "preserve-3d" }}
+                  >
+                    <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/95 shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-yellow-400/60 hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300 cursor-pointer">
+                      <JsIcon className="h-6 w-6" />
+                    </div>
+                  </motion.div>
+                </>
+              )}
 
               {/* Transparent developer portrait photo (ALWAYS on top of the backdrop) */}
               <div
@@ -241,186 +386,40 @@ export function About() {
                   transformStyle: "preserve-3d"
                 }}
               >
-                {/* Nested animated layer for entry fade-in/scale, preventing flattening of the parent 3D plane */}
+                {/* Portrait with conditional view check unmounting/blur deactivation safety */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={bypass ? false : { opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="w-full h-full relative"
                   style={{
+                    WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+                    maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
                     backfaceVisibility: "hidden",
                     WebkitBackfaceVisibility: "hidden"
                   }}
                 >
-                  {/* Isolated mask-image container to keep parent 3D space fully composited without flattening */}
-                  <div
-                    className="w-full h-full relative"
+                  <Image
+                    src={developerAboutImg}
+                    alt="Niraj Bava About portrait"
+                    fill
+                    priority
+                    className="object-contain object-bottom filter drop-shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-transform duration-500 transform-gpu"
+                    sizes="(max-w-md) 100vw"
                     style={{
-                      maskImage: "linear-gradient(to bottom, black 72%, transparent 98%)",
-                      WebkitMaskImage: "linear-gradient(to bottom, black 72%, transparent 98%)"
+                      backfaceVisibility: "hidden",
+                      WebkitBackfaceVisibility: "hidden"
                     }}
-                  >
-                    <Image
-                      src={developerAboutImg}
-                      alt="Niraj Bava About portrait"
-                      fill
-                      priority
-                      className="object-contain object-bottom filter drop-shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-transform duration-500 transform-gpu"
-                      sizes="(max-w-md) 100vw"
-                      style={{
-                        backfaceVisibility: "hidden",
-                        WebkitBackfaceVisibility: "hidden",
-                        imageRendering: "auto"
-                      }}
-                    />
-                  </div>
+                  />
                 </motion.div>
               </div>
-
-              {/* DIRECT SIBLING BADGES FOR TRUE 3D WEAVING (distortion-free, centered around model tummy, weaving back and front) */}
-              
-              {/* 1. Docker Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: dockerPath.x,
-                  y: dockerPath.y,
-                  z: dockerPath.z,
-                  scale: dockerPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-sky-400/60 hover:shadow-[0_0_15px_rgba(56,189,248,0.4)] transition-all duration-300 cursor-pointer">
-                  <DockerIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 2. Python Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: pythonPath.x,
-                  y: pythonPath.y,
-                  z: pythonPath.z,
-                  scale: pythonPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-yellow-400/60 hover:shadow-[0_0_15px_rgba(254,240,138,0.4)] transition-all duration-300 cursor-pointer">
-                  <PythonIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 3. FastAPI Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: fastApiPath.x,
-                  y: fastApiPath.y,
-                  z: fastApiPath.z,
-                  scale: fastApiPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-teal-400/60 hover:shadow-[0_0_15px_rgba(45,212,191,0.4)] transition-all duration-300 cursor-pointer">
-                  <FastApiIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 4. React Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: reactPath.x,
-                  y: reactPath.y,
-                  z: reactPath.z,
-                  scale: reactPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-cyan-400/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300 cursor-pointer">
-                  <ReactIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 5. AWS Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: awsPath.x,
-                  y: awsPath.y,
-                  z: awsPath.z,
-                  scale: awsPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-orange-400/60 hover:shadow-[0_0_15px_rgba(251,146,60,0.4)] transition-all duration-300 cursor-pointer">
-                  <AwsIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 6. LangChain Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: langchainPath.x,
-                  y: langchainPath.y,
-                  z: langchainPath.z,
-                  scale: langchainPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-emerald-400/60 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)] transition-all duration-300 cursor-pointer">
-                  <LangChainIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 7. TypeScript Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: tsPath.x,
-                  y: tsPath.y,
-                  z: tsPath.z,
-                  scale: tsPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-blue-400/60 hover:shadow-[0_0_15px_rgba(96,165,250,0.4)] transition-all duration-300 cursor-pointer">
-                  <TsIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
-
-              {/* 8. JavaScript Badge */}
-              <motion.div
-                animate={isInView ? {
-                  x: jsPath.x,
-                  y: jsPath.y,
-                  z: jsPath.z,
-                  scale: jsPath.scale
-                } : {}}
-                transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[64%] left-[50%] w-12 h-12 -ml-6 -mt-6 pointer-events-auto flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="p-2 rounded-xl border border-white/25 dark:border-white/15 bg-background/70 backdrop-blur-md shadow-lg flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 hover:scale-110 hover:border-yellow-400/60 hover:shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300 cursor-pointer">
-                  <JsIcon className="h-6 w-6" />
-                </div>
-              </motion.div>
 
             </div>
 
           {/* RIGHT SIDE: Highly Professional & Polished Cyber Card Box */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={bypass ? false : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}

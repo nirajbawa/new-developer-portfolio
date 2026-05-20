@@ -490,6 +490,16 @@ export const cvData: CVData = {
       ],
       link: "https://drive.google.com/file/d/1lV81n56jGv-bmJqdVTA2RG0wTfxV8X-K/view?usp=drive_link",
     },
+    {
+      title: "Innov-era Hackathon",
+      role: "AI Developer & Competitor",
+      location: "Nashik",
+      duration: "Dec 2024",
+      bullets: [
+        "Competed at the Innov-era Hackathon organized by K K Wagh Institute of Engineering Education and Research. Collaborated in a 5-member team to design and build 'AnvikshAI' — an AI-powered guide app that organizes unstructured free web tutorials into clear learning roadmaps with progress tracking and daily personalized recommendations.",
+      ],
+      link: "#",
+    },
   ],
   publications: [
     {

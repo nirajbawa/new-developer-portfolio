@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Send, CheckCircle, Mail, Phone, MapPin, Star } from "lucide-react";
+import { useAnimateBypass } from "@/app/providers";
 
 // Zero-dependency direct high-fidelity inline brand SVGs
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -58,6 +59,7 @@ export default function Footer() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const bypass = useAnimateBypass();
 
   // Footer rating feedback states
   const [footerRating, setFooterRating] = useState(0);
@@ -214,7 +216,7 @@ export default function Footer() {
         {/* 3-Column Asymmetric Bento Grid Layout with reduced gaps */}
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={bypass ? false : "hidden"}
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-12 gap-4 items-stretch"
@@ -254,16 +256,16 @@ export default function Footer() {
           </motion.div>
 
           {/* COLUMN 2: Stacked Cards (Spans 4 Columns of 12) */}
-          <div className="lg:col-span-4 flex flex-col gap-4 justify-between h-full">
+          <div className="lg:col-span-4 flex flex-col gap-4 justify-between h-auto lg:h-full">
 
             {/* STACKED CARD A: Contact details only */}
             <motion.div
               variants={cardVariants}
-              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col gap-3 hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md flex-1"
+              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-5 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[11rem] flex-1"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              <div className="space-y-2.5 relative z-10">
+              <div className="space-y-3 relative z-10">
                 <div>
                   <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
                     Reach Out
@@ -274,23 +276,23 @@ export default function Footer() {
                   <div className="h-0.5 w-8 bg-primary rounded-full mt-1" />
                 </div>
 
-                <div className="space-y-2 pt-1">
+                <div className="space-y-3 pt-1">
                   <a
                     href="mailto:nirajbava222@gmail.com"
-                    className="flex items-center gap-2 text-[0.7rem] sm:text-xs font-semibold text-muted-foreground hover:text-primary transition-colors font-mono"
+                    className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-primary transition-colors font-mono break-all"
                   >
-                    <Mail className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    <Mail className="h-4 w-4 text-primary flex-shrink-0" />
                     <span>nirajbava222@gmail.com</span>
                   </a>
                   <a
                     href="tel:+919359839551"
-                    className="flex items-center gap-2 text-[0.7rem] sm:text-xs font-semibold text-muted-foreground hover:text-primary transition-colors font-mono"
+                    className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-primary transition-colors font-mono"
                   >
-                    <Phone className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    <Phone className="h-4 w-4 text-primary flex-shrink-0" />
                     <span>+91 9359839551</span>
                   </a>
-                  <div className="flex items-center gap-2 text-[0.7rem] sm:text-xs font-semibold text-muted-foreground font-mono">
-                    <MapPin className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                  <div className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-muted-foreground font-mono">
+                    <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
                     <span>Nashik, MH, India</span>
                   </div>
                 </div>
@@ -300,11 +302,11 @@ export default function Footer() {
             {/* STACKED CARD B: Social Connections - Compacted padding */}
             <motion.div
               variants={cardVariants}
-              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[7.5rem]"
+              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-5 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[11rem] flex-1"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              <div className="space-y-2.5 relative z-10">
+              <div className="space-y-3 relative z-10">
                 <div>
                   <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
                     Socials
@@ -375,11 +377,11 @@ export default function Footer() {
             {/* STACKED CARD C: Rate this Portfolio */}
             <motion.div
               variants={cardVariants}
-              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-4 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[7.5rem] flex-1"
+              className="rounded-xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md p-5 pb-3.5 flex flex-col justify-between hover:border-primary/30 transition-colors duration-300 relative group overflow-hidden shadow-md min-h-[7rem]"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              <div className="space-y-2.5 relative z-10 w-full">
+              <div className="space-y-3 relative z-10 w-full">
                 <div className="flex justify-between items-center w-full">
                   <div>
                     <h3 className="text-[0.65rem] font-mono font-bold uppercase tracking-widest text-primary">
