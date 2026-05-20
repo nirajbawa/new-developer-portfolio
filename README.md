@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bespoke Professional Developer Portfolio
 
-## Getting Started
+Welcome to the official repository of **Niraj Bava's Premium Developer Portfolio**. This website is a high-fidelity, high-performance, dynamic showcase of full-stack engineering, government-funded tech initiatives (Rakshak AI), and private database cloud architectures.
 
-First, run the development server:
+Built using **Next.js 14**, **TypeScript**, and **Tailwind CSS**, this site implements top-tier micro-animations, theme-adaptability (light/dark mode), custom interactive widgets, and highly secure API routing.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Premium Interactive Hero Section**: Features a responsive layout with a real-time status indicator, custom social links, and multiple direct resume/CV download nodes.
+*   **Theme-Adaptive System**: Dynamic theme synchronization (Light / Dark Mode) across all pages—including the bespoke **Hire Me** page—leveraging `next-themes` and soft HSL CSS variables.
+*   **Bento-Grid Projects & Certifications**: Grid layouts displaying real-world projects (Rakshak AI, Secure SDR System, Anviksh AI) and credentials.
+*   **Live LeetCode & GitHub Heatmap Widgets**: Real-time widgets rendering active problem-solving stats and developer contributions cleanly in both light and dark themes.
+*   **Bespoke Asymmetric Sections**: Beautiful, visually striking timelines for Education, Achievements, and Work Experience.
+*   **Interactive Mind-Map Skills Widget**: A custom, category-grouped visual directory showcasing technology specialization.
+*   **Secure Server-Side Mail Proxy**: Form submissions (Footer and Hire Me enquiries) are proxied server-side via `/api/send-email`, securely attaching local tokens (`SECURITY_TOKEN`) to downstream Express APIs away from client-side visibility.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Technology Stack
 
-To learn more about Next.js, take a look at the following resources:
+| Technology | Category | Purpose |
+| :--- | :--- | :--- |
+| **Next.js 14** | Framework | Server-side rendering, App Router, and server API routing. |
+| **TypeScript** | Language | Strict type-safety, robust component interfaces. |
+| **Tailwind CSS** | Styling | Highly utility-first responsive styling and theme tokens. |
+| **Framer Motion** | Animation | Advanced physics-based, smooth micro-interactions. |
+| **Redux Toolkit** | State Management | Centralized global application state. |
+| **React Query** | Data Fetching | Efficient caching and synchronization of widget endpoints. |
+| **Geist Sans & Mono** | Typography | Sleek Vercel-optimized font family. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Getting Started
 
-## Deploy on Vercel
+### Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Ensure you have [Node.js](https://nodejs.org) (v18+) and [pnpm](https://pnpm.io) (or npm/yarn) installed.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Installation
+
+1. Clone the repository and navigate to the directory:
+   ```bash
+   cd portfolio
+   ```
+
+2. Install the workspace dependencies:
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
+
+3. Set up your local environment file (`.env`):
+   ```env
+   SECURITY_TOKEN=your_express_api_secret_token
+   ```
+
+4. Start the development server:
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) to see your portfolio live!
+
+---
+
+## 🔒 Security & Best Practices
+
+All API integrations (such as the contact forms and the plan purchase system) protect internal authentication details by routing through standard server-side endpoints inside `src/app/api/send-email/route.ts`. The proxy appends critical security headers (`x-api-key`) and locks the recipient payload to your email address before sending, preventing spam and credential theft.
