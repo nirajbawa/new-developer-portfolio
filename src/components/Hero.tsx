@@ -385,7 +385,9 @@ export function Hero() {
                 LinkedIn
               </a>
               <a
-                href="#"
+                href="https://drive.google.com/file/d/1hlRIV-nATCMA6dr-WmHnzVMvjaGpUmvl/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ variant: "outline" }),
                   "rounded-lg border-accent-foreground/20 bg-background/50 backdrop-blur-md text-[0.65rem] sm:text-xs font-bold font-mono text-foreground hover:scale-105 hover:border-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-center justify-center h-11 px-1 text-center"
