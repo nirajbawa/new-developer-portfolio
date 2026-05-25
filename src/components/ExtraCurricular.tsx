@@ -5,6 +5,7 @@ import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useAnimateBypass } from "@/app/providers";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Image Imports with exact filesystem spellings
 import policeImg from "@/assets/images/extra-police-assitance-1.jpeg";
@@ -75,6 +76,7 @@ const puzzleClasses = [
 export default function ExtraCurricular() {
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
 
   const handleCardClick = (id: number) => {
     setActiveCardId((prev) => (prev === id ? null : id));
@@ -101,7 +103,7 @@ export default function ExtraCurricular() {
     <section id="extra-curricular" className="relative py-24 bg-background overflow-hidden border-t border-border/10">
       {/* Cyber Ambient Background Grid */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-        <div className="absolute inset-0 bg-fixed bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 lg:bg-fixed bg-scroll bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
         <div className="absolute top-[20%] right-[10%] w-[25rem] h-[25rem] rounded-full bg-primary/5 blur-[100px] -z-10" />
         <div className="absolute bottom-[20%] left-[10%] w-[25rem] h-[25rem] rounded-full bg-accent-foreground/5 blur-[100px] -z-10" />
       </div>
@@ -131,7 +133,8 @@ export default function ExtraCurricular() {
         <motion.div
           variants={containerVariants}
           initial={bypass ? false : "hidden"}
-          whileInView="visible"
+          animate={isMobile ? "visible" : undefined}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.05 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
         >
@@ -143,7 +146,8 @@ export default function ExtraCurricular() {
               <motion.div
                 key={activity.id}
                 variants={cardVariants}
-                whileHover={{ y: -6 }}
+                animate={isMobile ? "visible" : undefined}
+                whileHover={isMobile ? undefined : { y: -6 }}
                 onClick={() => handleCardClick(activity.id)}
                 className={cn(
                   "group rounded-2xl border bg-secondary/10 overflow-hidden relative shadow-lg cursor-pointer transition-all duration-300 card-hover-effect",

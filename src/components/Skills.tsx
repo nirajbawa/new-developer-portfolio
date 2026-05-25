@@ -4,10 +4,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cvData } from "@/data/cv";
 import { useAnimateBypass } from "@/app/providers";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function Skills() {
   const { skills } = cvData;
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -25,9 +27,10 @@ export default function Skills() {
         {/* Section Heading & Cyber Title */}
         <motion.div
           initial={bypass ? false : { opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={isMobile ? { duration: 0 } : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
@@ -50,9 +53,10 @@ export default function Skills() {
           {/* Root Node on Axis */}
           <motion.div
             initial={bypass ? false : { opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={isMobile ? { opacity: 1, scale: 1 } : undefined}
+            whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.5 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.5 }}
             className="relative flex justify-start md:justify-center mb-16 z-20 pl-[48px] md:pl-0"
           >
             {/* Mobile Axis Point for Root */}
@@ -91,9 +95,10 @@ export default function Skills() {
                         <div className="md:hidden absolute left-[24px] top-8 w-10 h-[2px] bg-primary/30 z-0" />
                         <motion.div
                           initial={bypass ? false : { opacity: 0, x: "var(--slide-from-x, -30px)", y: 10 }}
-                          whileInView={{ opacity: 1, x: 0, y: 0 }}
+                          animate={isMobile ? { opacity: 1, x: 0, y: 0 } : undefined}
+                          whileInView={isMobile ? undefined : { opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
-                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                          transition={isMobile ? { duration: 0 } : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                           className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform [--slide-from-x:30px] md:[--slide-from-x:-30px]"
                         >
                           {/* Connecting Line to Axis (Desktop) */}
@@ -129,9 +134,10 @@ export default function Skills() {
 
                         <motion.div
                           initial={bypass ? false : { opacity: 0, x: "var(--slide-from-x, 30px)", y: 10 }}
-                          whileInView={{ opacity: 1, x: 0, y: 0 }}
+                          animate={isMobile ? { opacity: 1, x: 0, y: 0 } : undefined}
+                          whileInView={isMobile ? undefined : { opacity: 1, x: 0, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
-                          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                          transition={isMobile ? { duration: 0 } : { duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                           className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/60 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col gap-4 relative will-change-transform [--slide-from-x:30px]"
                         >
                           {/* Connecting Line to Axis (Desktop) */}

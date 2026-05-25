@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import { useAnimateBypass } from "@/app/providers";
 import { Portal } from "@/components/Portal";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Company logo imports
 import inventursLogo from "@/assets/images/inventurs_logo.jpg";
@@ -194,6 +195,7 @@ function ExperienceModal({
 export function Experience() {
   const { experience } = cvData;
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
   const [showAll, setShowAll] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState<WorkExperience | null>(null);
 
@@ -269,9 +271,10 @@ export function Experience() {
                     {isEven ? (
                       <motion.div
                         initial={bypass ? false : { opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                        whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                        transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col gap-4 cursor-pointer will-change-[transform,opacity]"
                         onClick={() => setSelectedExperience(exp)}
                       >
@@ -349,9 +352,10 @@ export function Experience() {
                     {!isEven ? (
                       <motion.div
                         initial={bypass ? false : { opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                        whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                        transition={isMobile ? { duration: 0 } : { duration: 0.6, delay: idx * 0.06, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full max-w-md group p-6 rounded-2xl border border-border/40 bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col gap-4 cursor-pointer will-change-[transform,opacity]"
                         onClick={() => setSelectedExperience(exp)}
                       >

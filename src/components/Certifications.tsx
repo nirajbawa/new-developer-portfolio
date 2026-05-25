@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import { useAnimateBypass } from "@/app/providers";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Image Imports
 import postmanLogo from "@/assets/images/postman-icon.png";
@@ -111,6 +112,7 @@ export default function Certifications() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [mobileVisibleCount, setMobileVisibleCount] = useState(3);
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -132,11 +134,11 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative min-h-screen py-24 px-4 sm:px-6 overflow-hidden bg-background"
+      className="relative lg:min-h-screen min-h-fit py-24 px-4 sm:px-6 overflow-hidden bg-background"
     >
       {/* Background Grid Pattern consistent with global style */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-        <div className="absolute inset-0 bg-fixed bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 lg:bg-fixed bg-scroll bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
         <div className="absolute top-[30%] left-[10%] w-[35rem] h-[35rem] rounded-full bg-primary/5 dark:bg-primary/[0.02] blur-[130px] -z-10" />
         <div className="absolute bottom-[30%] right-[10%] w-[35rem] h-[35rem] rounded-full bg-accent-foreground/5 dark:bg-accent-foreground/[0.02] blur-[130px] -z-10" />
       </div>
@@ -166,7 +168,8 @@ export default function Certifications() {
         <motion.div
           variants={containerVariants}
           initial={bypass ? false : "hidden"}
-          whileInView="visible"
+          animate={isMobile ? "visible" : undefined}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.05 }}
           className="hidden lg:grid grid-cols-3 gap-6 items-start"
         >
@@ -176,7 +179,7 @@ export default function Certifications() {
             {/* Card 1: Horizontal layout with circle logo */}
             <motion.div
               variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.01 }}
+              whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
               className="w-full p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex items-center gap-6 group hover:border-primary/40 hover:shadow-[0_0_25px_rgba(var(--primary),0.05)] transition-all duration-300"
             >
               <div className="w-24 h-24 rounded-full border-2 border-primary/20 flex-shrink-0 flex items-center justify-center bg-white overflow-hidden group-hover:border-primary/50 transition-colors relative shadow-[0_0_15px_rgba(255,255,255,0.1)]">
@@ -212,7 +215,7 @@ export default function Certifications() {
               {/* Card 2: JavaScript Basics */}
               <motion.div
                 variants={itemVariants}
-                whileHover={{ y: -4, scale: 1.01 }}
+                whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
                 className="p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between h-56 group hover:border-primary/40 transition-all duration-300"
               >
                 <div className="space-y-3">
@@ -240,7 +243,7 @@ export default function Certifications() {
               {/* Card 3: Java Basics */}
               <motion.div
                 variants={itemVariants}
-                whileHover={{ y: -4, scale: 1.01 }}
+                whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
                 className="p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between h-56 group hover:border-primary/40 transition-all duration-300"
               >
                 <div className="space-y-3">
@@ -274,7 +277,7 @@ export default function Certifications() {
                   animate={{ opacity: 1, height: "auto", y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -15 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -4, scale: 1.01 }}
+                  whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
                   className="p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between h-44 group hover:border-primary/40 transition-all duration-300 overflow-hidden"
                 >
                   <div className="flex justify-between items-start">
@@ -309,7 +312,7 @@ export default function Certifications() {
             {/* Card 4: Taller Vertical Card (AWS) */}
             <motion.div
               variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.01 }}
+              whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
               className="p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between min-h-[16rem] group hover:border-primary/40 transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full blur-xl -z-10" />
@@ -347,7 +350,7 @@ export default function Certifications() {
             {/* Card 5: Horizontal Medium (Full Stack GenAI) */}
             <motion.div
               variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.01 }}
+              whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
               className="p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between h-48 group hover:border-primary/40 transition-all duration-300"
             >
               <div className="flex justify-between items-start">
@@ -382,7 +385,7 @@ export default function Certifications() {
                   animate={{ opacity: 1, height: "auto", y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -15 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -4, scale: 1.01 }}
+                  whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
                   className="p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between min-h-[14rem] sm:min-h-[15rem] group hover:border-primary/40 transition-all duration-300 overflow-hidden"
                 >
                   <div className="space-y-3">
@@ -425,7 +428,7 @@ export default function Certifications() {
             {/* Card 6: Very Tall Vertical Card */}
             <motion.div
               variants={itemVariants}
-              whileHover={{ y: -4, scale: 1.01 }}
+              whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
               className="p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between min-h-[22rem] group hover:border-primary/40 transition-all duration-300"
             >
               <div className="space-y-6">
@@ -473,7 +476,7 @@ export default function Certifications() {
                   animate={{ opacity: 1, height: "auto", y: 0 }}
                   exit={{ opacity: 0, height: 0, y: -15 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -4, scale: 1.01 }}
+                  whileHover={isMobile ? undefined : { y: -4, scale: 1.01 }}
                   className="p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between min-h-[15rem] group hover:border-primary/40 transition-all duration-300 overflow-hidden"
                 >
                   <div className="space-y-4">
@@ -527,13 +530,8 @@ export default function Certifications() {
 
             if (isLandscape) {
               return (
-                <motion.div
+                <div
                   key={cert.id}
-                  initial={bypass ? false : { y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 100 }}
-                  whileHover={{ y: -4, scale: 1.01 }}
                   className="col-span-2 w-full p-6 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex items-center gap-6 group hover:border-primary/40 hover:shadow-[0_0_25px_rgba(var(--primary),0.05)] transition-all duration-300"
                 >
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-primary/20 flex-shrink-0 flex items-center justify-center bg-white overflow-hidden group-hover:border-primary/50 transition-colors relative shadow-[0_0_15px_rgba(255,255,255,0.1)]">
@@ -570,17 +568,12 @@ export default function Certifications() {
                       </svg>
                     </a>
                   </div>
-                </motion.div>
+                </div>
               );
             } else {
               return (
-                <motion.div
+                <div
                   key={cert.id}
-                  initial={bypass ? false : { y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 100 }}
-                  whileHover={{ y: -4, scale: 1.01 }}
                   className="col-span-1 p-4 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md flex flex-col justify-between min-h-[14rem] sm:min-h-[15rem] group hover:border-primary/40 transition-all duration-300"
                 >
                   <div className="space-y-3">
@@ -610,7 +603,7 @@ export default function Certifications() {
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </a>
-                </motion.div>
+                </div>
               );
             }
           })}

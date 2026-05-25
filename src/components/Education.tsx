@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useAnimateBypass } from "@/app/providers";
 import { Portal } from "@/components/Portal";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Image Imports
 import kkwaghLogoImg from "@/assets/images/kk-wagh-logo.png";
@@ -216,6 +217,7 @@ function EducationModal({
 export function Education() {
   const { education } = cvData;
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
   const [showAll, setShowAll] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState<EducationType | null>(null);
 
@@ -277,9 +279,10 @@ export function Education() {
           {latestSchool && (
             <motion.div
               initial={bypass ? false : { opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+              whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
               className="w-full flex flex-col justify-between p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md shadow-lg space-y-5 group/card hover:border-primary/30 transition-all duration-300 relative cursor-pointer"
               onClick={() => setSelectedSchool(latestSchool)}
             >
@@ -349,9 +352,10 @@ export function Education() {
                 <motion.div
                   key={school.institution}
                   initial={bypass ? false : { opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+                  whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+                  transition={isMobile ? { duration: 0 } : { duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
                   className={`p-3 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md shadow-lg group/card hover:border-primary/30 transition-all duration-300 relative cursor-pointer flex flex-col ${
                     isEven ? "sm:flex-row" : "sm:flex-row-reverse"
                   } gap-3 sm:gap-5 items-stretch flex-1 overflow-hidden`}

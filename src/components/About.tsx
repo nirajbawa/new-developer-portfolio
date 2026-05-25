@@ -161,7 +161,7 @@ const getOrbitPath = (startAngleDegrees: number, Rx = 12.8, Ry = 3.8, Rz = 32) =
 export function About() {
   const { personalInfo, summary } = cvData;
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const bypass = useAnimateBypass();
 
   // Generate mathematically perfect elliptical paths for the 8 tech badges

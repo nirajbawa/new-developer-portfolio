@@ -206,7 +206,7 @@ export default function Footer() {
 
       {/* Cyber Carbon Mesh Pattern Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-        <div className="absolute inset-0 bg-fixed bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute inset-0 lg:bg-fixed bg-scroll bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:40px_40px]" />
         <div className="absolute bottom-[10%] right-[10%] w-[35rem] h-[35rem] rounded-full bg-primary/5 blur-[120px] -z-10" />
         <div className="absolute bottom-[20%] left-[5%] w-[35rem] h-[35rem] rounded-full bg-accent-foreground/5 blur-[120px] -z-10" />
       </div>

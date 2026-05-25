@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useAnimateBypass } from "@/app/providers";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Import project showcase images
 import rakshakMain from "@/assets/images/rakshak-0.png";
@@ -432,6 +433,7 @@ const titleToSlugMap: Record<string, string> = {
 export function Projects() {
   const { projects } = cvData;
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
   // Pagination states: initially show 6, load increments of 3
@@ -475,15 +477,15 @@ export function Projects() {
     const isFullRowMobile = isMobileLayout && idx % 3 === 0;
     const mobileColSpan = isFullRowMobile ? "col-span-2" : "col-span-1";
     const mobileHeight = isFullRowMobile ? "min-h-[18rem] sm:min-h-[22rem]" : "min-h-[16rem] sm:min-h-[20rem]";
-
     return (
       <motion.div
         initial={bypass ? false : { opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={isMobile ? { opacity: 1, y: 0 } : undefined}
+        whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: (idx % 3) * 0.1 }}
+        transition={isMobile ? { duration: 0 } : { duration: 0.5, ease: "easeOut", delay: (idx % 3) * 0.1 }}
         key={project.title + (isMobileLayout ? '-mobile' : '-desktop')}
-        className={`relative w-full rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg hover:border-primary/40 hover:shadow-2xl transition-all duration-500 ${
+        className={`relative w-full rounded-2xl border border-accent-foreground/15 overflow-hidden group cursor-pointer shadow-lg lg:hover:border-primary/40 lg:hover:shadow-2xl transition-all duration-500 ${
           isMobileLayout 
             ? `${mobileColSpan} ${mobileHeight}` 
             : `${meta.aspectClass}`
@@ -501,13 +503,13 @@ export function Projects() {
           alt={project.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="object-cover transition-transform duration-700 ease-out lg:group-hover:scale-110"
           priority={idx < 3}
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 transition-opacity duration-500 lg:group-hover:opacity-0" />
 
-        <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-2">
+        <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 z-20 flex flex-col justify-end text-left transition-all duration-500 lg:group-hover:opacity-0 lg:group-hover:translate-y-2">
           <span className="text-[0.55rem] sm:text-[0.58rem] font-mono font-bold text-primary uppercase tracking-widest mb-1">
             {meta.category}
           </span>
@@ -516,7 +518,7 @@ export function Projects() {
           </h3>
         </div>
 
-        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-4 sm:p-5 text-left">
+        <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-md opacity-0 lg:group-hover:opacity-100 transition-all duration-500 z-30 flex flex-col justify-between p-4 sm:p-5 text-left">
           <div className="space-y-1">
             <span className="text-[0.6rem] sm:text-[0.65rem] font-mono text-primary font-bold uppercase tracking-widest">
               {meta.category}
@@ -561,11 +563,11 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen flex flex-col items-center justify-center py-24 px-4 sm:px-6 overflow-hidden bg-background"
+      className="relative lg:min-h-screen min-h-fit flex flex-col items-center justify-center py-24 px-4 sm:px-6 overflow-hidden bg-background"
     >
       {/* Grid Pattern and spotlights */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-        <div className="absolute inset-0 bg-fixed bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 lg:bg-fixed bg-scroll bg-[linear-gradient(to_right,#80808007_1px,transparent_1px),linear-gradient(to_bottom,#80808007_1px,transparent_1px)] bg-[size:30px_30px]" />
         
         {/* Subtle Cyber Spotlights */}
         <div className="absolute top-[25%] right-[10%] w-[32rem] h-[32rem] rounded-full bg-primary/5 dark:bg-primary/[0.02] blur-[120px] -z-10" />

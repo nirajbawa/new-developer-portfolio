@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import { useAnimateBypass } from "@/app/providers";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Image Imports
 import researchgateLogo from "@/assets/images/researchgate.webp";
@@ -46,6 +47,7 @@ const publicationsList: Publication[] = [
 export default function Publications() {
   const [isExpanded, setIsExpanded] = useState(false);
   const bypass = useAnimateBypass();
+  const isMobile = useIsMobile();
 
   // Initially show 2 publications, click expand to show all
   const visiblePublications = isExpanded ? publicationsList : publicationsList.slice(0, 2);
@@ -97,7 +99,8 @@ export default function Publications() {
         <motion.div
           variants={containerVariants}
           initial={bypass ? false : "hidden"}
-          whileInView="visible"
+          animate={isMobile ? "visible" : undefined}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
@@ -110,8 +113,9 @@ export default function Publications() {
                 rel="noopener noreferrer"
                 variants={cardVariants}
                 layout
-                whileHover={{ y: -4, scale: 1.005 }}
-                className="h-full p-4 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md hover:border-primary/40 transition-all duration-300 flex flex-col gap-3 shadow-md group relative overflow-hidden"
+                animate={isMobile ? "visible" : undefined}
+                whileHover={isMobile ? undefined : { y: -4, scale: 1.005 }}
+                className="h-full p-4 sm:p-5 rounded-2xl border border-accent-foreground/15 bg-background/40 backdrop-blur-md lg:hover:border-primary/40 transition-all duration-300 flex flex-col gap-3 shadow-md group relative overflow-hidden"
               >
                 {/* Visual Accent Glow on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
