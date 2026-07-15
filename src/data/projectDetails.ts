@@ -37,6 +37,8 @@ import pdf2audioMain from "@/assets/images/pdf2audio-0.png";
 import courseSellingMain from "@/assets/images/course-selling-0.png";
 import covidCounterMain from "@/assets/images/covid-counter-0.png";
 import turfSpotMain from "@/assets/images/turf-spot-0.png";
+import sanchayaMain from "@/assets/images/sanchaya-ai-1.png";
+import sanchaya2 from "@/assets/images/sanchaya-ai-2.png";
 
 export interface ProjectDetail {
   slug: string;
@@ -61,6 +63,36 @@ export interface ProjectDetail {
 }
 
 export const projectDetailsList: ProjectDetail[] = [
+  {
+    slug: "sanchaya-ai-proactive-financial-assistant",
+    title: "Sanchaya AI – Proactive Financial Assistant",
+    duration: "Jul 2026",
+    category: "AI & FinTech",
+    tagline: "Build financial habits that actually stick.",
+    problem: "People often suffer from reactive financial stress, engage in passive consumption/lifestyle credit, and struggle with friction-filled expense tracking or complex financial calculations.",
+    solutionDesc: "Sanchaya AI is a proactive financial copilot that shifts users from reactive stress to structured routines. Through low-friction conversational interactions, it logs expenses head-wise, evaluates borrowing vs. investment plans in plain language, and assists in building durable financial habits.",
+    features: [
+      { title: "💬 Low-Friction Conversation Chatbot", desc: "Allows users to quickly log expenses head-wise through natural, casual conversation to build an Inner Ledger.", icon: "💬" },
+      { title: "📊 The Inner Ledger", desc: "Helps shift measurement from external brand status to an internal utility-focused scorecard.", icon: "📊" },
+      { title: "⚖️ Smart Risk Scenarios", desc: "Compares complex financial choices, like taking a car loan vs. investing the EMI, to optimize resource allocation.", icon: "⚖️" },
+      { title: "📈 Personal Growth Engine", desc: "Reclaims wasted time and capital from passive consumption and redirects them into active skill-building.", icon: "📈" }
+    ],
+    techStack: {
+      "Frontend Framework": ["Next.js", "React.js", "TypeScript", "Tailwind CSS"],
+      "State & Animation": ["Framer Motion", "Lucide React Icons"],
+      "AI & Natural Language": ["Gemini SDK / OpenAI API", "Structured JSON Parsing"],
+      "Deployment": ["Vercel"]
+    },
+    benefits: [
+      "Removes expense tracking friction via natural language logging.",
+      "Compares borrowing costs vs investment gains in simple language.",
+      "Reduces lifestyle-credit dependency and boosts active inflation-beating investing."
+    ],
+    image: sanchayaMain,
+    carouselImages: [sanchayaMain, sanchaya2],
+    link: "https://github.com/nirajbawa/sanchaya-ai",
+    liveUrl: "https://sanchaya-ai.vercel.app/",
+  },
   {
     slug: "rakshak-ai-whatsapp-police-assistance-chatbot",
     title: "Rakshak AI – WhatsApp Police Assistance Chatbot",

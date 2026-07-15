@@ -207,6 +207,17 @@ export const cvData: CVData = {
   ],
   projects: [
     {
+      title: "Sanchaya AI – Proactive Financial Assistant",
+      duration: "Jul 2026",
+      link: "https://github.com/nirajbawa/sanchaya-ai",
+      bullets: [
+        "Developed Sanchaya AI, a proactive financial copilot designed to shift users from reactive stress to structured routines.",
+        "Created a low-friction expense-logging conversational chatbot that parses casual messages to categorize and track budgets under utility heads (The Inner Ledger).",
+        "Implemented smart risk analysis features that compare complex financial options, like taking a vehicle loan vs. investing the EMI, in plain, accessible language.",
+        "Built a responsive modern web dashboard using Next.js, React, Tailwind CSS, and Framer Motion for high-fidelity interactive chat simulations.",
+      ],
+    },
+    {
       title: "Rakshak AI – WhatsApp Police Assistance Chatbot",
       duration: "Jul 2025 – Sep 2025",
       link: "https://github.com/nirajbawa/rakshak-ai",

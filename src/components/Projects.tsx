@@ -45,6 +45,8 @@ import pdf2audioMain from "@/assets/images/pdf2audio-0.png";
 import courseSellingMain from "@/assets/images/course-selling-0.png";
 import covidCounterMain from "@/assets/images/covid-counter-0.png";
 import turfSpotMain from "@/assets/images/turf-spot-0.png";
+import sanchayaMain from "@/assets/images/sanchaya-ai-1.png";
+import sanchaya2 from "@/assets/images/sanchaya-ai-2.png";
 
 // Map project title names to static images and rich metadata
 const projectMeta: Record<
@@ -60,6 +62,17 @@ const projectMeta: Record<
     aspectClass: string; // Tailored aspect-ratio class for staggered desktop layout
   }
 > = {
+  "Sanchaya AI – Proactive Financial Assistant": {
+    image: sanchayaMain,
+    carouselImages: [sanchayaMain, sanchaya2],
+    abstract:
+      "A proactive financial copilot designed to shift users from reactive stress to structured routines. Through low-friction conversational interactions, it logs expenses head-wise, evaluates borrowing vs. investment plans in plain language, and assists in building durable financial habits.",
+    techStack: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Gemini SDK / OpenAI API"],
+    link: "https://github.com/nirajbawa/sanchaya-ai",
+    liveUrl: "https://sanchaya-ai.vercel.app/",
+    category: "AI & FinTech",
+    aspectClass: "lg:h-[22rem]",
+  },
   "Rakshak AI – WhatsApp Police Assistance Chatbot": {
     image: rakshakMain,
     carouselImages: [rakshakMain, rakshak1, rakshak2, rakshak3, rakshak4],
