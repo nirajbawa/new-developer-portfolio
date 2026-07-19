@@ -545,6 +545,8 @@ function ProjectDetailModal({
 }
 
 const titleToSlugMap: Record<string, string> = {
+  "Sanchaya AI – Proactive Financial Assistant":
+    "sanchaya-ai-proactive-financial-assistant",
   "Rakshak AI – WhatsApp Police Assistance Chatbot":
     "rakshak-ai-whatsapp-police-assistance-chatbot",
   "Anviksh AI – Learning Platform": "anviksh-ai-learning-platform",

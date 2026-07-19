@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Niraj Bava",
-  description: "Official portfolio of Niraj Bava, a Full-Stack Engineer, GenAI specialist, and CTO at Neuronex Developers. Delivering scalable web apps, offline-first secure databases, and AI chatbots in production.",
+  description: "Official portfolio of Niraj Bava, a Full-Stack Engineer, GenAI specialist. Delivering scalable web apps, offline-first secure databases, and AI chatbots in production.",
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
