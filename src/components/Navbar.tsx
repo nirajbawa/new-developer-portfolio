@@ -36,6 +36,7 @@ export function Navbar() {
     { label: "Experience", href: "/#experience" },
     { label: "Education", href: "/#education" },
     { label: "Projects", href: "/#projects" },
+    { label: "Patents", href: "/#patents" },
     { label: "Contact", href: "/#contact" },
   ];
 

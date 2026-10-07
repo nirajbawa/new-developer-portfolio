@@ -9,6 +9,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 // Image Imports
 import matrixLogo from "@/assets/images/team_matrixs_logo.jpg";
 import fossLogo from "@/assets/images/foss_club_logo.jpg";
+import rotaractLogo from "@/assets/images/rotaract-club.jpg";
 
 interface Club {
   id: number;
@@ -38,6 +39,15 @@ const clubsList: Club[] = [
     description: "Engaged in promoting open-source culture through collaboration, contributing to technical discussions, and supporting community-driven learning initiatives and events; currently leading the development of a club project focused on building an open-source Linux-based operating system.",
     logo: fossLogo,
     tags: ["Open Source", "Linux", "OS Dev", "Community"]
+  },
+  {
+    id: 3,
+    name: "ROTARACT CLUB OF NINE HILLS NASHIK",
+    role: "Active Member",
+    duration: "2024 - Present",
+    description: "Engaged in youth leadership, community development, and social welfare drives across Nashik in association with Rotary International; actively collaborating on civic initiatives, humanitarian outreach, and youth skill empowerment programs.",
+    logo: rotaractLogo,
+    tags: ["Community Service", "Leadership", "Rotary", "Youth Empowerment"]
   }
 ];
 
@@ -46,8 +56,8 @@ export default function Clubs() {
   const bypass = useAnimateBypass();
   const isMobile = useIsMobile();
 
-  // Initially show 2 clubs
-  const visibleClubs = isExpanded ? clubsList : clubsList.slice(0, 2);
+  // Initially show 3 clubs
+  const visibleClubs = isExpanded ? clubsList : clubsList.slice(0, 3);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -99,7 +109,7 @@ export default function Clubs() {
           animate={isMobile ? "visible" : undefined}
           whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
             {visibleClubs.map((club) => (
@@ -169,7 +179,7 @@ export default function Clubs() {
         </motion.div>
 
         {/* Expand Trigger Button with animated \/ icon - only shown if not expanded and there are more clubs than visible initially */}
-        {!isExpanded && clubsList.length > 2 && (
+        {!isExpanded && clubsList.length > 3 && (
           <div className="flex justify-center mt-12">
             <button
               onClick={() => setIsExpanded(true)}

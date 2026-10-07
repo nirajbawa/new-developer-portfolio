@@ -8,6 +8,7 @@ import Skills from "@/components/Skills";
 import Achievements from "@/components/Achievements";
 import Certifications from "@/components/Certifications";
 import Publications from "@/components/Publications";
+import Patents from "@/components/Patents";
 import Clubs from "@/components/Clubs";
 import ExtraCurricular from "@/components/ExtraCurricular";
 import Footer from "@/components/Footer";
@@ -46,6 +47,9 @@ export default function Home() {
 
         {/* Publications Grid Section matching blueprint */}
         <Publications />
+
+        {/* Patents & Registered Intellectual Property Section */}
+        <Patents />
 
         {/* Clubs & Societies Section matching blueprint */}
         <Clubs />

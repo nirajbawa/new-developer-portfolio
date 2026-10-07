@@ -64,6 +64,30 @@ export interface Publication {
   link?: string;
 }
 
+export interface Patent {
+  title: string;
+  patentType: string;
+  designNumber: string;
+  country: string;
+  issuingAuthority: string;
+  grantDate: string;
+  registrationDate: string;
+  act: string;
+  classification: {
+    version: string;
+    classCode: string;
+    className: string;
+    subclassCode: string;
+    subclassName: string;
+  };
+  inventors: string[];
+  status: string;
+  summary: string;
+  bullets: string[];
+  certificateImage?: string;
+  officialUrl?: string;
+}
+
 export interface Club {
   name: string;
   role: string;
@@ -79,6 +103,7 @@ export interface CVData {
   projects: Project[];
   skills: SkillCategory[];
   achievements: Achievement[];
+  patents: Patent[];
   publications: Publication[];
   clubs: Club[];
   certifications: string[];
@@ -512,6 +537,42 @@ export const cvData: CVData = {
       link: "#",
     },
   ],
+  patents: [
+    {
+      title: "Communications Equipment for Public Safety",
+      patentType: "Certificate of Registration for a UK Patent",
+      designNumber: "6549379",
+      country: "United Kingdom",
+      issuingAuthority: "Intellectual Property Office (UK IPO)",
+      grantDate: "28 September 2026",
+      registrationDate: "27 August 2026",
+      act: "Registered Designs Act 1949",
+      classification: {
+        version: "15-2025",
+        classCode: "14",
+        className: "RECORDING, TELECOMMUNICATION OR DATA PROCESSING EQUIPMENT",
+        subclassCode: "03",
+        subclassName: "TELECOMMUNICATIONS EQUIPMENT, WIRELESS REMOTE CONTROLS AND RADIO AMPLIFIERS",
+      },
+      inventors: [
+        "Saurabh Sagar Shinde",
+        "Niraj Bava",
+        "Shreenath Ravindra Kadam",
+        "Om Dhiraj Nikam",
+        "Prof. Dr. Snehal Mohan Kamalapur",
+      ],
+      status: "Registered & Granted",
+      summary: "Official UK Patent registration for specialized Communications Equipment for Public Safety, engineering critical telecommunications hardware and secure wireless remote control infrastructure tailored for emergency response, high-concurrency public safety monitoring, and police operations.",
+      bullets: [
+        "Officially registered and granted by the UK Intellectual Property Office (UK IPO) under patent number 6549379 in accordance with the Registered Designs Act 1949.",
+        "Classified under Locarno Classification Version 15-2025: Class 14 (Recording, Telecommunication or Data Processing Equipment), Subclass 03 (Telecommunications Equipment, Wireless Remote Controls and Radio Amplifiers).",
+        "Co-invented by Saurabh Sagar Shinde, Niraj Bava, Shreenath Ravindra Kadam, Om Dhiraj Nikam, and Prof. Dr. Snehal Mohan Kamalapur.",
+        "Engineered for mission-critical emergency communication scenarios, robust wireless remote operations, and secure public safety infrastructure deployment.",
+      ],
+      certificateImage: "/uk-design-patent-6549379.jpg",
+      officialUrl: "https://www.gov.uk/ipo",
+    },
+  ],
   publications: [
     {
       title: "JUSTICE-AS-A-PROTOCOL",
@@ -538,6 +599,14 @@ export const cvData: CVData = {
       duration: "2025 - Present",
       bullets: [
         "Engaged in promoting open-source culture through collaboration, contributing to technical discussions, and supporting community-driven learning initiatives and events; currently leading the development of a club project focused on building an open-source Linux-based operating system.",
+      ],
+    },
+    {
+      name: "ROTARACT CLUB OF NINE HILLS NASHIK",
+      role: "Active Member",
+      duration: "2024 - Present",
+      bullets: [
+        "Engaged in youth leadership, community impact initiatives, and social welfare drives across Nashik in association with Rotary International; actively collaborating on civic initiatives, humanitarian outreach, and youth skill empowerment programs.",
       ],
     },
   ],

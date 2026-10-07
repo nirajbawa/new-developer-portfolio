@@ -175,6 +175,7 @@ export default function Footer() {
     { label: "Achievements", href: "#achievements" },
     { label: "Certifications", href: "#certifications" },
     { label: "Publications", href: "#publications" },
+    { label: "Patents", href: "#patents" },
     { label: "Clubs", href: "#clubs" },
     { label: "Extra-Curricular", href: "#extra-curricular" }
   ];

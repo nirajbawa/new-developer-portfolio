@@ -473,8 +473,8 @@ export function About() {
                   <span className="text-[0.55rem] font-mono text-muted-foreground uppercase tracking-wider leading-tight">Backed Projects</span>
                 </div>
                 <div className="p-3 rounded-lg border border-primary/20 bg-primary/5 flex flex-col items-center gap-0.5 text-center">
-                  <span className="text-lg sm:text-xl font-bold text-primary font-mono">E2E</span>
-                  <span className="text-[0.55rem] font-mono text-muted-foreground uppercase tracking-wider leading-tight">System Ownership</span>
+                  <span className="text-lg sm:text-xl font-bold text-primary font-mono">1</span>
+                  <span className="text-[0.55rem] font-mono text-muted-foreground uppercase tracking-wider leading-tight">UK Design Patent</span>
                 </div>
               </div>
 
